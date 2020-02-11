@@ -1,0 +1,29 @@
+{
+  "name": "baketimejs",
+  "version": "0.0.1",
+  "description": "A vanilla JavaScript date library",
+  "main": "dist/baketime.js",
+  "types": "dist/baketime.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "coverage": "jest --coverage",
+    "prerelease": "tsc && jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michaelverschoof/BakeTimeJS.git"
+  },
+  "author": "Michael Verschoof <info@michaelv.nl>",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/michaelverschoof/BakeTimeJS/issues"
+  },
+  "homepage": "https://github.com/michaelverschoof/BakeTimeJS#readme",
+  "devDependencies": {
+    "@types/jest": "^24.0.25",
+    "jest": "^24.9.0",
+    "ts-jest": "^24.2.0",
+    "typescript": "^3.7.4"
+  }
+}
