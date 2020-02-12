@@ -46,19 +46,27 @@ export class BakeTime {
         return Comparisons.difference(Dates.utc(thisParts), Dates.utc(otherParts), period.milliseconds);
     }
 
-    after (date : BakeTime, unit ?: string | PeriodType, equality ?: boolean) : boolean {
-        return this.difference(date, unit) >= (equality ? 0 : 1);
+    after (date : BakeTime, unit ?: string | PeriodType, inclusivity ?: boolean) : boolean {
+        return this.difference(date, unit) >= (inclusivity ? 0 : 1);
     }
 
-    before (date : BakeTime, unit ?: string | PeriodType, equality ?: boolean) : boolean {
-        return this.difference(date, unit) <= (equality ? 0 : -1);
+    before (date : BakeTime, unit ?: string | PeriodType, inclusivity ?: boolean) : boolean {
+        return this.difference(date, unit) <= (inclusivity ? 0 : -1);
+    }
+
+    between (from : BakeTime, to : BakeTime, unit ?: string | PeriodType, inclusivity ?: boolean) : boolean {
+        return this.after(from, unit, inclusivity) && this.before(to, unit, inclusivity);
+    }
+
+    equals (date : BakeTime, unit ?: string | PeriodType) : boolean {
+        return this.difference(date, unit) === 0;
     }
 
     getTimestamp () : number {
         return this.timestamp;
     }
 
-    getDate () {
+    getDate () : Date {
         return this.date;
     }
 

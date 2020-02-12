@@ -1,4 +1,5 @@
 import { baketime, BakeTime } from '../src/BakeTime';
+import BakingError from '../src/error/BakingError';
 import { PeriodType } from '../src/lib/units/constants';
 
 /**
@@ -69,7 +70,7 @@ describe('Create BakeTime', () => {
         });
 
         test('Providing invalid string', () => {
-            expect(() => { baketime('not-a-date') }).toThrowError('The provided date string could not be parsed');
+            expect(() => { baketime('not-a-date') }).toThrowError(BakingError);
         });
     });
 });
