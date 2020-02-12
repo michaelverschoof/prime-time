@@ -62,17 +62,17 @@ export class BakeTime {
         return this.difference(date, unit) === 0;
     }
 
+    update (milliseconds : number) : BakeTime {
+        this.timestamp = milliseconds;
+        this.date.setTime(milliseconds);
+        return this;
+    }
+
     getTimestamp () : number {
         return this.timestamp;
     }
 
     getDate () : Date {
         return this.date;
-    }
-
-    update (milliseconds : number) : BakeTime {
-        this.timestamp = milliseconds;
-        this.date.setTime(milliseconds);
-        return this;
     }
 }

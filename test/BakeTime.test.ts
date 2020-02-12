@@ -131,85 +131,193 @@ describe('Subtracting time', () => {
     });
 });
 
-
-describe('Comparing time', () => {
+describe('Is after', () => {
     let baked : BakeTime;
 
     beforeAll(() => {
         baked = new BakeTime(timestamp);
     });
 
-    describe('Is after', () => {
+    test('Without equals', () => {
+        const compare = baketime(timestamp).add(2, PeriodType.DAY);
 
-        beforeEach(() => {
-            baked.update(timestamp);
-        });
+        let result = compare.after(baked);
+        expect(result).toBe(true);
 
-        test('Without equals', () => {
-            const compare = baketime(timestamp).add(2, PeriodType.DAY);
+        result = compare.after(baked, PeriodType.MILLISECOND);
+        expect(result).toBe(true);
 
-            let result = compare.after(baked);
-            expect(result).toBe(true);
+        result = compare.after(baked, PeriodType.DAY);
+        expect(result).toBe(true);
 
-            result = compare.after(baked, PeriodType.MILLISECOND);
-            expect(result).toBe(true);
-
-            result = compare.after(baked, PeriodType.DAY);
-            expect(result).toBe(true);
-
-            result = compare.after(baked, PeriodType.WEEK);
-            expect(result).toBe(false);
-        });
-
-        test('With equals', () => {
-            const compare = baketime(timestamp);
-
-            const result = compare.after(baked, PeriodType.DAY, true);
-            expect(result).toBe(true);
-        });
-
-        test('Not after', () => {
-            const compare = baketime(timestamp).subtract(1, PeriodType.DAY);
-
-            const result = compare.after(baked, PeriodType.DAY, true);
-            expect(result).toBe(false);
-        });
+        result = compare.after(baked, PeriodType.WEEK);
+        expect(result).toBe(false);
     });
 
-    describe('Is before', () => {
+    test('With equals', () => {
+        const compare = baketime(timestamp);
 
-        beforeEach(() => {
-            baked.update(timestamp);
-        });
+        const result = compare.after(baked, PeriodType.DAY, true);
+        expect(result).toBe(true);
+    });
 
-        test('Without equals', () => {
-            const compare = baketime(timestamp).subtract(2, PeriodType.DAY);
+    test('Not after', () => {
+        const compare = baketime(timestamp).subtract(1, PeriodType.DAY);
 
-            let result = compare.before(baked);
-            expect(result).toBe(true);
+        const result = compare.after(baked, PeriodType.DAY, true);
+        expect(result).toBe(false);
+    });
+});
 
-            result = compare.before(baked, PeriodType.MILLISECOND);
-            expect(result).toBe(true);
+describe('Is before', () => {
+    let baked : BakeTime;
 
-            result = compare.before(baked, PeriodType.DAY);
-            expect(result).toBe(true);
+    beforeAll(() => {
+        baked = new BakeTime(timestamp);
+    });
 
-            result = compare.before(baked, PeriodType.WEEK);
-            expect(result).toBe(false);
-        });
+    test('Without equals', () => {
+        const compare = baketime(timestamp).subtract(2, PeriodType.DAY);
 
-        test('With equals', () => {
-            const compare = baketime(timestamp);
+        let result = compare.before(baked);
+        expect(result).toBe(true);
 
-            const result = compare.before(baked, PeriodType.DAY, true);
-            expect(result).toBe(true);
-        });
+        result = compare.before(baked, PeriodType.MILLISECOND);
+        expect(result).toBe(true);
 
-        test('Not after', () => {
-            const compare = baketime(timestamp).add(1, PeriodType.DAY);
+        result = compare.before(baked, PeriodType.DAY);
+        expect(result).toBe(true);
 
-            const result = compare.before(baked, PeriodType.DAY, true);
-            expect(result).toBe(false);
-        });
+        result = compare.before(baked, PeriodType.WEEK);
+        expect(result).toBe(false);
+    });
+
+    test('With equals', () => {
+        const compare = baketime(timestamp);
+
+        const result = compare.before(baked, PeriodType.DAY, true);
+        expect(result).toBe(true);
+    });
+
+    test('Not after', () => {
+        const compare = baketime(timestamp).add(1, PeriodType.DAY);
+
+        const result = compare.before(baked, PeriodType.DAY, true);
+        expect(result).toBe(false);
+    });
+});
+
+describe('Is between', () => {
+    let baked : BakeTime;
+
+    beforeAll(() => {
+        baked = new BakeTime(timestamp);
+    });
+
+    test('Without equals', () => {
+        const from = baketime(timestamp).subtract(2, PeriodType.DAY);
+        const to = baketime(timestamp).add(2, PeriodType.DAY);
+
+        let result = baked.between(from, to);
+        expect(result).toBe(true);
+
+        result = baked.between(from, to, PeriodType.MILLISECOND);
+        expect(result).toBe(true);
+
+        result = baked.between(from, to, PeriodType.DAY);
+        expect(result).toBe(true);
+
+        result = baked.between(from, to, PeriodType.WEEK);
+        expect(result).toBe(false);
+    });
+
+    test('With equals', () => {
+        const from = baketime(timestamp).subtract(2, PeriodType.DAY);
+        const to = baketime(timestamp);
+
+        let result = baked.between(from, to, PeriodType.MILLISECOND, true);
+        expect(result).toBe(true);
+
+        result = baked.between(from, to, PeriodType.DAY, true);
+        expect(result).toBe(true);
+    });
+
+    test('Not between', () => {
+        const from = baketime(timestamp).add(1, PeriodType.DAY);
+        const to = baketime(timestamp).add(2, PeriodType.DAY);
+
+        let result = baked.between(from, to);
+        expect(result).toBe(false);
+
+        result = baked.between(from, to, PeriodType.DAY, true);
+        expect(result).toBe(false);
+    });
+});
+
+describe('Is between', () => {
+    let baked : BakeTime;
+
+    beforeAll(() => {
+        baked = new BakeTime(timestamp);
+    });
+
+    test('Without equals', () => {
+        const from = baketime(timestamp).subtract(2, PeriodType.DAY);
+        const to = baketime(timestamp).add(2, PeriodType.DAY);
+
+        let result = baked.between(from, to);
+        expect(result).toBe(true);
+
+        result = baked.between(from, to, PeriodType.MILLISECOND);
+        expect(result).toBe(true);
+
+        result = baked.between(from, to, PeriodType.DAY);
+        expect(result).toBe(true);
+
+        result = baked.between(from, to, PeriodType.WEEK);
+        expect(result).toBe(false);
+    });
+
+    test('With equals', () => {
+        const from = baketime(timestamp).subtract(2, PeriodType.DAY);
+        const to = baketime(timestamp);
+
+        let result = baked.between(from, to, PeriodType.MILLISECOND, true);
+        expect(result).toBe(true);
+
+        result = baked.between(from, to, PeriodType.DAY, true);
+        expect(result).toBe(true);
+    });
+
+    test('Not between', () => {
+        const from = baketime(timestamp).add(1, PeriodType.DAY);
+        const to = baketime(timestamp).add(2, PeriodType.DAY);
+
+        let result = baked.between(from, to);
+        expect(result).toBe(false);
+
+        result = baked.between(from, to, PeriodType.DAY, true);
+        expect(result).toBe(false);
+    });
+});
+
+describe('Is equal', () => {
+    let baked : BakeTime;
+
+    beforeAll(() => {
+        baked = new BakeTime(timestamp);
+    });
+
+    test('5 minute difference', () => {
+        const compare = baketime(timestamp).add(5, PeriodType.MINUTE);
+
+        let result = compare.equals(baked);
+        expect(result).toBe(false);
+
+        result = compare.equals(baked, PeriodType.MINUTE);
+        expect(result).toBe(false);
+
+        result = compare.equals(baked, PeriodType.DAY);
+        expect(result).toBe(true);
     });
 });
