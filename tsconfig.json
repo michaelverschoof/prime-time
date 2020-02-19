@@ -1,6 +1,8 @@
 {
   "compileOnSave": true,
   "compilerOptions": {
+    "strict": false,
+    "rootDir": "./",
     "declaration": true,
     "declarationDir": "./dist",
     "lib": [
@@ -8,7 +10,7 @@
       "es7",
       "dom"
     ],
-    "module": "system",
+    "module": "es6",
     "moduleResolution": "node",
     "noImplicitAny": true,
     "outDir": "./dist",
@@ -23,7 +25,7 @@
     "out": "docs"
   },
   "include": [
-    "src/**/*"
+    "src/**/*.ts"
   ],
   "exclude": [
     "node_modules",

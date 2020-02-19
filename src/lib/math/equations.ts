@@ -1,4 +1,6 @@
-export namespace Equations {
+/// <reference path="./mathematics.ts" />
+
+namespace Mathematics.Equations {
 
     export function add (augend : number, addend : number) {
         return augend + addend;

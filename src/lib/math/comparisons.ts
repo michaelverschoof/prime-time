@@ -1,16 +1,14 @@
-import { Equations } from './equations';
+/// <reference path="./mathematics.ts" />
 
-export namespace Comparisons {
+namespace Mathematics.Comparisons {
 
-    export function difference (start : number, end : number, divisor ?: number) {
-        const difference = Equations.subtract(start, end);
-        if (!divisor) {
-            return difference;
-        }
+    import divide = Mathematics.Equations.divide;
+    import subtract = Mathematics.Equations.subtract;
 
-        const quotient = Equations.divide(difference, divisor);
+    export function difference (start : number, end : number, divisor : number) : number {
+        const difference = subtract(start, end);
+        const quotient = divide(difference, divisor);
 
-        // TODO Make this optional?
         return Math.sign(quotient) * Math.floor(Math.abs(quotient));
     }
 }
