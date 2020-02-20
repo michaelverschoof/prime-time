@@ -1,6 +1,7 @@
 import { Dates } from './lib/conversions/dates';
 import { PeriodType } from './lib/units/constants';
-import { Periods } from './lib/units/periods';
+
+import { Math } from './lib/math/math';
 
 export function baketime (date ?: number | string | Date | BakeTime) {
     if (date instanceof BakeTime) {
@@ -20,28 +21,17 @@ export class BakeTime {
     }
 
     add (amount : number, unit : string | PeriodType) : BakeTime {
-        const addend = Mathematics.Equations.multiply(amount, Periods.find(unit).milliseconds);
-        const sum = Mathematics.Equations.add(this.timestamp, addend);
+        const sum = Math.Timestamps.add(this.timestamp, amount, unit);
         return this.update(sum);
     }
 
     subtract (amount : number, unit : string | PeriodType) : BakeTime {
-        const subtrahend = Mathematics.Equations.multiply(amount, Periods.find(unit).milliseconds);
-        const difference = Mathematics.Equations.subtract(this.timestamp, subtrahend);
+        const difference = Math.Timestamps.subtract(this.timestamp, amount, unit);
         return this.update(difference);
     }
 
     difference (other : BakeTime, unit ?: string | PeriodType) : number {
-        const period = Periods.find(unit);
-
-        if (period === Periods.MILLISECOND) {
-            return this.getTimestamp() - other.getTimestamp();
-        }
-
-        const thisParts = Dates.split(this.date, period.type);
-        const otherParts = Dates.split(other.date, period.type);
-
-        return Mathematics.Comparisons.difference(Dates.utc(thisParts), Dates.utc(otherParts), period.milliseconds);
+        return Math.Timestamps.difference(this.timestamp, other.timestamp, unit)
     }
 
     after (date : BakeTime, unit ?: string | PeriodType, inclusivity ?: boolean) : boolean {
