@@ -1,9 +1,9 @@
 {
-  "name": "baketimejs",
+  "name": "prime-time",
   "version": "0.0.1",
   "description": "A vanilla JavaScript date library",
-  "main": "dist/baketime.js",
-  "types": "dist/baketime.d.ts",
+  "main": "dist/prime-time.js",
+  "types": "dist/prime-time.d.ts",
   "scripts": {
     "clean": "rm -rf dist/*",
     "build": "tsc",
@@ -18,14 +18,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/michaelverschoof/BakeTimeJS.git"
+    "url": "git+https://github.com/michaelverschoof/prime-time.git"
   },
   "author": "Michael Verschoof <info@michaelv.nl>",
   "license": "SEE LICENSE IN LICENSE",
   "bugs": {
-    "url": "https://github.com/michaelverschoof/BakeTimeJS/issues"
+    "url": "https://github.com/michaelverschoof/prime-time/issues"
   },
-  "homepage": "https://github.com/michaelverschoof/BakeTimeJS#readme",
+  "homepage": "https://github.com/michaelverschoof/prime-time#readme",
   "devDependencies": {
     "@types/jest": "^25.1.2",
     "jest": "^25.1.0",
