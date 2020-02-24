@@ -1,6 +1,10 @@
 import BakingError from '../../error/BakingError';
-import { PeriodType } from '../units/constants';
+import { Timespan } from '../../types';
+import { Units } from '../units/units';
 
+const Timespans = Units.Timespans;
+
+// TODO: Remove namespace
 export namespace Dates {
 
     export function extract (date ?: number | string | Date) : number {
@@ -24,23 +28,23 @@ export namespace Dates {
         return parsed;
     }
 
-    export function split (date : Date, period : PeriodType) : number[] {
+    export function split (date : Date, unit : Timespan) : number[] {
         const parts = [ date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds(), date.getUTCMilliseconds() ];
-        switch (period) {
-            case PeriodType.YEAR:
+        switch (unit) {
+            case Timespans.YEAR:
                 return parts.slice(0, 1);
-            case PeriodType.MONTH:
+            case Timespans.MONTH:
                 return parts.slice(0, 2);
-            case PeriodType.WEEK:
-            case PeriodType.DAY:
+            case Timespans.WEEK:
+            case Timespans.DAY:
                 return parts.slice(0, 3);
-            case PeriodType.HOUR:
+            case Timespans.HOUR:
                 return parts.slice(0, 4);
-            case PeriodType.MINUTE:
+            case Timespans.MINUTE:
                 return parts.slice(0, 5);
-            case PeriodType.SECOND:
+            case Timespans.SECOND:
                 return parts.slice(0, 6);
-            case PeriodType.MILLISECOND:
+            case Timespans.MILLISECOND:
             default:
                 return parts;
         }

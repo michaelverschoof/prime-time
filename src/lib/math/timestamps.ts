@@ -1,27 +1,29 @@
+import { Timespan } from '../../types';
 import { Dates } from '../conversions/dates';
-import { PeriodType } from '../units/constants';
-import { Periods } from '../units/periods';
+import { Units } from '../units/units';
 import { Math } from './math';
 
-export function add (timestamp : number, amount : number, unit : string | PeriodType) : number {
-    const addend = Math.Numbers.multiply(amount, Periods.find(unit).milliseconds);
+const Timespans = Units.Timespans;
+
+export function add (timestamp : number, amount : number, unit : string | Timespan) : number {
+    const addend = Math.Numbers.multiply(amount, Timespans.find(unit).milliseconds);
     return Math.Numbers.add(timestamp, addend);
 }
 
-export function subtract (timestamp : number, amount : number, unit : string | PeriodType) : number {
-    const subtrahend = Math.Numbers.multiply(amount, Periods.find(unit).milliseconds);
+export function subtract (timestamp : number, amount : number, unit : string | Timespan) : number {
+    const subtrahend = Math.Numbers.multiply(amount, Timespans.find(unit).milliseconds);
     return Math.Numbers.subtract(timestamp, subtrahend);
 }
 
-export function difference (left : number, right : number, unit ?: string | PeriodType) : number {
-    const period = Periods.find(unit);
+export function difference (left : number, right : number, unit ?: string | Timespan) : number {
+    const timespan = Timespans.find(unit);
 
-    if (period === Periods.MILLISECOND) {
+    if (timespan === Timespans.MILLISECOND) {
         return left - right;
     }
 
-    const leftParts = Dates.split(new Date(left), period.type);
-    const rightParts = Dates.split(new Date(right), period.type);
+    const leftParts = Dates.split(new Date(left), timespan);
+    const rightParts = Dates.split(new Date(right), timespan);
 
-    return Math.Numbers.difference(Dates.utc(leftParts), Dates.utc(rightParts), period.milliseconds);
+    return Math.Numbers.difference(Dates.utc(leftParts), Dates.utc(rightParts), timespan.milliseconds);
 }

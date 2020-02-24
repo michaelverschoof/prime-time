@@ -17,6 +17,5 @@ export function divide (dividend : number, divisor : number) : number {
 export function difference (start : number, end : number, divisor : number = 1) : number {
     const difference = subtract(start, end);
     const quotient = divide(difference, divisor);
-
     return Math.sign(quotient) * Math.floor(Math.abs(quotient));
 }

@@ -1,3 +1,4 @@
+const { defaults } = require('jest-config');
 module.exports = {
   "roots": [
     "<rootDir>/test"
@@ -9,4 +10,5 @@ module.exports = {
   "transform": {
     "^.+\\.(ts|tsx)$": "ts-jest"
   },
+  moduleFileExtensions: [...defaults.moduleFileExtensions, 'd.ts'],
 }

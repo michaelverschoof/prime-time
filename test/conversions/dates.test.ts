@@ -1,9 +1,11 @@
 import BakingError from '../../src/error/BakingError';
 import { Dates } from '../../src/lib/conversions/dates';
-import { PeriodType } from '../../src/lib/units/constants';
+import { Units } from '../../src/lib/units/units';
 import extract = Dates.extract;
 import split = Dates.split;
 import utc = Dates.utc;
+
+const Timespans = Units.Timespans;
 
 /**
  * 1986-6-24 12:01:02.003 GMT
@@ -47,47 +49,42 @@ describe('Split', () => {
     });
 
     test('Providing year', () => {
-        const result = split(date, PeriodType.YEAR);
+        const result = split(date, Timespans.YEAR);
         expect(result).toEqual([1986]);
     });
 
     test('Providing month', () => {
-        const result = split(date, PeriodType.MONTH);
+        const result = split(date, Timespans.MONTH);
         expect(result).toEqual([1986, 5]);
     });
 
     test('Providing week', () => {
-        const result = split(date, PeriodType.WEEK);
+        const result = split(date, Timespans.WEEK);
         expect(result).toEqual([1986, 5, 24]);
     });
 
     test('Providing day', () => {
-        const result = split(date, PeriodType.DAY);
+        const result = split(date, Timespans.DAY);
         expect(result).toEqual([1986, 5, 24]);
     });
 
     test('Providing hour', () => {
-        const result = split(date, PeriodType.HOUR);
+        const result = split(date, Timespans.HOUR);
         expect(result).toEqual([1986, 5, 24, 12]);
     });
 
     test('Providing minute', () => {
-        const result = split(date, PeriodType.MINUTE);
+        const result = split(date, Timespans.MINUTE);
         expect(result).toEqual([1986, 5, 24, 12, 1]);
     });
 
     test('Providing second', () => {
-        const result = split(date, PeriodType.SECOND);
+        const result = split(date, Timespans.SECOND);
         expect(result).toEqual([1986, 5, 24, 12, 1, 2]);
     });
 
     test('Providing millisecond', () => {
-        const result = split(date, PeriodType.MILLISECOND);
-        expect(result).toEqual([1986, 5, 24, 12, 1, 2, 3]);
-    });
-
-    test('Providing null', () => {
-        const result = split(date, null);
+        const result = split(date, Timespans.MILLISECOND);
         expect(result).toEqual([1986, 5, 24, 12, 1, 2, 3]);
     });
 });
