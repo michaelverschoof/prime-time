@@ -1,14 +1,22 @@
 import BakingError from '../../error/BakingError';
 import { Timespan } from '../../types';
+import Day from './timespans/day';
+import Hour from './timespans/hour';
+import MilliSecond from './timespans/millisecond';
+import Minute from './timespans/minute';
+import Month from './timespans/month';
+import Second from './timespans/second';
+import Week from './timespans/week';
+import Year from './timespans/year';
 
-export const MILLISECOND : Timespan = { milliseconds: 1, aliases: ['milliseconds', 'millisecond'] };
-export const SECOND : Timespan = { milliseconds: 1000, aliases: ['seconds', 'second'] };
-export const MINUTE : Timespan = { milliseconds: 60000, aliases: ['minutes', 'minute'] };
-export const HOUR : Timespan = { milliseconds: 3600000, aliases: ['hours', 'hour'] };
-export const DAY : Timespan = { milliseconds: 86400000, aliases: ['days', 'day'] };
-export const WEEK : Timespan = { milliseconds: 604800000, aliases: ['weeks', 'week'] };
-export const MONTH : Timespan = { milliseconds: 2629746000, aliases: ['months', 'month'] };
-export const YEAR : Timespan = { milliseconds: 31556952000, aliases: ['years', 'year'] };
+export const MILLISECOND : Timespan = new MilliSecond();
+export const SECOND : Timespan = new Second();
+export const MINUTE : Timespan = new Minute();
+export const HOUR : Timespan = new Hour();
+export const DAY : Timespan = new Day();
+export const WEEK : Timespan = new Week();
+export const MONTH : Timespan = new Month();
+export const YEAR : Timespan = new Year();
 
 const timespans : Timespan[] = [ MILLISECOND, SECOND, MINUTE, HOUR, DAY, WEEK, MONTH, YEAR ];
 
@@ -26,7 +34,7 @@ export function find (unit ?: string | Timespan) : Timespan {
     }
 
     if (typeof unit === 'object' && 'milliseconds' in unit) {
-        return timespans.find(timespan => timespan.milliseconds === unit.milliseconds);
+        return <Timespan> timespans.find(timespan => timespan.milliseconds === unit.milliseconds);
     }
 
     throw new BakingError('The provided unit (' + unit + ') is not allowed');

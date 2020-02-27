@@ -14,8 +14,8 @@ export function divide (dividend : number, divisor : number) : number {
     return dividend / divisor;
 }
 
-export function difference (start : number, end : number, divisor : number = 1) : number {
-    const difference = subtract(start, end);
+export function difference (left : number, right : number, divisor : number = 1) : number {
+    const difference = subtract(right, left);
     const quotient = divide(difference, divisor);
-    return Math.sign(quotient) * Math.floor(Math.abs(quotient));
+    return quotient >> 0;
 }

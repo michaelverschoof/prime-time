@@ -1,4 +1,4 @@
-import { add, difference, subtract } from '../../src/lib/math/timestamps';
+import { add, difference, scale, subtract } from '../../src/lib/calc/timestamps';
 import { Units } from '../../src/lib/units/units';
 
 const Timespans = Units.Timespans;
@@ -53,10 +53,10 @@ describe('Differences', () => {
         const right = add(timestamp, 5, Timespans.DAY);
 
         let result = difference(left, right, Timespans.DAY);
-        expect(result).toBe(-5);
+        expect(result).toBe(5);
 
         result = difference(right, left, Timespans.DAY);
-        expect(result).toBe(5);
+        expect(result).toBe(-5);
     });
 
     test('Subtract 5 days', () => {
@@ -64,9 +64,52 @@ describe('Differences', () => {
         const right = subtract(timestamp, 5, Timespans.DAY);
 
         let result = difference(left, right, Timespans.DAY);
-        expect(result).toBe(5);
+        expect(result).toBe(-5);
 
         result = difference(right, left, Timespans.DAY);
-        expect(result).toBe(-5);
+        expect(result).toBe(5);
+    });
+});
+
+describe('Set scale', () => {
+
+    test('To millisecond', () => {
+        let result = scale(timestamp, Timespans.MILLISECOND);
+        expect(result).toBe(timestamp);
+    });
+
+    test('To second', () => {
+        let result = scale(timestamp, Timespans.SECOND);
+        expect(result).toBe(519998462000);
+    });
+
+    test('To minute', () => {
+        let result = scale(timestamp, Timespans.MINUTE);
+        expect(result).toBe(519998460000);
+    });
+
+    test('To hour', () => {
+        let result = scale(timestamp, Timespans.HOUR);
+        expect(result).toBe(519998400000);
+    });
+
+    test('To day', () => {
+        let result = scale(timestamp, Timespans.DAY);
+        expect(result).toBe(519955200000);
+    });
+
+    test('To week', () => {
+        let result = scale(timestamp, Timespans.WEEK);
+        expect(result).toBe(519955200000);
+    });
+
+    test('To month', () => {
+        let result = scale(timestamp, Timespans.MONTH);
+        expect(result).toBe(517968000000);
+    });
+
+    test('To year', () => {
+        let result = scale(timestamp, Timespans.YEAR);
+        expect(result).toBe(504921600000);
     });
 });

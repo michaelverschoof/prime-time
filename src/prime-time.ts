@@ -1,14 +1,11 @@
-import { Dates } from './lib/conversions/dates';
-import { Math } from './lib/math/math';
+import { Calc } from './lib/calc/calc';
+import { From } from './lib/from/from';
 import { Timespan } from './types';
 
-const Timestamps = Math.Timestamps;
+const Timestamps = Calc.Timestamps;
 
-export function primetime (date ?: number | string | Date | PrimeTime) {
-    if (date instanceof PrimeTime) {
-        return date;
-    }
-    return new PrimeTime(Dates.extract(date));
+export function primetime (date ?: number | string | Date | PrimeTime) : PrimeTime {
+    return From.anything(date);
 }
 
 export class PrimeTime {
@@ -21,34 +18,44 @@ export class PrimeTime {
         this.date = new Date(timestamp);
     }
 
-    add (amount : number, unit : string | Timespan) : PrimeTime {
-        const sum = Timestamps.add(this.timestamp, amount, unit);
+    add (amount : number, timespan : string | Timespan) : PrimeTime {
+        const sum = Timestamps.add(this.timestamp, amount, timespan);
         return this.update(sum);
     }
 
-    subtract (amount : number, unit : string | Timespan) : PrimeTime {
-        const difference = Timestamps.subtract(this.timestamp, amount, unit);
+    subtract (amount : number, timespan : string | Timespan) : PrimeTime {
+        const difference = Timestamps.subtract(this.timestamp, amount, timespan);
         return this.update(difference);
     }
 
-    difference (other : PrimeTime, unit ?: string | Timespan) : number {
-        return Timestamps.difference(this.timestamp, other.timestamp, unit)
+    difference (to : PrimeTime, timespan ?: string | Timespan) : number {
+        return Timestamps.difference(this.timestamp, to.timestamp, timespan)
     }
 
-    after (date : PrimeTime, unit ?: string | Timespan, inclusivity ?: boolean) : boolean {
-        return this.difference(date, unit) >= (inclusivity ? 0 : 1);
+    after (date : PrimeTime, timespan ?: string | Timespan, inclusivity ?: boolean) : boolean {
+        return this.difference(date, timespan) <= (inclusivity ? 0 : -1);
     }
 
-    before (date : PrimeTime, unit ?: string | Timespan, inclusivity ?: boolean) : boolean {
-        return this.difference(date, unit) <= (inclusivity ? 0 : -1);
+    before (date : PrimeTime, timespan ?: string | Timespan, inclusivity ?: boolean) : boolean {
+        return this.difference(date, timespan) >= (inclusivity ? 0 : 1);
     }
 
-    between (from : PrimeTime, to : PrimeTime, unit ?: string | Timespan, inclusivity ?: boolean) : boolean {
-        return this.after(from, unit, inclusivity) && this.before(to, unit, inclusivity);
+    between (from : PrimeTime, to : PrimeTime, timespan ?: string | Timespan, inclusivity ?: boolean) : boolean {
+        return this.after(from, timespan, inclusivity) && this.before(to, timespan, inclusivity);
     }
 
-    equals (date : PrimeTime, unit ?: string | Timespan) : boolean {
-        return this.difference(date, unit) === 0;
+    equals (date : PrimeTime, timespan ?: string | Timespan) : boolean {
+        return this.difference(date, timespan) === 0;
+    }
+
+    clone (timespan ?: string | Timespan) : PrimeTime {
+        const timestamp = timespan ? Timestamps.scale(this.timestamp, timespan) : this.timestamp;
+        return From.timestamp(timestamp);
+    }
+
+    to (timespan : string | Timespan) : PrimeTime {
+        const timestamp = Timestamps.scale(this.timestamp, timespan);
+        return this.update(timestamp);
     }
 
     update (milliseconds : number) : PrimeTime {

@@ -19,7 +19,8 @@
     "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "strictNullChecks": true
   },
   "typedocOptions": {
     "mode": "modules",
@@ -31,6 +32,5 @@
   "exclude": [
     "node_modules",
     "dist"
-  ],
-  "strictNullChecks": true
+  ]
 }

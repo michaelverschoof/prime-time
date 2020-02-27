@@ -1,4 +1,4 @@
-import { add, difference, divide, multiply, subtract } from '../../src/lib/math/numbers';
+import { add, difference, divide, multiply, subtract } from '../../src/lib/calc/numbers';
 
 describe('Additions', () => {
 
@@ -98,21 +98,41 @@ describe('Differences', () => {
 
         test('5 differs from 2', () => {
             const result = difference(5, 2);
+            expect(result).toBe(-3);
+        });
+
+        test('2 differs from 5', () => {
+            const result = difference(2, 5);
             expect(result).toBe(3);
         });
 
         test('-5 differs from -2', () => {
             const result = difference(-5, -2);
+            expect(result).toBe(3);
+        });
+
+        test('-2 differs from -5', () => {
+            const result = difference(-2, -5);
             expect(result).toBe(-3);
         });
 
         test('5 differs from -2', () => {
             const result = difference(5, -2);
+            expect(result).toBe(-7);
+        });
+
+        test('-2 differs from 5', () => {
+            const result = difference(-2, 5);
             expect(result).toBe(7);
         });
 
         test('-5 differs from 2', () => {
             const result = difference(-5, 2);
+            expect(result).toBe(7);
+        });
+
+        test('2 differs from -5', () => {
+            const result = difference(2, -5);
             expect(result).toBe(-7);
         });
     });
@@ -121,22 +141,41 @@ describe('Differences', () => {
 
         test('5 differs from 2', () => {
             const result = difference(5, 2, 2);
+            expect(result).toBe(-1);
+        });
+
+        test('2 differs from 5', () => {
+            const result = difference(2, 5, 2);
             expect(result).toBe(1);
         });
 
         test('-5 differs from -2', () => {
             const result = difference(-5, -2, 2);
+            expect(result).toBe(1);
+        });
+
+        test('-2 differs from -5', () => {
+            const result = difference(-2, -5, 2);
             expect(result).toBe(-1);
         });
 
         test('5 differs from -2', () => {
             const result = difference(5, -2, 5);
+            expect(result).toBe(-1);
+        });
 
+        test('-2 differs from 5', () => {
+            const result = difference(-2, 5, 5);
             expect(result).toBe(1);
         });
 
         test('-5 differs from 2', () => {
             const result = difference(-5, 2, 5);
+            expect(result).toBe(1);
+        });
+
+        test('2 differs from -5', () => {
+            const result = difference(2, -5, 5);
             expect(result).toBe(-1);
         });
     });
