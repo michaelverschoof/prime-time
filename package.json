@@ -1,6 +1,6 @@
 {
   "name": "prime-time",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A vanilla JavaScript date library",
   "main": "dist/prime-time.js",
   "types": "dist/prime-time.d.ts",
