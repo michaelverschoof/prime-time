@@ -1,4 +1,4 @@
-import BakingError from '../../error/BakingError';
+import PrimeError from '../../error/prime-error';
 import { Timespan } from '../../types';
 import Day from './timespans/day';
 import Hour from './timespans/hour';
@@ -37,5 +37,5 @@ export function find (unit ?: string | Timespan) : Timespan {
         return <Timespan> timespans.find(timespan => timespan.milliseconds === unit.milliseconds);
     }
 
-    throw new BakingError('The provided unit (' + unit + ') is not allowed');
+    throw new PrimeError('The provided unit (' + unit + ') is not allowed');
 }

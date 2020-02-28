@@ -1,4 +1,4 @@
-import BakingError from '../src/error/BakingError';
+import PrimeError from '../src/error/prime-error';
 import { Units } from '../src/lib/units/units';
 import { primetime, PrimeTime } from '../src/prime-time';
 
@@ -65,7 +65,7 @@ describe('Create', () => {
         });
 
         test('Providing invalid string', () => {
-            expect(() => { primetime('not-a-date') }).toThrowError(BakingError);
+            expect(() => { primetime('not-a-date') }).toThrowError(PrimeError);
         });
     });
 });

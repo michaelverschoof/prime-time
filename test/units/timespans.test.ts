@@ -1,4 +1,4 @@
-import BakingError from '../../src/error/BakingError';
+import PrimeError from '../../src/error/prime-error';
 import { DAY, find, HOUR, MILLISECOND, MINUTE, MONTH, SECOND, WEEK, YEAR } from '../../src/lib/units/timespans';
 
 describe('Find timespan', () => {
@@ -73,6 +73,6 @@ describe('Find timespan', () => {
     });
 
     test('Non-existent values', () => {
-        expect(() => { find('non-existent value') }).toThrowError(BakingError);
+        expect(() => { find('non-existent value') }).toThrowError(PrimeError);
     });
 });

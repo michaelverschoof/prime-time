@@ -1,6 +1,6 @@
 // TODO Tests
 
-import BakingError from '../../error/BakingError';
+import PrimeError from '../../error/prime-error';
 import { PrimeTime } from '../../prime-time';
 
 function anything (value ?: number | string | Date | PrimeTime) : PrimeTime {
@@ -34,7 +34,7 @@ function timestamp (date : number) : PrimeTime {
 function string (date : string) : PrimeTime {
     let parsed = Date.parse(date);
     if (isNaN(parsed)) {
-        throw new BakingError('The provided date string could not be parsed');
+        throw new PrimeError('The provided date string could not be parsed');
     }
 
     return new PrimeTime(parsed);
