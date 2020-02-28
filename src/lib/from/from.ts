@@ -1,5 +1,3 @@
-// TODO Tests
-
 import PrimeError from '../../error/prime-error';
 import { PrimeTime } from '../../prime-time';
 
