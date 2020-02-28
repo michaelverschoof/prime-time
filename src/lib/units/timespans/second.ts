@@ -2,8 +2,11 @@ import { Timespan } from '../../../types';
 
 export default class Second implements Timespan {
 
-    readonly milliseconds : number;
-    readonly aliases : string[];
+    readonly milliseconds : number = 1000;
+    readonly aliases : string[] = [
+        'seconds',
+        'second'
+    ];
 
     constructor () {
         this.milliseconds = 1000;

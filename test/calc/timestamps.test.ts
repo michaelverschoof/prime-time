@@ -1,4 +1,4 @@
-import { add, difference, scale, subtract } from '../../src/lib/calc/timestamps';
+import { add, difference, leapYear, scale, subtract } from '../../src/lib/calc/timestamps';
 import { Units } from '../../src/lib/units/units';
 
 const Timespans = Units.Timespans;
@@ -71,7 +71,7 @@ describe('Differences', () => {
     });
 });
 
-describe('Set scale', () => {
+describe('To scale', () => {
 
     test('To millisecond', () => {
         let result = scale(timestamp, Timespans.MILLISECOND);
@@ -106,5 +106,19 @@ describe('Set scale', () => {
     test('To year', () => {
         let result = scale(timestamp, Timespans.YEAR);
         expect(result).toBe(504921600000);
+    });
+});
+
+describe('Is leap year', () => {
+
+    test('1986 (not a leap year)', () => {
+        const result = leapYear(timestamp);
+        expect(result).toEqual(false);
+    });
+
+    test('1988 (a leap year)', () => {
+        const year = add(timestamp, 2, Timespans.YEAR);
+        const result = leapYear(year);
+        expect(result).toEqual(true);
     });
 });

@@ -2,16 +2,11 @@ import { Timespan } from '../../../types';
 
 export default class Month implements Timespan {
 
-    readonly milliseconds : number;
-    readonly aliases : string[];
-
-    constructor () {
-        this.milliseconds = 2629746000;
-        this.aliases = [
-            'months',
-            'month'
-        ];
-    }
+    readonly milliseconds : number = 2629746000;
+    readonly aliases : string[] = [
+        'months',
+        'month'
+    ];
 
     validate (month : number) : boolean {
         // Month is zero-based for some reason

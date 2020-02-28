@@ -2,16 +2,11 @@ import { Timespan } from '../../../types';
 
 export default class Minute implements Timespan {
 
-    readonly milliseconds : number;
-    readonly aliases : string[];
-
-    constructor () {
-        this.milliseconds = 60000;
-        this.aliases = [
-            'minutes',
-            'minute'
-        ];
-    }
+    readonly milliseconds : number = 60000;
+    readonly aliases : string[] = [
+        'minutes',
+        'minute'
+    ];
 
     validate (minute : number) : boolean {
         return minute >= 0 && minute <= 59;

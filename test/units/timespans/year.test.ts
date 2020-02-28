@@ -24,11 +24,3 @@ test('Get date parts', () => {
     let result = year.parts(timestamp);
     expect(result).toEqual([1986]);
 });
-
-test('Is leap year', () => {
-    let result = year.leap(1986);
-    expect(result).toEqual(false);
-
-    result = year.leap(2000);
-    expect(result).toEqual(true);
-});

@@ -28,6 +28,16 @@ export class PrimeTime {
         return this.update(difference);
     }
 
+    clone (timespan ?: string | Timespan) : PrimeTime {
+        const timestamp = timespan ? Timestamps.scale(this.timestamp, timespan) : this.timestamp;
+        return From.timestamp(timestamp);
+    }
+
+    to (timespan : string | Timespan) : PrimeTime {
+        const timestamp = Timestamps.scale(this.timestamp, timespan);
+        return this.update(timestamp);
+    }
+
     difference (to : PrimeTime, timespan ?: string | Timespan) : number {
         return Timestamps.difference(this.timestamp, to.timestamp, timespan)
     }
@@ -48,14 +58,8 @@ export class PrimeTime {
         return this.difference(date, timespan) === 0;
     }
 
-    clone (timespan ?: string | Timespan) : PrimeTime {
-        const timestamp = timespan ? Timestamps.scale(this.timestamp, timespan) : this.timestamp;
-        return From.timestamp(timestamp);
-    }
-
-    to (timespan : string | Timespan) : PrimeTime {
-        const timestamp = Timestamps.scale(this.timestamp, timespan);
-        return this.update(timestamp);
+    leapYear () : boolean {
+        return Timestamps.leapYear(this.timestamp);
     }
 
     update (milliseconds : number) : PrimeTime {
