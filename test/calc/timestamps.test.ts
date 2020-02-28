@@ -98,11 +98,6 @@ describe('Set scale', () => {
         expect(result).toBe(519955200000);
     });
 
-    test('To week', () => {
-        let result = scale(timestamp, Timespans.WEEK);
-        expect(result).toBe(519955200000);
-    });
-
     test('To month', () => {
         let result = scale(timestamp, Timespans.MONTH);
         expect(result).toBe(517968000000);

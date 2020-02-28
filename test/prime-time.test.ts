@@ -145,7 +145,7 @@ describe('Is after', () => {
         result = compare.after(prime, Timespans.DAY);
         expect(result).toBe(true);
 
-        result = compare.after(prime, Timespans.WEEK);
+        result = compare.after(prime, Timespans.MONTH);
         expect(result).toBe(false);
     });
 
@@ -183,7 +183,7 @@ describe('Is before', () => {
         result = compare.before(prime, Timespans.DAY);
         expect(result).toBe(true);
 
-        result = compare.before(prime, Timespans.WEEK);
+        result = compare.before(prime, Timespans.MONTH);
         expect(result).toBe(false);
     });
 
@@ -222,7 +222,7 @@ describe('Is between', () => {
         result = prime.between(from, to, Timespans.DAY);
         expect(result).toBe(true);
 
-        result = prime.between(from, to, Timespans.WEEK);
+        result = prime.between(from, to, Timespans.MONTH);
         expect(result).toBe(false);
     });
 
@@ -297,11 +297,6 @@ describe('To timespan', () => {
         expect(result.getTimestamp()).toEqual(519955200000);
     });
 
-    test('Weeks', () => {
-        const result = prime.to(Timespans.WEEK);
-        expect(result.getTimestamp()).toEqual(519955200000);
-    });
-
     test('Months', () => {
         const result = prime.to(Timespans.MONTH);
         expect(result.getTimestamp()).toEqual(517968000000);
@@ -347,11 +342,6 @@ describe('Clone', () => {
 
     test('Days', () => {
         const result = prime.clone(Timespans.DAY);
-        expect(result.getTimestamp()).toEqual(519955200000);
-    });
-
-    test('Weeks', () => {
-        const result = prime.clone(Timespans.WEEK);
         expect(result.getTimestamp()).toEqual(519955200000);
     });
 

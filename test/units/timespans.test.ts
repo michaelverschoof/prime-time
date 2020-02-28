@@ -1,5 +1,5 @@
 import PrimeError from '../../src/error/prime-error';
-import { DAY, find, HOUR, MILLISECOND, MINUTE, MONTH, SECOND, WEEK, YEAR } from '../../src/lib/units/timespans';
+import { DAY, find, HOUR, MILLISECOND, MINUTE, MONTH, SECOND, YEAR } from '../../src/lib/units/timespans';
 
 describe('Find timespan', () => {
 
@@ -17,14 +17,6 @@ describe('Find timespan', () => {
 
         result = find('month');
         expect(result).toEqual(MONTH);
-    });
-
-    test('Week', () => {
-        let result = find(WEEK);
-        expect(result).toEqual(WEEK);
-
-        result = find('week');
-        expect(result).toEqual(WEEK);
     });
 
     test('Day', () => {

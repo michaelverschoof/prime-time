@@ -6,7 +6,6 @@ import MilliSecond from './timespans/millisecond';
 import Minute from './timespans/minute';
 import Month from './timespans/month';
 import Second from './timespans/second';
-import Week from './timespans/week';
 import Year from './timespans/year';
 
 export const MILLISECOND : Timespan = new MilliSecond();
@@ -14,11 +13,10 @@ export const SECOND : Timespan = new Second();
 export const MINUTE : Timespan = new Minute();
 export const HOUR : Timespan = new Hour();
 export const DAY : Timespan = new Day();
-export const WEEK : Timespan = new Week();
 export const MONTH : Timespan = new Month();
 export const YEAR : Timespan = new Year();
 
-const timespans : Timespan[] = [ MILLISECOND, SECOND, MINUTE, HOUR, DAY, WEEK, MONTH, YEAR ];
+const timespans : Timespan[] = [ MILLISECOND, SECOND, MINUTE, HOUR, DAY, MONTH, YEAR ];
 
 export function find (unit ?: string | Timespan) : Timespan {
     if (!unit) {
