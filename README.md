@@ -1,3 +1,5 @@
+[![Coverage Status](https://coveralls.io/repos/github/michaelverschoof/prime-time/badge.svg?branch=master)](https://coveralls.io/github/michaelverschoof/prime-time?branch=master)
+
 # Prime Time
 
 A lightweight JavaScript date library for parsing, manipulating and formatting dates. 

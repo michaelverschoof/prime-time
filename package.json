@@ -10,6 +10,7 @@
     "clean-build": "npm run clean && npm run build",
     "test": "jest",
     "test-coverage": "jest --coverage",
+    "test-coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls",
     "prerelease": "npm run clean-build && npm run test-coverage"
   },
   "keywords": [
@@ -28,6 +29,7 @@
   "homepage": "https://github.com/michaelverschoof/prime-time#readme",
   "devDependencies": {
     "@types/jest": "^25.1.2",
+    "coveralls": "^3.0.9",
     "jest": "^25.1.0",
     "ts-jest": "^25.2.1",
     "typescript": "^3.7.5"
