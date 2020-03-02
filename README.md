@@ -1,5 +1,5 @@
 [![MIT License][license-image]][license-url]
-[![Coverage Status](https://coveralls.io/repos/github/michaelverschoof/prime-time/badge.svg?branch=master)](https://coveralls.io/github/michaelverschoof/prime-time?branch=master)
+[![Coverage Status][coverall-image]][coverall-url]
 
 
 # Prime Time
@@ -10,10 +10,6 @@ A lightweight JavaScript date library for parsing, manipulating and formatting d
 The library is available as a [npm package][npm]. To install the package simply run:
 ```bash
 npm install prime-time --save
-```
-or with yarn:
-```bash
-yarn add prime-time
 ```
 
 ## Calling the functionality
@@ -36,3 +32,5 @@ Named after the [Alan Parsons Project][alan-parsons-project] song [Prime Time][y
 
 [license-image]: http://img.shields.io/badge/license-MIT-blue.svg?style=flat
 [license-url]: LICENSE
+[coverall-image]: https://coveralls.io/repos/github/michaelverschoof/prime-time/badge.svg?branch=master
+[coverall-url]: https://coveralls.io/github/michaelverschoof/prime-time?branch=master
