@@ -1,4 +1,5 @@
 import { Calc } from './lib/calc/calc';
+import { Format } from './lib/format/format';
 import { From } from './lib/from/from';
 import { Timespan } from './types';
 
@@ -12,6 +13,9 @@ export class PrimeTime {
 
     private timestamp : number;
     private readonly date : Date;
+
+    // private locale : string;
+    // private timezone : string;
 
     constructor (timestamp : number) {
         this.timestamp = timestamp;
@@ -60,6 +64,10 @@ export class PrimeTime {
 
     leapYear () : boolean {
         return Timestamps.leapYear(this.timestamp);
+    }
+
+    localise (format ?: string, locale ?: string) {
+        return Format.localise(this.timestamp, format, locale);
     }
 
     update (milliseconds : number) : PrimeTime {

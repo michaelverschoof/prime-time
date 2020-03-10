@@ -5,11 +5,11 @@
   "main": "dist/prime-time.js",
   "types": "dist/prime-time.d.ts",
   "scripts": {
-    "clean": "rm -rf dist/*",
+    "clean": "rm -rf dist/* && rm -rf coverage/*",
     "build": "tsc",
-    "test": "jest",
-    "test-coverage": "jest --coverage",
-    "test-coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls",
+    "test": "cross-env NODE_ICU_DATA=node_modules/full-icu jest",
+    "test-coverage": "cross-env NODE_ICU_DATA=node_modules/full-icu jest --coverage",
+    "test-coveralls": "cross-env NODE_ICU_DATA=node_modules/full-icu jest --coverage --coverageReporters=text-lcov | coveralls",
     "clean-build": "npm run clean && npm run build",
     "clean-build-test": "npm run clean && npm run build && npm run test",
     "clean-build-test-coverage": "npm run clean && npm run build && npm run test-coverage",
@@ -32,6 +32,8 @@
   "devDependencies": {
     "@types/jest": "^25.1.2",
     "coveralls": "^3.0.9",
+    "cross-env": "^7.0.2",
+    "full-icu": "^1.3.1",
     "jest": "^25.1.0",
     "ts-jest": "^25.2.1",
     "typescript": "^3.7.5"

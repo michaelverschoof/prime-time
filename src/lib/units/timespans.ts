@@ -18,22 +18,23 @@ export const YEAR : Timespan = new Year();
 
 const timespans : Timespan[] = [ MILLISECOND, SECOND, MINUTE, HOUR, DAY, MONTH, YEAR ];
 
-export function find (unit ?: string | Timespan) : Timespan {
-    if (!unit) {
+export function find (timespan ?: string | Timespan) : Timespan {
+    if (!timespan) {
         return MILLISECOND;
     }
 
-    if (typeof unit === 'string') {
-        const search = unit.toLowerCase();
-        const found = timespans.find(timespan => timespan.aliases.includes(search)) || null;
+    if (typeof timespan === 'string') {
+        const alias = timespan.toLowerCase();
+        const found = timespans.find(item => item.aliases.includes(alias)) || null;
         if (found !== null) {
             return found;
         }
     }
 
-    if (typeof unit === 'object' && 'milliseconds' in unit) {
-        return <Timespan> timespans.find(timespan => timespan.milliseconds === unit.milliseconds);
+    // TODO: Create a base object for all timespans to check with instanceof?
+    if (typeof timespan === 'object' && 'milliseconds' in timespan) {
+        return <Timespan> timespans.find(item => item.milliseconds === timespan.milliseconds);
     }
 
-    throw new PrimeError('The provided unit (' + unit + ') is not allowed');
+    throw new PrimeError('The provided unit (' + timespan + ') is not allowed');
 }

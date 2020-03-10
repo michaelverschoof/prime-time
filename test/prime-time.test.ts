@@ -373,3 +373,43 @@ describe('Is leap year', () => {
         expect(result).toEqual(true);
     });
 });
+
+describe('Localise', () => {
+    let prime : PrimeTime;
+
+    beforeAll(() => {
+        prime = new PrimeTime(timestamp);
+    });
+
+    test('Without options', () => {
+        const result = prime.localise();
+        expect(result).toBe('6/24/1986');
+    });
+
+    test('With format', () => {
+        const result = prime.localise('weekday, day, month, year, hour, minute, second');
+        expect(result).toEqual('Tuesday, June 24, 1986, 2:01:02 PM');
+    });
+
+    test('With locale', () => {
+        let result = prime.localise(undefined, 'en-us');
+        expect(result).toEqual('6/24/1986');
+
+        result = prime.localise(undefined, 'en-gb');
+        expect(result).toEqual('24/06/1986');
+
+        result = prime.localise('', 'nl-nl');
+        expect(result).toEqual('24-6-1986');
+    });
+
+    test('With format and locale)', () => {
+        let result = prime.localise('weekday, day, month, year, hour, minute, second', 'en-us');
+        expect(result).toEqual('Tuesday, June 24, 1986, 2:01:02 PM');
+
+        result = prime.localise('weekday, day, month, year, hour, minute, second', 'en-gb');
+        expect(result).toEqual('Tuesday, 24 June 1986, 14:01:02');
+
+        result = prime.localise('weekday, day, month, year, hour, minute, second', 'nl-nl');
+        expect(result).toEqual('dinsdag 24 juni 1986 14:01:02');
+    });
+});
