@@ -83,4 +83,5 @@ export class PrimeTime {
     getDate () : Date {
         return this.date;
     }
+
 }

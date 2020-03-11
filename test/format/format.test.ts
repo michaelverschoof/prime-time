@@ -46,4 +46,5 @@ describe('Localise', () => {
 
         expect(() => { Format.localise(timestamp, 'non-existing-format', NL) }).toThrowError(PrimeError);
     });
+
 });

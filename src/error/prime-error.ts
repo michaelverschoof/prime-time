@@ -5,4 +5,5 @@ export default class PrimeError extends Error {
         this.name = this.constructor.name;
         Object.setPrototypeOf(this, PrimeError.prototype);
     }
+
 }

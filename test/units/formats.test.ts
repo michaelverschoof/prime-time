@@ -83,4 +83,5 @@ describe('Localise', () => {
     test('Non-existent values', () => {
         expect(() => { localise('non-existent value') }).toThrowError(PrimeError);
     });
+
 });

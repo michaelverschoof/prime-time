@@ -25,6 +25,7 @@ describe('Additions', () => {
         result = add(result, 2, 'days');
         expect(result).toEqual(timestamp + 604800000);
     });
+
 });
 
 describe('Subtractions', () => {
@@ -44,6 +45,7 @@ describe('Subtractions', () => {
         result = subtract(result, 2, 'days');
         expect(result).toEqual(timestamp - 604800000);
     });
+
 });
 
 describe('Differences', () => {
@@ -69,6 +71,7 @@ describe('Differences', () => {
         result = difference(right, left, Timespans.DAY);
         expect(result).toBe(5);
     });
+
 });
 
 describe('To scale', () => {
@@ -107,6 +110,7 @@ describe('To scale', () => {
         let result = scale(timestamp, Timespans.YEAR);
         expect(result).toBe(504921600000);
     });
+
 });
 
 describe('Is leap year', () => {
@@ -121,4 +125,5 @@ describe('Is leap year', () => {
         const result = leapYear(year);
         expect(result).toEqual(true);
     });
+
 });

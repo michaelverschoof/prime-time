@@ -24,6 +24,7 @@ describe('Create', () => {
             expect(prime.getTimestamp()).toEqual(timestamp);
             expect(prime.getDate()).toEqual(date);
         });
+
     });
 
     describe('Using function', () => {
@@ -67,7 +68,9 @@ describe('Create', () => {
         test('Providing invalid string', () => {
             expect(() => { primetime('not-a-date') }).toThrowError(PrimeError);
         });
+
     });
+
 });
 
 describe('Adding time', () => {
@@ -96,6 +99,7 @@ describe('Adding time', () => {
         result = prime.add(2, 'days').getTimestamp();
         expect(result).toEqual(timestamp + 604800000);
     });
+
 });
 
 describe('Subtracting time', () => {
@@ -124,6 +128,7 @@ describe('Subtracting time', () => {
         result = prime.subtract(2, 'days').getTimestamp();
         expect(result).toEqual(timestamp - 604800000);
     });
+
 });
 
 describe('Is after', () => {
@@ -162,6 +167,7 @@ describe('Is after', () => {
         const result = compare.after(prime, Timespans.DAY, true);
         expect(result).toBe(false);
     });
+
 });
 
 describe('Is before', () => {
@@ -200,6 +206,7 @@ describe('Is before', () => {
         const result = compare.before(prime, Timespans.DAY, true);
         expect(result).toBe(false);
     });
+
 });
 
 describe('Is between', () => {
@@ -247,6 +254,7 @@ describe('Is between', () => {
         result = prime.between(from, to, Timespans.DAY, true);
         expect(result).toBe(false);
     });
+
 });
 
 describe('Is equal', () => {
@@ -268,6 +276,7 @@ describe('Is equal', () => {
         result = compare.equals(prime, Timespans.DAY);
         expect(result).toBe(true);
     });
+
 });
 
 describe('To timespan', () => {
@@ -306,6 +315,7 @@ describe('To timespan', () => {
         const result = prime.to(Timespans.YEAR);
         expect(result.getTimestamp()).toEqual(504921600000);
     });
+
 });
 
 describe('Clone', () => {
@@ -354,6 +364,7 @@ describe('Clone', () => {
         const result = prime.clone(Timespans.YEAR);
         expect(result.getTimestamp()).toEqual(504921600000);
     });
+
 });
 
 describe('Is leap year', () => {
@@ -372,6 +383,7 @@ describe('Is leap year', () => {
         const result = prime.add(2, Timespans.YEAR).leapYear();
         expect(result).toEqual(true);
     });
+
 });
 
 describe('Localise', () => {
@@ -412,4 +424,5 @@ describe('Localise', () => {
         result = prime.localise('weekday, day, month, year, hour, minute, second', 'nl-nl');
         expect(result).toEqual('dinsdag 24 juni 1986 14:01:02');
     });
+
 });
