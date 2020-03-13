@@ -1,13 +1,13 @@
-import { KeyValuePairs, LocaliseOptions } from '../../../types';
+import { KeyValuePair, LocaliseOptions } from '../../../types';
 import { LocalisedFormats } from '../constants';
 
-const fixed : KeyValuePairs = { minute: LocalisedFormats.NUMERIC_FIXED };
-const flexible : KeyValuePairs = { minute: LocalisedFormats.NUMERIC_FLEXIBLE };
+const fixed : KeyValuePair = { minute: LocalisedFormats.NUMERIC_FIXED };
+const flexible : KeyValuePair = { minute: LocalisedFormats.NUMERIC_FLEXIBLE };
 
 export const localised : LocaliseOptions = {
     'minute': fixed,
     'minute-long': fixed,
-    'minute-short': flexible
+    'minute-short': flexible,
+    'm': flexible,
+    'mm': fixed
 };
-
-export const customised : KeyValuePairs = {};

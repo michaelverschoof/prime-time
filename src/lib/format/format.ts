@@ -1,27 +1,63 @@
-import { KeyValuePairs } from '../../types';
+import PrimeError from '../../error/prime-error';
 import { Units } from '../units/units';
+import DateTimeFormatPart = Intl.DateTimeFormatPart;
 
 const Formatter = Intl.DateTimeFormat;
 
-function parse (format : string) : KeyValuePairs {
-    return format.split(',').reduce(
-        (options : KeyValuePairs, item : string) => (
-            {...options, ...Units.Formats.localise(item)}
-        ), {}
-    );
-}
-
-function localise (timestamp : number, format ?: string, locale ?: string) : string {
+function format (timestamp : number, format ?: string, locale ?: string) : string {
     if (!locale || locale === '' || locale === 'local') {
         locale = navigator.language;
     }
 
-    const locales = Formatter.supportedLocalesOf(locale);
-    const options = format ? parse(format) : undefined;
+    if (format && /{(.*?)}/.test(format)) {
+        return customisedFormat(timestamp, format, locale);
+    }
+
+    return localisedFormat(timestamp, format, locale);
+}
+
+function localisedFormat (timestamp : number, format ?: string, locale ?: string) : string {
+    const locales = getLocales(locale);
+    const options = getOptions(format?.split(','));
 
     return Formatter(locales, options).format(timestamp);
 }
 
+function customisedFormat (timestamp : number, format : string, locale ?: string) : string {
+    const matches = format.match(/{(.*?)}/g)?.map(item => item.slice(1, -1));
+    if (!matches) {
+        throw new PrimeError('Format "' + format + '" could not be parsed');
+    }
+
+    const options = getOptions(matches);
+    const locales = getLocales(locale);
+    const formatted = Formatter(locales, options).formatToParts(timestamp).filter((item) => item.type !== 'literal');
+
+    return format.replace(/{.*?}/g, match => getLocalisedValue(match, formatted));
+}
+
+function getLocalisedValue (key : string, formatted : DateTimeFormatPart[]) : string {
+    const timespan = Units.Formats.timespan(key.slice(1, -1));
+    const value = formatted.find((item => item.type === timespan))?.value;
+    if (value) {
+        return value;
+    }
+
+    throw new PrimeError('Format key "' + key + '" not found');
+}
+
+function getOptions (formats ?: string[]) {
+    return formats && formats.length > 0
+        ? Units.Formats.options(formats)
+        : undefined;
+}
+
+function getLocales (locale ?: string) {
+    return locale ? Formatter.supportedLocalesOf(locale) : undefined;
+}
+
 export const Format = {
-    localise
+    format,
+    localise : localisedFormat,
+    customise: customisedFormat
 };

@@ -6,10 +6,10 @@ export interface Timespan {
     parts (timestamp : number) : number[]
 }
 
-export interface KeyValuePairs {
+export interface KeyValuePair {
     [key : string] : string
 }
 
 export interface LocaliseOptions {
-    [key : string] : KeyValuePairs
+    [key : string] : KeyValuePair
 }

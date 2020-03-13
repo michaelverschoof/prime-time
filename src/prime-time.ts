@@ -67,7 +67,7 @@ export class PrimeTime {
     }
 
     localise (format ?: string, locale ?: string) {
-        return Format.localise(this.timestamp, format, locale);
+        return Format.format(this.timestamp, format, locale);
     }
 
     update (milliseconds : number) : PrimeTime {
