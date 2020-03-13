@@ -66,8 +66,16 @@ export class PrimeTime {
         return Timestamps.leapYear(this.timestamp);
     }
 
-    localise (format ?: string, locale ?: string) {
+    format (format ?: string, locale ?: string) {
         return Format.format(this.timestamp, format, locale);
+    }
+
+    localise (format ?: string, locale ?: string) {
+        return Format.localise(this.timestamp, format, locale);
+    }
+
+    customise (format : string, locale ?: string) {
+        return Format.customise(this.timestamp, format, locale);
     }
 
     update (milliseconds : number) : PrimeTime {

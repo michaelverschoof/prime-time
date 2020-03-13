@@ -6,7 +6,6 @@ import * as Minute from './formats/minute';
 import * as Month from './formats/month';
 import * as Second from './formats/second';
 import * as Year from './formats/year';
-import { Units } from './units';
 
 const localised : LocaliseOptions = {
     ...Year.localised,
