@@ -9,7 +9,7 @@ function format (timestamp : number, format ?: string, locale ?: string) : strin
         locale = navigator.language;
     }
 
-    if (format && /{(.*?)}/.test(format)) {
+    if (format && /{.*?}/.test(format)) {
         return customisedFormat(timestamp, format, locale);
     }
 
@@ -24,26 +24,22 @@ function localisedFormat (timestamp : number, format ?: string, locale ?: string
 }
 
 function customisedFormat (timestamp : number, format : string, locale ?: string) : string {
-    const matches = format.match(/{(.*?)}/g)?.map(item => item.slice(1, -1));
+    const matches = format.match(/{.*?}/g)?.map(item => item.slice(1, -1));
     if (!matches) {
         throw new PrimeError('Format "' + format + '" could not be parsed');
     }
 
-    const options = getOptions(matches);
     const locales = getLocales(locale);
+    const options = getOptions(matches);
     const formatted = Formatter(locales, options).formatToParts(timestamp).filter((item) => item.type !== 'literal');
 
-    return format.replace(/{.*?}/g, match => getLocalisedValue(match, formatted));
+    return format.replace(/{.*?}/g, (match) => getFormattedValue(match, formatted));
 }
 
-function getLocalisedValue (key : string, formatted : DateTimeFormatPart[]) : string {
+function getFormattedValue (key : string, formatted : DateTimeFormatPart[]) : string {
     const timespan = Units.Formats.timespan(key.slice(1, -1));
-    const value = formatted.find((item => item.type === timespan))?.value;
-    if (value) {
-        return value;
-    }
-
-    throw new PrimeError('Format key "' + key + '" not found');
+    // @ts-ignore
+    return formatted.find((item => item.type === timespan)).value;
 }
 
 function getOptions (formats ?: string[]) {
