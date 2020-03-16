@@ -1,87 +1,54 @@
 import PrimeError from '../../src/error/prime-error';
-import { localise } from '../../src/lib/units/formats';
+import { find, options, timespan } from '../../src/lib/units/formats';
 
-describe('Localise', () => {
+describe('Find', () => {
 
     test('Year', () => {
-        let result = localise('year');
+        let result = find('year');
         expect(result).toEqual({year: 'numeric'});
 
-        result = localise('year-long');
+        result = find('year-long');
         expect(result).toEqual({year: 'numeric'});
 
-        result = localise('year-short');
+        result = find('year-short');
         expect(result).toEqual({year: '2-digit'});
     });
 
-    test('Month', () => {
-        let result = localise('month');
-        expect(result).toEqual({month: 'long'});
-
-        result = localise('month-long');
-        expect(result).toEqual({month: 'long'});
-
-        result = localise('month-short');
-        expect(result).toEqual({month: 'short'});
+    test('Non-existent values', () => {
+        expect(() => { find('non-existent value') }).toThrowError(PrimeError);
     });
 
-    test('Weekday', () => {
-        let result = localise('weekday');
-        expect(result).toEqual({weekday: 'long'});
+});
 
-        result = localise('weekday-long');
-        expect(result).toEqual({weekday: 'long'});
+describe('Timespan', () => {
 
-        result = localise('weekday-short');
-        expect(result).toEqual({weekday: 'short'});
-    });
+    test('Year', () => {
+        let result = timespan('year');
+        expect(result).toEqual('year');
 
-    test('Day', () => {
-        let result = localise('day');
-        expect(result).toEqual({day: '2-digit'});
+        result = timespan('year-long');
+        expect(result).toEqual('year');
 
-        result = localise('day-long');
-        expect(result).toEqual({day: '2-digit'});
-
-        result = localise('day-short');
-        expect(result).toEqual({day: 'numeric'});
-    });
-
-    test('Hour', () => {
-        let result = localise('hour');
-        expect(result).toEqual({hour: '2-digit'});
-
-        result = localise('hour-long');
-        expect(result).toEqual({hour: '2-digit'});
-
-        result = localise('hour-short');
-        expect(result).toEqual({hour: 'numeric'});
-    });
-
-    test('Minute', () => {
-        let result = localise('minute');
-        expect(result).toEqual({minute: '2-digit'});
-
-        result = localise('minute-long');
-        expect(result).toEqual({minute: '2-digit'});
-
-        result = localise('minute-short');
-        expect(result).toEqual({minute: 'numeric'});
-    });
-
-    test('Second', () => {
-        let result = localise('second');
-        expect(result).toEqual({second: '2-digit'});
-
-        result = localise('second-long');
-        expect(result).toEqual({second: '2-digit'});
-
-        result = localise('second-short');
-        expect(result).toEqual({second: 'numeric'});
+        result = timespan('year-short');
+        expect(result).toEqual('year');
     });
 
     test('Non-existent values', () => {
-        expect(() => { localise('non-existent value') }).toThrowError(PrimeError);
+        expect(() => { timespan('non-existent value') }).toThrowError(PrimeError);
+    });
+
+});
+
+describe('Options', () => {
+
+    test('Localised options', () => {
+        let result = options(['year', 'month', 'day']);
+        expect(result).toEqual({year: 'numeric', month: 'long', day: '2-digit'});
+    });
+
+    test('Customised options', () => {
+        let result = options(['YY', 'MM', 'DD']);
+        expect(result).toEqual({year: 'numeric', month: '2-digit', day: '2-digit'});
     });
 
 });
