@@ -11,8 +11,8 @@
     "test-coverage": "cross-env NODE_ICU_DATA=node_modules/full-icu jest --coverage",
     "test-coveralls": "cross-env NODE_ICU_DATA=node_modules/full-icu jest --coverage --coverageReporters=text-lcov | coveralls",
     "clean-build": "npm run clean && npm run build",
-    "clean-build-test": "npm run clean && npm run build && npm run test",
-    "clean-build-test-coverage": "npm run clean && npm run build && npm run test-coverage",
+    "clean-build-test": "npm run clean-build && npm run test",
+    "clean-build-test-coverage": "npm run clean-build && npm run test-coverage",
     "prerelease": "npm run clean-build && npm run test-coveralls"
   },
   "keywords": [
