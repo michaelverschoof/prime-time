@@ -5,21 +5,16 @@ import { Timespan } from './types';
 
 const Timestamps = Calc.Timestamps;
 
-export function primetime (date ?: number | string | Date | PrimeTime) : PrimeTime {
-    return From.anything(date);
+export function primetime (from ?: number | string | Date | PrimeTime) : PrimeTime {
+    return From.anything(from);
 }
 
 export class PrimeTime {
 
     private timestamp : number;
-    private readonly date : Date;
-
-    // private locale : string;
-    // private timezone : string;
 
     constructor (timestamp : number) {
         this.timestamp = timestamp;
-        this.date = new Date(timestamp);
     }
 
     add (amount : number, timespan : string | Timespan) : PrimeTime {
@@ -46,20 +41,20 @@ export class PrimeTime {
         return Timestamps.difference(this.timestamp, to.timestamp, timespan)
     }
 
-    after (date : PrimeTime, timespan ?: string | Timespan, inclusivity ?: boolean) : boolean {
-        return this.difference(date, timespan) <= (inclusivity ? 0 : -1);
+    after (other : PrimeTime, timespan ?: string | Timespan, inclusivity ?: boolean) : boolean {
+        return this.difference(other, timespan) <= (inclusivity ? 0 : -1);
     }
 
-    before (date : PrimeTime, timespan ?: string | Timespan, inclusivity ?: boolean) : boolean {
-        return this.difference(date, timespan) >= (inclusivity ? 0 : 1);
+    before (other : PrimeTime, timespan ?: string | Timespan, inclusivity ?: boolean) : boolean {
+        return this.difference(other, timespan) >= (inclusivity ? 0 : 1);
     }
 
     between (from : PrimeTime, to : PrimeTime, timespan ?: string | Timespan, inclusivity ?: boolean) : boolean {
         return this.after(from, timespan, inclusivity) && this.before(to, timespan, inclusivity);
     }
 
-    equals (date : PrimeTime, timespan ?: string | Timespan) : boolean {
-        return this.difference(date, timespan) === 0;
+    equals (other : PrimeTime, timespan ?: string | Timespan) : boolean {
+        return this.difference(other, timespan) === 0;
     }
 
     leapYear () : boolean {
@@ -80,16 +75,11 @@ export class PrimeTime {
 
     update (milliseconds : number) : PrimeTime {
         this.timestamp = milliseconds;
-        this.date.setTime(milliseconds);
         return this;
     }
 
     getTimestamp () : number {
         return this.timestamp;
-    }
-
-    getDate () : Date {
-        return this.date;
     }
 
 }
