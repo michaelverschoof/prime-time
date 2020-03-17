@@ -23,7 +23,6 @@ describe('Create', () => {
             let prime = new PrimeTime(timestamp);
             expect(prime instanceof PrimeTime).toBe(true);
             expect(prime.getTimestamp()).toEqual(timestamp);
-            expect(prime.getDate()).toEqual(date);
         });
 
     });
@@ -42,28 +41,24 @@ describe('Create', () => {
             const result = primetime(timestamp);
             expect(result instanceof PrimeTime).toBe(true);
             expect(result.getTimestamp()).toEqual(timestamp);
-            expect(result.getDate()).toEqual(date);
         });
 
         test('Providing date', () => {
             const result = primetime(date);
             expect(result instanceof PrimeTime).toBe(true);
             expect(result.getTimestamp()).toEqual(timestamp);
-            expect(result.getDate()).toEqual(date);
         });
 
         test('Providing PrimeTime', () => {
             const result = primetime(new PrimeTime(timestamp));
             expect(result instanceof PrimeTime).toBe(true);
             expect(result.getTimestamp()).toEqual(timestamp);
-            expect(result.getDate()).toEqual(date);
         });
 
         test('Providing valid string', () => {
             const result = primetime(date.toISOString());
             expect(result instanceof PrimeTime).toBe(true);
             expect(result.getTimestamp()).toEqual(timestamp);
-            expect(result.getDate()).toEqual(date);
         });
 
         test('Providing invalid string', () => {

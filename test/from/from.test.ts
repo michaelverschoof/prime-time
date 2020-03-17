@@ -36,9 +36,6 @@ test('From anything', () => {
     result = From.anything(prime);
     expect(result).toEqual(prime);
 
-    result = From.anything(prime.getDate());
-    expect(result).toEqual(prime);
-
     result = From.anything(prime.getTimestamp());
     expect(result).toEqual(prime);
 
