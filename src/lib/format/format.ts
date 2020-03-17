@@ -3,13 +3,14 @@ import { Units } from '../units/units';
 import DateTimeFormatPart = Intl.DateTimeFormatPart;
 
 const Formatter = Intl.DateTimeFormat;
+const regex = /{.*?}/g;
 
 function format (timestamp : number, format ?: string, locale ?: string) : string {
     if (!locale || locale === '' || locale === 'local') {
         locale = navigator.language;
     }
 
-    if (format && /{.*?}/.test(format)) {
+    if (format && regex.test(format)) {
         return customisedFormat(timestamp, format, locale);
     }
 
@@ -24,7 +25,7 @@ function localisedFormat (timestamp : number, format ?: string, locale ?: string
 }
 
 function customisedFormat (timestamp : number, format : string, locale ?: string) : string {
-    const matches = format.match(/{.*?}/g)?.map(item => item.slice(1, -1));
+    const matches = format.match(regex)?.map(item => item.slice(1, -1));
     if (!matches) {
         throw new PrimeError('Format "' + format + '" could not be parsed');
     }
@@ -33,7 +34,7 @@ function customisedFormat (timestamp : number, format : string, locale ?: string
     const options = getOptions(matches);
     const formatted = Formatter(locales, options).formatToParts(timestamp).filter((item) => item.type !== 'literal');
 
-    return format.replace(/{.*?}/g, (match) => getFormattedValue(match, formatted));
+    return format.replace(regex, (match) => getFormattedValue(match, formatted));
 }
 
 function getFormattedValue (key : string, formatted : DateTimeFormatPart[]) : string {
