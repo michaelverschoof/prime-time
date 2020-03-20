@@ -1,5 +1,5 @@
-import { KeyValuePair, LocaliseOptions } from '../../../types';
 import { LocalisedFormats } from '../constants';
+import { KeyValuePair, LocaliseOptions } from '../formats';
 
 const fixed : KeyValuePair = { second: LocalisedFormats.NUMERIC_FIXED };
 const flexible : KeyValuePair = { second: LocalisedFormats.NUMERIC_FLEXIBLE };
