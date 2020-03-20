@@ -6,6 +6,13 @@ import * as Month from './formats/month';
 import * as Second from './formats/second';
 import * as Year from './formats/year';
 
+export enum LocalisedFormats {
+    NUMERIC_FIXED = '2-digit',
+    NUMERIC_FLEXIBLE = 'numeric',
+    TEXTUAL_LONG = 'long',
+    TEXTUAL_SHORT = 'short'
+}
+
 export interface KeyValuePair {
     [key : string] : string
 }

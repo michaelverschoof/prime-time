@@ -1,5 +1,4 @@
-import { LocalisedFormats } from '../constants';
-import { KeyValuePair, LocaliseOptions } from '../formats';
+import { KeyValuePair, LocalisedFormats, LocaliseOptions } from '../formats';
 
 const fixed : KeyValuePair = { hour: LocalisedFormats.NUMERIC_FIXED };
 const flexible : KeyValuePair = { hour: LocalisedFormats.NUMERIC_FLEXIBLE };
