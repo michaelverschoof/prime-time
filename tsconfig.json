@@ -1,36 +1,24 @@
 {
-  "compileOnSave": true,
   "compilerOptions": {
-    "strict": false,
+    "strict": true,
     "rootDir": "./",
     "declaration": true,
-    "declarationDir": "./dist",
     "lib": [
       "es2017",
       "es7",
       "dom"
     ],
-    "module": "es6",
-    "moduleResolution": "node",
+    "module": "commonjs",
     "noImplicitAny": true,
     "outDir": "./dist",
     "target": "es6",
-    "sourceMap": true,
-    "removeComments": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "esModuleInterop": true,
-    "strictNullChecks": true
-  },
-  "typedocOptions": {
-    "mode": "modules",
-    "out": "docs"
+    "removeComments": true
   },
   "include": [
-    "src/**/*.ts"
+    "src",
+    "src/types.d.ts"
   ],
   "exclude": [
-    "node_modules",
-    "dist"
+    "node_modules"
   ]
 }

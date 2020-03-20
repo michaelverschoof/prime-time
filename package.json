@@ -1,7 +1,7 @@
 {
   "name": "prime-time",
   "version": "0.1.0",
-  "description": "A vanilla JavaScript date library",
+  "description": "A vanilla JavaScript date and time library",
   "main": "dist/prime-time.js",
   "types": "dist/prime-time.d.ts",
   "scripts": {
@@ -16,7 +16,12 @@
     "prerelease": "npm run clean-build && npm run test-coveralls"
   },
   "keywords": [
+    "prime-time",
+    "primetime",
+    "date-time",
     "date",
+    "time",
+    "format",
     "npm"
   ],
   "repository": {
