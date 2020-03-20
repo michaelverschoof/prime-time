@@ -12,14 +12,6 @@ test('Create', () => {
     expect(hour).toEqual(HOUR);
 });
 
-test('Validate', () => {
-    let result = hour.validate(12);
-    expect(result).toBe(true);
-
-    result = hour.validate(25);
-    expect(result).toBe(false);
-});
-
 test('Get date parts', () => {
     let result = hour.parts(timestamp);
     expect(result).toEqual([1986, 5, 24, 12]);

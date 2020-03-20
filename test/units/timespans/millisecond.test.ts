@@ -12,14 +12,6 @@ test('Create', () => {
     expect(millisecond).toEqual(MILLISECOND);
 });
 
-test('Validate', () => {
-    let result = millisecond.validate(3);
-    expect(result).toBe(true);
-
-    result = millisecond.validate(1001);
-    expect(result).toBe(false);
-});
-
 test('Get date parts', () => {
     let result = millisecond.parts(timestamp);
     expect(result).toEqual([1986, 5, 24, 12, 1, 2, 3]);

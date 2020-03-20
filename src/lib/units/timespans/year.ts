@@ -1,4 +1,4 @@
-import { Timespan } from '../../../types';
+import { Timespan } from '../../types';
 
 export default class Year implements Timespan {
 
@@ -7,10 +7,6 @@ export default class Year implements Timespan {
         'years',
         'year'
     ];
-
-    validate (year : number) : boolean {
-        return year >= -9999 && year <= 9999;
-    }
 
     parts (timestamp : number) : number[] {
         const date = new Date(timestamp);

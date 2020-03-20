@@ -1,4 +1,4 @@
-import { Timespan } from '../../../types';
+import { Timespan } from '../../types';
 
 export default class Day implements Timespan {
 
@@ -7,10 +7,6 @@ export default class Day implements Timespan {
         'days',
         'day'
     ];
-
-    validate (day : number) : boolean {
-        return day >= 1 && day <= 31;
-    }
 
     parts (timestamp : number) : number[] {
         const date = new Date(timestamp);

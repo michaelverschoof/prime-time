@@ -1,7 +1,7 @@
-import { Calc } from './lib/calc/calc';
+import { Calc } from './lib/calc';
 import { Format } from './lib/format/format';
 import { From } from './lib/from/from';
-import { Timespan } from './types.d';
+import { Timespan } from './lib/types';
 
 const Timestamps = Calc.Timestamps;
 

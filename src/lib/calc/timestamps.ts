@@ -1,6 +1,6 @@
+import { Timespan } from '../types';
 import * as Numbers from './numbers';
-import { Timespan } from '../../types';
-import { Units } from '../units/units';
+import { Units } from '../units';
 
 const Timespans = Units.Timespans;
 

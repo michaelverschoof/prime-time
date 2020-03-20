@@ -1,5 +1,5 @@
 import PrimeError from '../../error/prime-error';
-import { Units } from '../units/units';
+import { Units } from '../units';
 import DateTimeFormatPart = Intl.DateTimeFormatPart;
 
 const Formatter = Intl.DateTimeFormat;

@@ -1,6 +1,6 @@
 import PrimeError from '../src/error/prime-error';
 import { Format } from '../src/lib/format/format';
-import { Units } from '../src/lib/units/units';
+import { Units } from '../src/lib/units';
 import { primetime, PrimeTime } from '../src/prime-time';
 
 const Timespans = Units.Timespans;

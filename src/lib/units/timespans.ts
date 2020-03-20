@@ -1,5 +1,5 @@
 import PrimeError from '../../error/prime-error';
-import { Timespan } from '../../types';
+import { Timespan } from '../types';
 import Day from './timespans/day';
 import Hour from './timespans/hour';
 import MilliSecond from './timespans/millisecond';

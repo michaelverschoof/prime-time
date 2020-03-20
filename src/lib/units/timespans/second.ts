@@ -1,4 +1,4 @@
-import { Timespan } from '../../../types';
+import { Timespan } from '../../types';
 
 export default class Second implements Timespan {
 
@@ -14,10 +14,6 @@ export default class Second implements Timespan {
             'seconds',
             'second'
         ];
-    }
-
-    validate (second : number) : boolean {
-        return second >= 0 && second <= 59;
     }
 
     parts (timestamp : number) : number[] {

@@ -1,4 +1,4 @@
-import { Timespan } from '../../../types';
+import { Timespan } from '../../types';
 
 export default class Month implements Timespan {
 
@@ -7,11 +7,6 @@ export default class Month implements Timespan {
         'months',
         'month'
     ];
-
-    validate (month : number) : boolean {
-        // Month is zero-based for some reason
-        return month >= 0 && month <= 11;
-    }
 
     parts (timestamp : number) : number[] {
         const date = new Date(timestamp);

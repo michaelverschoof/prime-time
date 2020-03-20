@@ -12,14 +12,6 @@ test('Create', () => {
     expect(day).toEqual(DAY);
 });
 
-test('Validate', () => {
-    let result = day.validate(24);
-    expect(result).toBe(true);
-
-    result = day.validate(33);
-    expect(result).toBe(false);
-});
-
 test('Get date parts', () => {
     let result = day.parts(timestamp);
     expect(result).toEqual([1986, 5, 24]);

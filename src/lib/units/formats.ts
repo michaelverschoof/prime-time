@@ -1,25 +1,11 @@
 import PrimeError from '../../error/prime-error';
+import { KeyValuePair, LocaliseOptions } from '../types';
 import * as Day from './formats/day';
 import * as Hour from './formats/hour';
 import * as Minute from './formats/minute';
 import * as Month from './formats/month';
 import * as Second from './formats/second';
 import * as Year from './formats/year';
-
-export enum LocalisedFormats {
-    NUMERIC_FIXED = '2-digit',
-    NUMERIC_FLEXIBLE = 'numeric',
-    TEXTUAL_LONG = 'long',
-    TEXTUAL_SHORT = 'short'
-}
-
-export interface KeyValuePair {
-    [key : string] : string
-}
-
-export interface LocaliseOptions {
-    [key : string] : KeyValuePair
-}
 
 const localised : LocaliseOptions = {
     ...Year.localised,

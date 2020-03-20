@@ -1,5 +1,5 @@
 import { add, difference, leapYear, scale, subtract } from '../../src/lib/calc/timestamps';
-import { Units } from '../../src/lib/units/units';
+import { Units } from '../../src/lib/units';
 
 const Timespans = Units.Timespans;
 

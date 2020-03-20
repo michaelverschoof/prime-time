@@ -12,14 +12,6 @@ test('Create', () => {
     expect(year).toEqual(YEAR);
 });
 
-test('Validate', () => {
-    let result = year.validate(1986);
-    expect(result).toBe(true);
-
-    result = year.validate(10000);
-    expect(result).toBe(false);
-});
-
 test('Get date parts', () => {
     let result = year.parts(timestamp);
     expect(result).toEqual([1986]);

@@ -1,4 +1,4 @@
-import { Timespan } from '../../../types';
+import { Timespan } from '../../types';
 
 export default class Minute implements Timespan {
 
@@ -7,10 +7,6 @@ export default class Minute implements Timespan {
         'minutes',
         'minute'
     ];
-
-    validate (minute : number) : boolean {
-        return minute >= 0 && minute <= 59;
-    }
 
     parts (timestamp : number) : number[] {
         const date = new Date(timestamp);

@@ -12,14 +12,6 @@ test('Create', () => {
     expect(month).toEqual(MONTH);
 });
 
-test('Validate', () => {
-    let result = month.validate(5);
-    expect(result).toBe(true);
-
-    result = month.validate(12);
-    expect(result).toBe(false);
-});
-
 test('Get date parts', () => {
     let result = month.parts(timestamp);
     expect(result).toEqual([1986, 5]);

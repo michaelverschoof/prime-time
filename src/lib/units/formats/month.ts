@@ -1,4 +1,4 @@
-import { KeyValuePair, LocalisedFormats, LocaliseOptions } from '../formats';
+import { KeyValuePair, LocalisedFormats, LocaliseOptions } from '../../types';
 
 const fixed : KeyValuePair = { month: LocalisedFormats.NUMERIC_FIXED };
 const flexible : KeyValuePair = { month: LocalisedFormats.NUMERIC_FLEXIBLE };
