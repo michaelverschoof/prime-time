@@ -12,10 +12,16 @@ export function primetime (from ?: number | string | Date | PrimeTime) : PrimeTi
 export class PrimeTime {
 
     private timestamp : number;
+    private offset : number;
+    private timezone : string;
 
     constructor (timestamp : number) {
         this.timestamp = timestamp;
+        this.offset = 0;
+        this.timezone = '';
     }
+
+    /* Transformations */
 
     add (amount : number, timespan : string | Timespan) : PrimeTime {
         const sum = Timestamps.add(this.timestamp, amount, timespan);
@@ -27,15 +33,22 @@ export class PrimeTime {
         return this.update(difference);
     }
 
+    scale (timespan : string | Timespan) : PrimeTime {
+        const timestamp = Timestamps.scale(this.timestamp, timespan);
+        return this.update(timestamp);
+    }
+
     clone (timespan ?: string | Timespan) : PrimeTime {
         const timestamp = timespan ? Timestamps.scale(this.timestamp, timespan) : this.timestamp;
         return From.timestamp(timestamp);
     }
 
-    to (timespan : string | Timespan) : PrimeTime {
-        const timestamp = Timestamps.scale(this.timestamp, timespan);
-        return this.update(timestamp);
+    update (milliseconds : number) : PrimeTime {
+        this.timestamp = milliseconds;
+        return this;
     }
+
+    /* Comparisons */
 
     difference (to : PrimeTime, timespan ?: string | Timespan) : number {
         return Timestamps.difference(this.timestamp, to.timestamp, timespan)
@@ -61,6 +74,8 @@ export class PrimeTime {
         return Timestamps.leapYear(this.timestamp);
     }
 
+    /* Formatting */
+
     format (format ?: string, locale ?: string) {
         return Format.format(this.timestamp, format, locale);
     }
@@ -73,10 +88,7 @@ export class PrimeTime {
         return Format.customise(this.timestamp, format, locale);
     }
 
-    update (milliseconds : number) : PrimeTime {
-        this.timestamp = milliseconds;
-        return this;
-    }
+    /* Getters */
 
     getTimestamp () : number {
         return this.timestamp;
