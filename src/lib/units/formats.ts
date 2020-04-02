@@ -6,6 +6,7 @@ import * as Minute from './formats/minute';
 import * as Month from './formats/month';
 import * as Second from './formats/second';
 import * as Year from './formats/year';
+import * as Timezone from './formats/timezone'
 
 const localised : LocaliseOptions = {
     ...Year.localised,
@@ -13,7 +14,8 @@ const localised : LocaliseOptions = {
     ...Day.localised,
     ...Hour.localised,
     ...Minute.localised,
-    ...Second.localised
+    ...Second.localised,
+    ...Timezone.localised
 };
 
 export function find (key : string) : KeyValuePair {

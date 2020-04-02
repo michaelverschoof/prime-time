@@ -283,32 +283,32 @@ describe('To timespan', () => {
     });
 
     test('Seconds', () => {
-        const result = prime.to(Timespans.SECOND);
+        const result = prime.scale(Timespans.SECOND);
         expect(result.getTimestamp()).toEqual(519998462000);
     });
 
     test('Minutes', () => {
-        const result = prime.to(Timespans.MINUTE);
+        const result = prime.scale(Timespans.MINUTE);
         expect(result.getTimestamp()).toEqual(519998460000);
     });
 
     test('Hours', () => {
-        const result = prime.to(Timespans.HOUR);
+        const result = prime.scale(Timespans.HOUR);
         expect(result.getTimestamp()).toEqual(519998400000);
     });
 
     test('Days', () => {
-        const result = prime.to(Timespans.DAY);
+        const result = prime.scale(Timespans.DAY);
         expect(result.getTimestamp()).toEqual(519955200000);
     });
 
     test('Months', () => {
-        const result = prime.to(Timespans.MONTH);
+        const result = prime.scale(Timespans.MONTH);
         expect(result.getTimestamp()).toEqual(517968000000);
     });
 
     test('Years', () => {
-        const result = prime.to(Timespans.YEAR);
+        const result = prime.scale(Timespans.YEAR);
         expect(result.getTimestamp()).toEqual(504921600000);
     });
 
@@ -396,16 +396,16 @@ describe('Format', () => {
 
     test('With format', () => {
         let result = prime.format('weekday, day, month, year, hour, minute, second');
-        expect(result).toEqual('Tuesday, June 24, 1986, 2:01:02 PM');
+        expect(result).toEqual('Tuesday, June 24, 1986, 12:01:02 PM');
 
         result = prime.format('WDD, DD, MMMM, YY, H, mm, ss');
-        expect(result).toEqual('Tuesday, June 24, 1986, 2:01:02 PM');
+        expect(result).toEqual('Tuesday, June 24, 1986, 12:01:02 PM');
 
         result = prime.format('{weekday}, {month} {day}, {year} @ {hour}:{minute}:{second}');
-        expect(result).toBe('Tuesday, June 24, 1986 @ 2:01:02');
+        expect(result).toBe('Tuesday, June 24, 1986 @ 12:01:02');
 
         result = prime.format('{WDD}, {MMMM} {DD}, {YY} @ {HH}:{mm}:{ss}');
-        expect(result).toBe('Tuesday, June 24, 1986 @ 2:01:02');
+        expect(result).toBe('Tuesday, June 24, 1986 @ 12:01:02');
     });
 
     test('With locale', () => {
@@ -421,16 +421,16 @@ describe('Format', () => {
 
     test('With format and locale)', () => {
         let result = prime.format('weekday, day, month, year, hour, minute, second', 'en-us');
-        expect(result).toEqual('Tuesday, June 24, 1986, 2:01:02 PM');
+        expect(result).toEqual('Tuesday, June 24, 1986, 12:01:02 PM');
 
         result = prime.format('WDD, DD, MMMM, YY, H, mm, ss', 'en-us');
-        expect(result).toEqual('Tuesday, June 24, 1986, 2:01:02 PM');
+        expect(result).toEqual('Tuesday, June 24, 1986, 12:01:02 PM');
 
         result = prime.format('{weekday}, {month} {day}, {year} @ {hour}:{minute}:{second}', 'en-us');
-        expect(result).toBe('Tuesday, June 24, 1986 @ 2:01:02');
+        expect(result).toBe('Tuesday, June 24, 1986 @ 12:01:02');
 
         result = prime.format('{WDD}, {MMMM} {DD}, {YY} @ {HH}:{mm}:{ss}', 'en-us');
-        expect(result).toBe('Tuesday, June 24, 1986 @ 2:01:02');
+        expect(result).toBe('Tuesday, June 24, 1986 @ 12:01:02');
     });
 
 });
@@ -449,10 +449,10 @@ describe('Localise', () => {
 
     test('With format', () => {
         let result = prime.localise('weekday, day, month, year, hour, minute, second');
-        expect(result).toEqual('Tuesday, June 24, 1986, 2:01:02 PM');
+        expect(result).toEqual('Tuesday, June 24, 1986, 12:01:02 PM');
 
         result = prime.localise('WDD, DD, MMMM, YY, H, mm, ss');
-        expect(result).toEqual('Tuesday, June 24, 1986, 2:01:02 PM');
+        expect(result).toEqual('Tuesday, June 24, 1986, 12:01:02 PM');
     });
 
     test('With locale', () => {
@@ -468,10 +468,10 @@ describe('Localise', () => {
 
     test('With format and locale)', () => {
         let result = prime.localise('weekday, day, month, year, hour, minute, second', 'en-us');
-        expect(result).toEqual('Tuesday, June 24, 1986, 2:01:02 PM');
+        expect(result).toEqual('Tuesday, June 24, 1986, 12:01:02 PM');
 
         result = prime.localise('WDD, DD, MMMM, YY, H, mm, ss', 'en-us');
-        expect(result).toEqual('Tuesday, June 24, 1986, 2:01:02 PM');
+        expect(result).toEqual('Tuesday, June 24, 1986, 12:01:02 PM');
     });
 
 });
@@ -485,18 +485,18 @@ describe('Customise', () => {
 
     test('With format', () => {
         let result = prime.customise('{weekday}, {month} {day}, {year} @ {hour}:{minute}:{second}');
-        expect(result).toBe('Tuesday, June 24, 1986 @ 2:01:02');
+        expect(result).toBe('Tuesday, June 24, 1986 @ 12:01:02');
 
         result = prime.customise('{WDD}, {MMMM} {DD}, {YY} @ {HH}:{mm}:{ss}');
-        expect(result).toBe('Tuesday, June 24, 1986 @ 2:01:02');
+        expect(result).toBe('Tuesday, June 24, 1986 @ 12:01:02');
     });
 
     test('With format and locale)', () => {
         let result = prime.customise('{weekday}, {month} {day}, {year} @ {hour}:{minute}:{second}', 'en-us');
-        expect(result).toBe('Tuesday, June 24, 1986 @ 2:01:02');
+        expect(result).toBe('Tuesday, June 24, 1986 @ 12:01:02');
 
         result = prime.customise('{WDD}, {MMMM} {DD}, {YY} @ {HH}:{mm}:{ss}', 'en-us');
-        expect(result).toBe('Tuesday, June 24, 1986 @ 2:01:02');
+        expect(result).toBe('Tuesday, June 24, 1986 @ 12:01:02');
     });
 
 });
