@@ -70,10 +70,6 @@ export class PrimeTime {
         return this.difference(other, timespan) === 0;
     }
 
-    leapYear () : boolean {
-        return Timestamps.leapYear(this.timestamp);
-    }
-
     /* Formatting */
 
     format (format ?: string, locale ?: string) {

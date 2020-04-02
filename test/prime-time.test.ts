@@ -363,25 +363,6 @@ describe('Clone', () => {
 
 });
 
-describe('Is leap year', () => {
-    let prime : PrimeTime;
-
-    beforeAll(() => {
-        prime = new PrimeTime(timestamp);
-    });
-
-    test('1986 (not a leap year)', () => {
-        const result = prime.leapYear();
-        expect(result).toEqual(false);
-    });
-
-    test('1988 (a leap year)', () => {
-        const result = prime.add(2, Timespans.YEAR).leapYear();
-        expect(result).toEqual(true);
-    });
-
-});
-
 describe('Format', () => {
     let prime : PrimeTime;
 

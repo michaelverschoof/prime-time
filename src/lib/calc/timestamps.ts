@@ -34,8 +34,3 @@ export function scale (timestamp : number, timespan : string | Timespan) : numbe
 
     return Date.UTC(parts[0], parts[1], ...parts.splice(2));
 }
-
-export function leapYear (timestamp : number) : boolean {
-    const year = Timespans.YEAR.parts(timestamp)[0];
-    return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
-}
