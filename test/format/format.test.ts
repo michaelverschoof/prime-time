@@ -16,8 +16,8 @@ const AMSTERDAM = 'Europe/Amsterdam';
 
 const FORMAT_LOCALISED_LONG = 'weekday, month-number-short, day, year, hour, minute, second, timezone';
 const FORMAT_LOCALISED_SHORT = 'WDD, M, DD, YY, HH, mm, ss, TZZ';
-const FORMAT_CUSTOMISED_LONG = '{weekday}, {month} {day}, {year} @ {hour}:{minute}:{second} {timezone-short}';
-const FORMAT_CUSTOMISED_SHORT = '{WDD}, {MMMM} {DD}, {YY} @ {HH}:{mm}:{ss} {TZ}';
+const FORMAT_CUSTOMISED_LONG = '{weekday}, {month} {day}, {year} @ {hour}:{minute}:{second} {AMPM} {timezone-short}';
+const FORMAT_CUSTOMISED_SHORT = '{WDD}, {MMMM} {DD}, {YY} @ {HH}:{mm}:{ss} {AMPM} {TZ}';
 
 const FORMAT_WRONG_LONG = 'wrong-format';
 const FORMAT_WRONG_SHORT = '{WRONG}';
@@ -34,12 +34,12 @@ const RESULT_LOCALISED_NEW_YORK = 'Tuesday, 6/24/1986, 8:01:02 AM Eastern Daylig
 const RESULT_LOCALISED_LONDON = 'Tuesday, 24/06/1986, 13:01:02 British Summer Time';
 const RESULT_LOCALISED_AMSTERDAM = 'dinsdag 24-6-1986 14:01:02 Midden-Europese zomertijd';
 
-const RESULT_CUSTOMISED_US = 'Tuesday, June 24, 1986 @ 12:01:02 UTC';
-const RESULT_CUSTOMISED_GB = 'Tuesday, June 24, 1986 @ 12:01:02 UTC';
+const RESULT_CUSTOMISED_US = 'Tuesday, June 24, 1986 @ 12:01:02 PM UTC';
+const RESULT_CUSTOMISED_GB = 'Tuesday, June 24, 1986 @ 12:01:02 pm UTC';
 const RESULT_CUSTOMISED_NL = 'dinsdag, juni 24, 1986 @ 12:01:02 UTC';
 
-const RESULT_CUSTOMISED_NEW_YORK = 'Tuesday, June 24, 1986 @ 8:01:02 EDT';
-const RESULT_CUSTOMISED_LONDON = 'Tuesday, June 24, 1986 @ 13:01:02 BST';
+const RESULT_CUSTOMISED_NEW_YORK = 'Tuesday, June 24, 1986 @ 8:01:02 AM EDT';
+const RESULT_CUSTOMISED_LONDON = 'Tuesday, June 24, 1986 @ 1:01:02 pm BST';
 const RESULT_CUSTOMISED_AMSTERDAM = 'dinsdag, juni 24, 1986 @ 14:01:02 CEST';
 
 describe('Localise', () => {
@@ -165,13 +165,13 @@ describe('Customise', () => {
         expect(result).toBe(RESULT_CUSTOMISED_US);
 
         result = Format.customise(1234.56, FORMAT_CUSTOMISED_LONG);
-        expect(result).toBe('Thursday, January 01, 1970 @ 12:00:01 UTC');
+        expect(result).toBe('Thursday, January 01, 1970 @ 12:00:01 AM UTC');
 
         result = Format.customise(timestamp, FORMAT_CUSTOMISED_SHORT);
         expect(result).toBe(RESULT_CUSTOMISED_US);
 
         result = Format.customise(1234.56, FORMAT_CUSTOMISED_SHORT);
-        expect(result).toBe('Thursday, January 01, 1970 @ 12:00:01 UTC');
+        expect(result).toBe('Thursday, January 01, 1970 @ 12:00:01 AM UTC');
 
         expect(() => Format.customise(timestamp, FORMAT_WRONG_LONG)).toThrowError(PrimeError);
         expect(() => Format.customise(timestamp, FORMAT_WRONG_SHORT)).toThrowError(PrimeError);
@@ -182,13 +182,13 @@ describe('Customise', () => {
         expect(result).toBe(RESULT_CUSTOMISED_NEW_YORK);
 
         result = Format.customise(1234.56, FORMAT_CUSTOMISED_LONG, undefined,  NEW_YORK);
-        expect(result).toBe('Wednesday, December 31, 1969 @ 7:00:01 EST');
+        expect(result).toBe('Wednesday, December 31, 1969 @ 7:00:01 PM EST');
 
         result = Format.customise(timestamp, FORMAT_CUSTOMISED_SHORT, undefined,  NEW_YORK);
         expect(result).toBe(RESULT_CUSTOMISED_NEW_YORK);
 
         result = Format.customise(1234.56, FORMAT_CUSTOMISED_SHORT, undefined,  NEW_YORK);
-        expect(result).toBe('Wednesday, December 31, 1969 @ 7:00:01 EST');
+        expect(result).toBe('Wednesday, December 31, 1969 @ 7:00:01 PM EST');
 
         expect(() => Format.customise(timestamp, FORMAT_WRONG_LONG)).toThrowError(PrimeError);
         expect(() => Format.customise(timestamp, FORMAT_WRONG_SHORT)).toThrowError(PrimeError);
@@ -201,7 +201,7 @@ describe('Customise', () => {
         result = Format.customise(timestamp, FORMAT_CUSTOMISED_LONG, GB);
         expect(result).toBe(RESULT_CUSTOMISED_GB);
 
-        result = Format.customise(timestamp, FORMAT_CUSTOMISED_LONG, NL);
+        result = Format.customise(timestamp, FORMAT_CUSTOMISED_LONG.replace('{AMPM}', ''), NL);
         expect(result).toBe(RESULT_CUSTOMISED_NL);
 
         result = Format.customise(timestamp, FORMAT_CUSTOMISED_SHORT, US);
@@ -210,7 +210,7 @@ describe('Customise', () => {
         result = Format.customise(timestamp, FORMAT_CUSTOMISED_SHORT, GB);
         expect(result).toBe(RESULT_CUSTOMISED_GB);
 
-        result = Format.customise(timestamp, FORMAT_CUSTOMISED_SHORT, NL);
+        result = Format.customise(timestamp, FORMAT_CUSTOMISED_SHORT.replace('{AMPM}', ''), NL);
         expect(result).toBe(RESULT_CUSTOMISED_NL);
 
         expect(() => Format.customise(timestamp, FORMAT_WRONG_LONG, US)).toThrowError(PrimeError);
@@ -228,7 +228,7 @@ describe('Customise', () => {
         result = Format.customise(timestamp, FORMAT_CUSTOMISED_LONG, GB, LONDON);
         expect(result).toBe(RESULT_CUSTOMISED_LONDON);
 
-        result = Format.customise(timestamp, FORMAT_CUSTOMISED_LONG, NL, AMSTERDAM);
+        result = Format.customise(timestamp, FORMAT_CUSTOMISED_LONG.replace('{AMPM}', ''), NL, AMSTERDAM);
         expect(result).toBe(RESULT_CUSTOMISED_AMSTERDAM);
 
         result = Format.customise(timestamp, FORMAT_CUSTOMISED_SHORT, US, NEW_YORK);
@@ -237,7 +237,7 @@ describe('Customise', () => {
         result = Format.customise(timestamp, FORMAT_CUSTOMISED_SHORT, GB, LONDON);
         expect(result).toBe(RESULT_CUSTOMISED_LONDON);
 
-        result = Format.customise(timestamp, FORMAT_CUSTOMISED_SHORT, NL, AMSTERDAM);
+        result = Format.customise(timestamp, FORMAT_CUSTOMISED_SHORT.replace('{AMPM}', ''), NL, AMSTERDAM);
         expect(result).toBe(RESULT_CUSTOMISED_AMSTERDAM);
 
         expect(() => Format.customise(timestamp, FORMAT_WRONG_LONG, US, NEW_YORK)).toThrowError(PrimeError);
@@ -347,7 +347,7 @@ describe('Format', () => {
         result = Format.format(timestamp, FORMAT_CUSTOMISED_LONG, GB);
         expect(result).toBe(RESULT_CUSTOMISED_GB);
 
-        result = Format.format(timestamp, FORMAT_CUSTOMISED_LONG, NL);
+        result = Format.format(timestamp, FORMAT_CUSTOMISED_LONG.replace('{AMPM}', ''), NL);
         expect(result).toBe(RESULT_CUSTOMISED_NL);
 
         result = Format.format(timestamp, FORMAT_CUSTOMISED_SHORT, US);
@@ -356,7 +356,7 @@ describe('Format', () => {
         result = Format.format(timestamp, FORMAT_CUSTOMISED_SHORT, GB);
         expect(result).toBe(RESULT_CUSTOMISED_GB);
 
-        result = Format.format(timestamp, FORMAT_CUSTOMISED_SHORT, NL);
+        result = Format.format(timestamp, FORMAT_CUSTOMISED_SHORT.replace('{AMPM}', ''), NL);
         expect(result).toBe(RESULT_CUSTOMISED_NL);
 
         expect(() => Format.format(timestamp, FORMAT_WRONG_LONG, US)).toThrowError(PrimeError);
@@ -374,7 +374,7 @@ describe('Format', () => {
         result = Format.format(timestamp, FORMAT_LOCALISED_LONG, GB, LONDON);
         expect(result).toBe(RESULT_LOCALISED_LONDON);
 
-        result = Format.format(timestamp, FORMAT_LOCALISED_LONG, NL, AMSTERDAM);
+        result = Format.format(timestamp, FORMAT_LOCALISED_LONG.replace('{AMPM}', ''), NL, AMSTERDAM);
         expect(result).toBe(RESULT_LOCALISED_AMSTERDAM);
 
         result = Format.format(timestamp, FORMAT_LOCALISED_SHORT, US, NEW_YORK);
@@ -383,7 +383,7 @@ describe('Format', () => {
         result = Format.format(timestamp, FORMAT_LOCALISED_SHORT, GB, LONDON);
         expect(result).toBe(RESULT_LOCALISED_LONDON);
 
-        result = Format.format(timestamp, FORMAT_LOCALISED_SHORT, NL, AMSTERDAM);
+        result = Format.format(timestamp, FORMAT_LOCALISED_SHORT.replace('{AMPM}', ''), NL, AMSTERDAM);
         expect(result).toBe(RESULT_LOCALISED_AMSTERDAM);
 
         result = Format.format(timestamp, FORMAT_CUSTOMISED_LONG, US, NEW_YORK);
@@ -392,7 +392,7 @@ describe('Format', () => {
         result = Format.format(timestamp, FORMAT_CUSTOMISED_LONG, GB, LONDON);
         expect(result).toBe(RESULT_CUSTOMISED_LONDON);
 
-        result = Format.format(timestamp, FORMAT_CUSTOMISED_LONG, NL, AMSTERDAM);
+        result = Format.format(timestamp, FORMAT_CUSTOMISED_LONG.replace('{AMPM}', ''), NL, AMSTERDAM);
         expect(result).toBe(RESULT_CUSTOMISED_AMSTERDAM);
 
         result = Format.format(timestamp, FORMAT_CUSTOMISED_SHORT, US, NEW_YORK);
@@ -401,7 +401,7 @@ describe('Format', () => {
         result = Format.format(timestamp, FORMAT_CUSTOMISED_SHORT, GB, LONDON);
         expect(result).toBe(RESULT_CUSTOMISED_LONDON);
 
-        result = Format.format(timestamp, FORMAT_CUSTOMISED_SHORT, NL, AMSTERDAM);
+        result = Format.format(timestamp, FORMAT_CUSTOMISED_SHORT.replace('{AMPM}', ''), NL, AMSTERDAM);
         expect(result).toBe(RESULT_CUSTOMISED_AMSTERDAM);
 
         expect(() => Format.format(timestamp, FORMAT_WRONG_LONG, US, NEW_YORK)).toThrowError(PrimeError);
