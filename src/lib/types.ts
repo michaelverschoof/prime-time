@@ -28,4 +28,3 @@ export interface KeyValuePair {
 export interface LocaliseOptions {
     [key : string] : KeyValuePair
 }
-
