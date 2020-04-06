@@ -3,6 +3,7 @@ import { KeyValuePair, LocaliseOptions } from '../types';
 import * as Day from './formats/day';
 import * as Hour from './formats/hour';
 import * as Minute from './formats/minute';
+import * as MilliSecond from './formats/millisecond';
 import * as Month from './formats/month';
 import * as Second from './formats/second';
 import * as Year from './formats/year';
@@ -15,6 +16,7 @@ const localised : LocaliseOptions = {
     ...Hour.localised,
     ...Minute.localised,
     ...Second.localised,
+    ...MilliSecond.localised,
     ...Timezone.localised
 };
 
