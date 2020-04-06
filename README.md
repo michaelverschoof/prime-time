@@ -65,9 +65,6 @@ These methods return the updated PrimeTime object, enabling method chaining.
 | `primetime().clone('day')`           | Creates a duplicate PrimeTime object with the year, month and day set     | `PrimeTime` |
 | `primetime().update(519998462003)`   | Sets a new timestamp for the object                                       | `PrimeTime` |
 
-
-
-
 ## Why Prime Time?
 Named after the [Alan Parsons Project][alan-parsons-project] song [Prime Time][youtube-video] from the album [Ammonia Avenue][ammonia-avenue]. 
 This song is one of my personal favorites and its name fits this project quite well.

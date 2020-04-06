@@ -4,12 +4,9 @@ import DateTimeFormatPart = Intl.DateTimeFormatPart;
 
 const Formatter = Intl.DateTimeFormat;
 const regex = /{.*?}/g;
+const whitespaces = /\s+/g;
 
 function format (timestamp : number, format ?: string, locale ?: string, timezone ?: string) : string {
-    if (!locale || locale === '' || locale === 'local') {
-        locale = navigator.language;
-    }
-
     if (format && regex.test(format)) {
         return customisedFormat(timestamp, format, locale, timezone);
     }
@@ -34,13 +31,15 @@ function customisedFormat (timestamp : number, format : string, locale ?: string
     const options = getOptions(matches, timezone);
     const formatted = Formatter(locales, options).formatToParts(timestamp).filter((item) => item.type !== 'literal');
 
-    return format.replace(regex, (match) => getFormattedValue(match, formatted));
+    return format.replace(regex, (match) => getFormattedValue(match, formatted)).replace(whitespaces, ' ');
 }
 
 function getFormattedValue (key : string, formatted : DateTimeFormatPart[]) : string {
     const timespan = Units.Formats.timespan(key.slice(1, -1));
+    const type = timespan === 'hour12' ? 'dayPeriod' : timespan;
+
     // @ts-ignore
-    return formatted.find((item => item.type === timespan)).value;
+    return formatted.find(item => item.type.toLowerCase() === type.toLowerCase()).value;
 }
 
 function getOptions (formats ?: string[], timezone ?: string) {
@@ -53,7 +52,11 @@ function getOptions (formats ?: string[], timezone ?: string) {
 }
 
 function getLocales (locale ?: string) {
-    return locale ? Formatter.supportedLocalesOf(locale) : undefined;
+    if (!locale || locale === '' || locale === 'local') {
+        locale = navigator.language;
+    }
+
+    return Formatter.supportedLocalesOf(locale);
 }
 
 export const Format = {

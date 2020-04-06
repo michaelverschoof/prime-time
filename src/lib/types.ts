@@ -22,7 +22,7 @@ export interface Timespan {
 }
 
 export interface KeyValuePair {
-    [key : string] : string
+    [key : string] : string | boolean
 }
 
 export interface LocaliseOptions {
