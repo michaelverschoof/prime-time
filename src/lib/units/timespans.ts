@@ -2,13 +2,13 @@ import PrimeError from '../../error/prime-error';
 import { Timespan } from '../types';
 import Day from './timespans/day';
 import Hour from './timespans/hour';
-import MilliSecond from './timespans/millisecond';
+import Millisecond from './timespans/millisecond';
 import Minute from './timespans/minute';
 import Month from './timespans/month';
 import Second from './timespans/second';
 import Year from './timespans/year';
 
-export const MILLISECOND : Timespan = new MilliSecond();
+export const MILLISECOND : Timespan = new Millisecond();
 export const SECOND : Timespan = new Second();
 export const MINUTE : Timespan = new Minute();
 export const HOUR : Timespan = new Hour();
