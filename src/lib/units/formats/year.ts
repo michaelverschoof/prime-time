@@ -1,9 +1,9 @@
-import { KeyValuePair, LocalisedFormats, LocaliseOptions } from '../../types';
+import { FormattingOption, FormattingValues, FormattingOptions } from '../../types';
 
-const fixed : KeyValuePair = { year: LocalisedFormats.NUMERIC_FIXED };
-const flexible : KeyValuePair = { year: LocalisedFormats.NUMERIC_FLEXIBLE };
+const fixed : FormattingOption = { year: FormattingValues.NUMERIC_FIXED };
+const flexible : FormattingOption = { year: FormattingValues.NUMERIC_FLEXIBLE };
 
-export const localised : LocaliseOptions = {
+export const options : FormattingOptions = {
     'year': flexible,
     'year-long': flexible,
     'year-short': fixed,

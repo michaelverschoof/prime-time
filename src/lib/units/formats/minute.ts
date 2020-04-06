@@ -1,9 +1,9 @@
-import { KeyValuePair, LocalisedFormats, LocaliseOptions } from '../../types';
+import { FormattingOption, FormattingValues, FormattingOptions } from '../../types';
 
-const fixed : KeyValuePair = { minute: LocalisedFormats.NUMERIC_FIXED };
-const flexible : KeyValuePair = { minute: LocalisedFormats.NUMERIC_FLEXIBLE };
+const fixed : FormattingOption = { minute: FormattingValues.NUMERIC_FIXED };
+const flexible : FormattingOption = { minute: FormattingValues.NUMERIC_FLEXIBLE };
 
-export const localised : LocaliseOptions = {
+export const options : FormattingOptions = {
     'minute': fixed,
     'minute-long': fixed,
     'minute-short': flexible,

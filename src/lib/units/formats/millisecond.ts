@@ -1,8 +1,8 @@
-import { KeyValuePair, LocaliseOptions } from '../../types';
+import { FormattingOption, FormattingOptions } from '../../types';
 
-const fixed : KeyValuePair = { fractionalSecondDigits: 3 };
+const fixed : FormattingOption = { fractionalSecondDigits: 3 };
 
-export const localised : LocaliseOptions = {
+export const options : FormattingOptions = {
     'millisecond': fixed,
     'ms': fixed,
 };

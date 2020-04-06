@@ -1,9 +1,9 @@
-import { KeyValuePair, LocalisedFormats, LocaliseOptions } from '../../types';
+import { FormattingOption, FormattingValues, FormattingOptions } from '../../types';
 
-const fixed : KeyValuePair = { second: LocalisedFormats.NUMERIC_FIXED };
-const flexible : KeyValuePair = { second: LocalisedFormats.NUMERIC_FLEXIBLE };
+const fixed : FormattingOption = { second: FormattingValues.NUMERIC_FIXED };
+const flexible : FormattingOption = { second: FormattingValues.NUMERIC_FLEXIBLE };
 
-export const localised : LocaliseOptions = {
+export const options : FormattingOptions = {
     'second': fixed,
     'second-long': fixed,
     'second-short': flexible,

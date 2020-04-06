@@ -1,5 +1,5 @@
 import PrimeError from '../../error/prime-error';
-import { KeyValuePair, LocaliseOptions } from '../types';
+import { FormattingOption, FormattingOptions } from '../types';
 import * as Day from './formats/day';
 import * as Hour from './formats/hour';
 import * as Minute from './formats/minute';
@@ -9,18 +9,18 @@ import * as Second from './formats/second';
 import * as Year from './formats/year';
 import * as Timezone from './formats/timezone'
 
-const localised : LocaliseOptions = {
-    ...Year.localised,
-    ...Month.localised,
-    ...Day.localised,
-    ...Hour.localised,
-    ...Minute.localised,
-    ...Second.localised,
-    ...Millisecond.localised,
-    ...Timezone.localised
+const localised : FormattingOptions = {
+    ...Year.options,
+    ...Month.options,
+    ...Day.options,
+    ...Hour.options,
+    ...Minute.options,
+    ...Second.options,
+    ...Millisecond.options,
+    ...Timezone.options
 };
 
-export function find (key : string) : KeyValuePair {
+export function find (key : string) : FormattingOption {
     const search = key.trim();
     if (search in localised) {
         return localised[search];
@@ -29,9 +29,9 @@ export function find (key : string) : KeyValuePair {
     throw new PrimeError('Format: "' + search + '" not found');
 }
 
-export function options (formats : string[]) : KeyValuePair {
+export function options (formats : string[]) : FormattingOption {
     return formats.map(item => item.trim()).reduce(
-        (options : KeyValuePair, item : string) => (
+        (options : FormattingOption, item : string) => (
             { ...options, ...find(item) }
         ), {}
     );

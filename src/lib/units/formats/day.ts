@@ -1,15 +1,15 @@
-import { KeyValuePair, LocalisedFormats, LocaliseOptions } from '../../types';
+import { FormattingOption, FormattingValues, FormattingOptions } from '../../types';
 
-const fixed : KeyValuePair = { day: LocalisedFormats.NUMERIC_FIXED };
-const flexible : KeyValuePair = { day: LocalisedFormats.NUMERIC_FLEXIBLE };
+const fixed : FormattingOption = { day: FormattingValues.NUMERIC_FIXED };
+const flexible : FormattingOption = { day: FormattingValues.NUMERIC_FLEXIBLE };
 
-const long : KeyValuePair = { weekday: LocalisedFormats.TEXTUAL_LONG };
-const short : KeyValuePair = { weekday: LocalisedFormats.TEXTUAL_SHORT };
+const long : FormattingOption = { weekday: FormattingValues.TEXTUAL_LONG };
+const short : FormattingOption = { weekday: FormattingValues.TEXTUAL_SHORT };
 
-const twelve : KeyValuePair = { hour12 : true };
-const twentyfour : KeyValuePair = { hour12 : false };
+const hour12 : FormattingOption = { hour12 : true };
+const hour24 : FormattingOption = { hour12 : false };
 
-export const localised : LocaliseOptions = {
+export const options : FormattingOptions = {
     'day': fixed,
     'day-long': fixed,
     'day-short': flexible,
@@ -22,7 +22,7 @@ export const localised : LocaliseOptions = {
     'WD': short,
     'WDD': long,
 
-    'AMPM': twelve,
-    '12-hour': twelve,
-    '24-hour': twentyfour
+    'AMPM': hour12,
+    '12-hour': hour12,
+    '24-hour': hour24
 };

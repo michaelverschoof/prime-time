@@ -1,9 +1,9 @@
-import { KeyValuePair, LocalisedFormats, LocaliseOptions } from '../../types';
+import { FormattingOption, FormattingValues, FormattingOptions } from '../../types';
 
-const long : KeyValuePair = { timeZoneName: LocalisedFormats.TEXTUAL_LONG };
-const short : KeyValuePair = { timeZoneName: LocalisedFormats.TEXTUAL_SHORT };
+const long : FormattingOption = { timeZoneName: FormattingValues.TEXTUAL_LONG };
+const short : FormattingOption = { timeZoneName: FormattingValues.TEXTUAL_SHORT };
 
-export const localised : LocaliseOptions = {
+export const options : FormattingOptions = {
     'timezone': long,
     'timezone-long': long,
     'timezone-short': short,

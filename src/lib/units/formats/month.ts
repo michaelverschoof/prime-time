@@ -1,11 +1,11 @@
-import { KeyValuePair, LocalisedFormats, LocaliseOptions } from '../../types';
+import { FormattingOption, FormattingValues, FormattingOptions } from '../../types';
 
-const fixed : KeyValuePair = { month: LocalisedFormats.NUMERIC_FIXED };
-const flexible : KeyValuePair = { month: LocalisedFormats.NUMERIC_FLEXIBLE };
-const long : KeyValuePair = { month: LocalisedFormats.TEXTUAL_LONG };
-const short : KeyValuePair = { month: LocalisedFormats.TEXTUAL_SHORT };
+const fixed : FormattingOption = { month: FormattingValues.NUMERIC_FIXED };
+const flexible : FormattingOption = { month: FormattingValues.NUMERIC_FLEXIBLE };
+const long : FormattingOption = { month: FormattingValues.TEXTUAL_LONG };
+const short : FormattingOption = { month: FormattingValues.TEXTUAL_SHORT };
 
-export const localised : LocaliseOptions = {
+export const options : FormattingOptions = {
     'month': long,
     'month-long': long,
     'month-short': short,

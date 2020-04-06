@@ -1,5 +1,5 @@
 import PrimeError from '../../error/prime-error';
-import { KeyValuePair } from '../types';
+import { FormattingOption } from '../types';
 import { Units } from '../units';
 import * as Millisecond from '../units/formats/millisecond';
 import DateTimeFormatPart = Intl.DateTimeFormatPart;
@@ -47,7 +47,7 @@ function getFormattedValue (key : string, formatted : DateTimeFormatPart[]) : st
     return formatted.find(item => item.type.toLowerCase() === type.toLowerCase()).value;
 }
 
-function getOptions (formats ?: string[], timezone ?: string) : KeyValuePair {
+function getOptions (formats ?: string[], timezone ?: string) : FormattingOption {
     const options = formats && formats.length > 0
         ? Units.Formats.options(formats)
         : {};
@@ -66,7 +66,7 @@ function getLocales (locale ?: string) : string[] {
 
 // TODO: Remove this once fractionalDigits is more widely used
 function formatMilliseconds (timestamp : number, format : string) : string {
-    const regex = new RegExp('{(' + Object.keys(Millisecond.localised).join('|') + ')}', 'g');
+    const regex = new RegExp('{(' + Object.keys(Millisecond.options).join('|') + ')}', 'g');
     const milliseconds = timestamp.toString().slice(-3);
 
     return format.replace(regex, milliseconds);
