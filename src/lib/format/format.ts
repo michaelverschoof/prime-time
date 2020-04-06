@@ -36,10 +36,10 @@ function customisedFormat (timestamp : number, format : string, locale ?: string
 
 function getFormattedValue (key : string, formatted : DateTimeFormatPart[]) : string {
     const timespan = Units.Formats.timespan(key.slice(1, -1));
-    const type = timespan === 'hour12' ? 'dayperiod' : timespan;
+    const type = timespan === 'hour12' ? 'dayPeriod' : timespan;
 
     // @ts-ignore
-    return formatted.find((item => item.type === type)).value;
+    return formatted.find(item => item.type.toLowerCase() === type.toLowerCase()).value;
 }
 
 function getOptions (formats ?: string[], timezone ?: string) {
