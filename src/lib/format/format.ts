@@ -69,7 +69,7 @@ function formatMilliseconds (timestamp : number, format : string) : string {
     const regex = new RegExp('{(' + Object.keys(Millisecond.localised).join('|') + ')}', 'g');
     const milliseconds = timestamp.toString().slice(-3);
 
-    return format.replace(regex, milliseconds.toString());
+    return format.replace(regex, milliseconds);
 }
 
 export const Format = {

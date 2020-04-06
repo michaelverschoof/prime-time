@@ -1,6 +1,6 @@
 import { Timespan } from '../../types';
 
-export default class MilliSecond implements Timespan {
+export default class Millisecond implements Timespan {
 
     readonly milliseconds : number = 1;
     readonly aliases : string[] = [
