@@ -1,40 +1,21 @@
 import PrimeError from '../../src/error/prime-error';
-import { find, options, timespan } from '../../src/lib/units/formats';
-
-describe('Find', () => {
-
-    test('Year', () => {
-        let result = find('year');
-        expect(result).toEqual({ year: 'numeric' });
-
-        result = find('year-long');
-        expect(result).toEqual({ year: 'numeric' });
-
-        result = find('year-short');
-        expect(result).toEqual({ year: '2-digit' });
-    });
-
-    test('Non-existent values', () => {
-        expect(() => { find('non-existent value') }).toThrowError(PrimeError);
-    });
-
-});
+import { options, type } from '../../src/lib/units/formats';
 
 describe('Timespan', () => {
 
     test('Year', () => {
-        let result = timespan('year');
+        let result = type('year');
         expect(result).toEqual('year');
 
-        result = timespan('year-long');
+        result = type('year-long');
         expect(result).toEqual('year');
 
-        result = timespan('year-short');
+        result = type('year-short');
         expect(result).toEqual('year');
     });
 
     test('Non-existent values', () => {
-        expect(() => { timespan('non-existent value') }).toThrowError(PrimeError);
+        expect(() => { type('non-existent value') }).toThrowError(PrimeError);
     });
 
 });
