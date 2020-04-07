@@ -9,7 +9,7 @@ import * as Second from './formats/second';
 import * as Year from './formats/year';
 import * as Timezone from './formats/timezone'
 
-const localised : FormattingOptions = {
+const options : FormattingOptions = {
     ...Year.options,
     ...Month.options,
     ...Day.options,
@@ -20,23 +20,28 @@ const localised : FormattingOptions = {
     ...Timezone.options
 };
 
-export function find (key : string) : FormattingOption {
+function findOption (key : string) : FormattingOption {
     const search = key.trim();
-    if (search in localised) {
-        return localised[search];
+    if (search in options) {
+        return options[search];
     }
 
     throw new PrimeError('Format: "' + search + '" not found');
 }
 
-export function options (formats : string[]) : FormattingOption {
+function findOptions (formats : string[]) : FormattingOption {
     return formats.map(item => item.trim()).reduce(
         (options : FormattingOption, item : string) => (
-            { ...options, ...find(item) }
+            { ...options, ...findOption(item) }
         ), {}
     );
 }
 
-export function timespan (key : string) : string {
-    return Object.keys(find(key))[0];
+function findType (key : string) : string {
+    return Object.keys(findOption(key))[0];
 }
+
+export {
+    findOptions as options,
+    findType as type
+};

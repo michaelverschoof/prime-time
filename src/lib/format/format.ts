@@ -20,6 +20,8 @@ function localisedFormat (timestamp : number, format ?: string, locale ?: string
     const locales = getLocales(locale);
     const options = getOptions(format?.split(','), timezone);
 
+    // TODO Milliseconds
+
     return Formatter(locales, options).format(timestamp);
 }
 
@@ -40,8 +42,8 @@ function customisedFormat (timestamp : number, format : string, locale ?: string
 }
 
 function getFormattedValue (key : string, formatted : DateTimeFormatPart[]) : string {
-    const timespan = Units.Formats.timespan(key.slice(1, -1));
-    const type = timespan === 'hour12' ? 'dayPeriod' : timespan;
+    const optionType = Units.Formats.type(key.slice(1, -1));
+    const type = optionType === 'hour12' ? 'dayPeriod' : optionType;
 
     // @ts-ignore
     return formatted.find(item => item.type.toLowerCase() === type.toLowerCase()).value;
@@ -75,5 +77,5 @@ function formatMilliseconds (timestamp : number, format : string) : string {
 export const Format = {
     format,
     localise : localisedFormat,
-    customise: customisedFormat
+    customise : customisedFormat
 };
