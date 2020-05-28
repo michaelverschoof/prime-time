@@ -1,19 +1,16 @@
 {
   "name": "prime-time",
   "version": "0.1.0",
-  "description": "A vanilla JavaScript date and time library",
+  "description": "Manipulate, display, format and parse dates.",
   "main": "dist/prime-time.js",
   "types": "dist/prime-time.d.ts",
   "scripts": {
+    "typescript": "tsc",
     "clean": "rm -rf dist/* && rm -rf coverage/*",
-    "build": "tsc",
-    "test": "cross-env NODE_ICU_DATA=node_modules/full-icu jest",
-    "test-coverage": "cross-env NODE_ICU_DATA=node_modules/full-icu jest --coverage",
-    "test-coveralls": "cross-env NODE_ICU_DATA=node_modules/full-icu jest --coverage --coverageReporters=text-lcov | coveralls",
-    "clean-build": "npm run clean && npm run build",
-    "clean-build-test": "npm run clean-build && npm run test",
-    "clean-build-test-coverage": "npm run clean-build && npm run test-coverage",
-    "prerelease": "npm run clean-build && npm run test-coveralls"
+    "build": "npm run clean && npm run typescript",
+    "test": "npm run build && cross-env NODE_ICU_DATA=node_modules/full-icu jest",
+    "test:coverage": "npm run test -- --coverage",
+    "test:coveralls": "npm run test:coverage -- --coverageReporters=text-lcov | coveralls"
   },
   "keywords": [
     "prime-time",
@@ -22,7 +19,8 @@
     "date",
     "time",
     "format",
-    "npm"
+    "parse",
+    "calculate"
   ],
   "repository": {
     "type": "git",
