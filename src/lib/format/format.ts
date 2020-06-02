@@ -20,7 +20,21 @@ function localisedFormat (timestamp : number, format ?: string, locale ?: string
     const locales = getLocales(locale);
     const options = getOptions(format?.split(','), timezone);
 
-    // TODO Milliseconds
+    // TODO: Remove this once fractionalDigits is more widely used
+    if (options.fractionalSecondDigits) {
+        delete options.fractionalSecondDigits;
+
+        if (!options.second) {
+            console.warn('Tried to add milliseconds to localised format without seconds present. This is currently not possible.')
+            return Formatter(locales, options).format(timestamp);
+        }
+
+        return Formatter(locales, options).formatToParts(timestamp).reduce(
+            (formatted : string, item : DateTimeFormatPart) => (
+                formatted += (item.value + (item.type === 'second' ? '.' + getMilliseconds(timestamp) : ''))
+            ), ''
+        );
+    }
 
     return Formatter(locales, options).format(timestamp);
 }
@@ -69,9 +83,13 @@ function getLocales (locale ?: string) : string[] {
 // TODO: Remove this once fractionalDigits is more widely used
 function formatMilliseconds (timestamp : number, format : string) : string {
     const regex = new RegExp('{(' + Object.keys(Millisecond.options).join('|') + ')}', 'g');
-    const milliseconds = timestamp.toString().slice(-3);
+    const milliseconds = getMilliseconds(timestamp);
 
     return format.replace(regex, milliseconds);
+}
+
+function getMilliseconds (timestamp : number) : string {
+    return timestamp.toString().slice(-3);
 }
 
 export const Format = {

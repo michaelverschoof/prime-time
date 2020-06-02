@@ -14,8 +14,8 @@ const NEW_YORK = 'America/New_York';
 const LONDON = 'Europe/London';
 const AMSTERDAM = 'Europe/Amsterdam';
 
-const FORMAT_LOCALISED_LONG = 'weekday, month-number-short, day, year, hour, minute, second, timezone';
-const FORMAT_LOCALISED_SHORT = 'WDD, M, DD, YY, HH, mm, ss, TZZ';
+const FORMAT_LOCALISED_LONG = 'weekday, month-number-short, day, year, hour, minute, second, millisecond, timezone';
+const FORMAT_LOCALISED_SHORT = 'WDD, M, DD, YY, HH, mm, ss, ms, TZZ';
 const FORMAT_CUSTOMISED_LONG = '{weekday}, {month} {day}, {year} @ {hour}:{minute}:{second}.{millisecond} {AMPM} {timezone-short}';
 const FORMAT_CUSTOMISED_SHORT = '{WDD}, {MMMM} {DD}, {YY} @ {HH}:{mm}:{ss}.{ms} {AMPM} {TZ}';
 
@@ -26,13 +26,13 @@ const RESULT_SHORT_US = '6/24/1986';
 const RESULT_SHORT_GB = '24/06/1986';
 const RESULT_SHORT_NL = '24-6-1986';
 
-const RESULT_LOCALISED_US = 'Tuesday, 6/24/1986, 12:01:02 PM Coordinated Universal Time';
+const RESULT_LOCALISED_US = 'Tuesday, 6/24/1986, 12:01:02.003 PM Coordinated Universal Time';
 const RESULT_LOCALISED_GB = 'Tuesday, 24/06/1986, 12:01:02 Coordinated Universal Time';
-const RESULT_LOCALISED_NL = 'dinsdag 24-6-1986 12:01:02 Gecoördineerde wereldtijd';
+const RESULT_LOCALISED_NL = 'dinsdag 24-6-1986 12:01:02.003 Gecoördineerde wereldtijd';
 
-const RESULT_LOCALISED_NEW_YORK = 'Tuesday, 6/24/1986, 8:01:02 AM Eastern Daylight Time';
+const RESULT_LOCALISED_NEW_YORK = 'Tuesday, 6/24/1986, 8:01:02.003 AM Eastern Daylight Time';
 const RESULT_LOCALISED_LONDON = 'Tuesday, 24/06/1986, 13:01:02 British Summer Time';
-const RESULT_LOCALISED_AMSTERDAM = 'dinsdag 24-6-1986 14:01:02 Midden-Europese zomertijd';
+const RESULT_LOCALISED_AMSTERDAM = 'dinsdag 24-6-1986 14:01:02.003 Midden-Europese zomertijd';
 
 const RESULT_CUSTOMISED_US = 'Tuesday, June 24, 1986 @ 12:01:02.003 PM UTC';
 const RESULT_CUSTOMISED_GB = 'Tuesday, June 24, 1986 @ 12:01:02 pm UTC';
@@ -103,7 +103,7 @@ describe('Localise', () => {
         let result = Format.localise(timestamp, FORMAT_LOCALISED_LONG, US);
         expect(result).toBe(RESULT_LOCALISED_US);
 
-        result = Format.localise(timestamp, FORMAT_LOCALISED_LONG, GB);
+        result = Format.localise(timestamp, FORMAT_LOCALISED_LONG.replace(', millisecond', ''), GB);
         expect(result).toBe(RESULT_LOCALISED_GB);
 
         result = Format.localise(timestamp, FORMAT_LOCALISED_LONG, NL);
@@ -112,11 +112,14 @@ describe('Localise', () => {
         result = Format.localise(timestamp, FORMAT_LOCALISED_SHORT, US);
         expect(result).toBe(RESULT_LOCALISED_US);
 
-        result = Format.localise(timestamp, FORMAT_LOCALISED_SHORT, GB);
+        result = Format.localise(timestamp, FORMAT_LOCALISED_SHORT.replace(', ms', ''), GB);
         expect(result).toBe(RESULT_LOCALISED_GB);
 
         result = Format.localise(timestamp, FORMAT_LOCALISED_SHORT, NL);
         expect(result).toBe(RESULT_LOCALISED_NL);
+
+        result = Format.localise(timestamp, FORMAT_LOCALISED_LONG.replace(', second', ''), GB);
+        expect(result).toBe(RESULT_LOCALISED_GB.replace(':02', ''));
 
         expect(() => Format.localise(timestamp, FORMAT_WRONG_LONG, US)).toThrowError(PrimeError);
         expect(() => Format.localise(timestamp, FORMAT_WRONG_LONG, GB)).toThrowError(PrimeError);
@@ -130,7 +133,7 @@ describe('Localise', () => {
         let result = Format.localise(timestamp, FORMAT_LOCALISED_LONG, US, NEW_YORK);
         expect(result).toBe(RESULT_LOCALISED_NEW_YORK);
 
-        result = Format.localise(timestamp, FORMAT_LOCALISED_LONG, GB, LONDON);
+        result = Format.localise(timestamp, FORMAT_LOCALISED_LONG.replace(', millisecond', ''), GB, LONDON);
         expect(result).toBe(RESULT_LOCALISED_LONDON);
 
         result = Format.localise(timestamp, FORMAT_LOCALISED_LONG, NL, AMSTERDAM);
@@ -139,7 +142,7 @@ describe('Localise', () => {
         result = Format.localise(timestamp, FORMAT_LOCALISED_SHORT, US, NEW_YORK);
         expect(result).toBe(RESULT_LOCALISED_NEW_YORK);
 
-        result = Format.localise(timestamp, FORMAT_LOCALISED_SHORT, GB, LONDON);
+        result = Format.localise(timestamp, FORMAT_LOCALISED_SHORT.replace(', ms', ''), GB, LONDON);
         expect(result).toBe(RESULT_LOCALISED_LONDON);
 
         result = Format.localise(timestamp, FORMAT_LOCALISED_SHORT, NL, AMSTERDAM);
@@ -308,7 +311,7 @@ describe('Format', () => {
         let result = Format.format(timestamp, FORMAT_LOCALISED_LONG, US);
         expect(result).toBe(RESULT_LOCALISED_US);
 
-        result = Format.format(timestamp, FORMAT_LOCALISED_LONG, GB);
+        result = Format.format(timestamp, FORMAT_LOCALISED_LONG.replace(', millisecond', ''), GB);
         expect(result).toBe(RESULT_LOCALISED_GB);
 
         result = Format.format(timestamp, FORMAT_LOCALISED_LONG, NL);
@@ -317,7 +320,7 @@ describe('Format', () => {
         result = Format.format(timestamp, FORMAT_LOCALISED_SHORT, US);
         expect(result).toBe(RESULT_LOCALISED_US);
 
-        result = Format.format(timestamp, FORMAT_LOCALISED_SHORT, GB);
+        result = Format.format(timestamp, FORMAT_LOCALISED_SHORT.replace(', ms', ''), GB);
         expect(result).toBe(RESULT_LOCALISED_GB);
 
         result = Format.format(timestamp, FORMAT_LOCALISED_SHORT, NL);
@@ -353,7 +356,7 @@ describe('Format', () => {
         let result = Format.format(timestamp, FORMAT_LOCALISED_LONG, US, NEW_YORK);
         expect(result).toBe(RESULT_LOCALISED_NEW_YORK);
 
-        result = Format.format(timestamp, FORMAT_LOCALISED_LONG, GB, LONDON);
+        result = Format.format(timestamp, FORMAT_LOCALISED_LONG.replace(', millisecond', ''), GB, LONDON);
         expect(result).toBe(RESULT_LOCALISED_LONDON);
 
         result = Format.format(timestamp, FORMAT_LOCALISED_LONG.replace('{AMPM}', ''), NL, AMSTERDAM);
@@ -362,7 +365,7 @@ describe('Format', () => {
         result = Format.format(timestamp, FORMAT_LOCALISED_SHORT, US, NEW_YORK);
         expect(result).toBe(RESULT_LOCALISED_NEW_YORK);
 
-        result = Format.format(timestamp, FORMAT_LOCALISED_SHORT, GB, LONDON);
+        result = Format.format(timestamp, FORMAT_LOCALISED_SHORT.replace(', ms', ''), GB, LONDON);
         expect(result).toBe(RESULT_LOCALISED_LONDON);
 
         result = Format.format(timestamp, FORMAT_LOCALISED_SHORT.replace('{AMPM}', ''), NL, AMSTERDAM);
