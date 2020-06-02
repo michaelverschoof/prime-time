@@ -1,4 +1,4 @@
-import { YEAR } from '../../../src/lib/units/timespans';
+import { Options } from '../../../src/lib/units/timespans';
 import Year from '../../../src/lib/units/timespans/year';
 
 /**
@@ -9,10 +9,10 @@ const timestamp : number = 519998462003;
 const year = new Year();
 
 test('Create', () => {
-    expect(year).toEqual(YEAR);
+    expect(year).toEqual(Options.YEAR);
 });
 
 test('Get date parts', () => {
-    let result = year.parts(timestamp);
+    const result = year.parts(timestamp);
     expect(result).toEqual([1986]);
 });

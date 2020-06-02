@@ -1,4 +1,4 @@
-import { DAY } from '../../../src/lib/units/timespans';
+import { Options } from '../../../src/lib/units/timespans';
 import Day from '../../../src/lib/units/timespans/day';
 
 /**
@@ -9,10 +9,10 @@ const timestamp : number = 519998462003;
 const day = new Day();
 
 test('Create', () => {
-    expect(day).toEqual(DAY);
+    expect(day).toEqual(Options.DAY);
 });
 
 test('Get date parts', () => {
-    let result = day.parts(timestamp);
+    const result = day.parts(timestamp);
     expect(result).toEqual([1986, 5, 24]);
 });

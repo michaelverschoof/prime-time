@@ -2,6 +2,9 @@ import { Calc } from './lib/calc';
 import { Format } from './lib/format/format';
 import { From } from './lib/from/from';
 import { Timespan } from './lib/types';
+import { Units } from './lib/units';
+
+const Timespans = Units.Timespans.Options;
 
 function primetime (from ?: number | string | Date | PrimeTime) : PrimeTime {
     return From.anything(from);
@@ -93,5 +96,5 @@ class PrimeTime {
 export {
     primetime,
     PrimeTime,
-    Timespan
+    Timespans
 };

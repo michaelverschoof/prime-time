@@ -1,4 +1,4 @@
-import { MONTH } from '../../../src/lib/units/timespans';
+import { Options } from '../../../src/lib/units/timespans';
 import Month from '../../../src/lib/units/timespans/month';
 
 /**
@@ -9,10 +9,10 @@ const timestamp : number = 519998462003;
 const month = new Month();
 
 test('Create', () => {
-    expect(month).toEqual(MONTH);
+    expect(month).toEqual(Options.MONTH);
 });
 
 test('Get date parts', () => {
-    let result = month.parts(timestamp);
+    const result = month.parts(timestamp);
     expect(result).toEqual([1986, 5]);
 });

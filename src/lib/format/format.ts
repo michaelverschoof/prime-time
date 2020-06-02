@@ -4,6 +4,8 @@ import { Units } from '../units';
 import * as Millisecond from '../units/formats/millisecond';
 import DateTimeFormatPart = Intl.DateTimeFormatPart;
 
+const Formats = Units.Formats;
+
 const Formatter = Intl.DateTimeFormat;
 const regex = /{.*?}/g;
 const whitespaces = /\s+/g;
@@ -56,7 +58,7 @@ function customisedFormat (timestamp : number, format : string, locale ?: string
 }
 
 function getFormattedValue (key : string, formatted : DateTimeFormatPart[]) : string {
-    const optionType = Units.Formats.type(key.slice(1, -1));
+    const optionType = Formats.type(key.slice(1, -1));
     const type = optionType === 'hour12' ? 'dayPeriod' : optionType;
 
     // @ts-ignore
@@ -65,7 +67,7 @@ function getFormattedValue (key : string, formatted : DateTimeFormatPart[]) : st
 
 function getOptions (formats ?: string[], timezone ?: string) : FormattingOption {
     const options = formats && formats.length > 0
-        ? Units.Formats.options(formats)
+        ? Formats.options(formats)
         : {};
     options.timeZone = timezone || 'UTC';
 

@@ -1,4 +1,4 @@
-import { HOUR } from '../../../src/lib/units/timespans';
+import { Options } from '../../../src/lib/units/timespans';
 import Hour from '../../../src/lib/units/timespans/hour';
 
 /**
@@ -9,10 +9,10 @@ const timestamp : number = 519998462003;
 const hour = new Hour();
 
 test('Create', () => {
-    expect(hour).toEqual(HOUR);
+    expect(hour).toEqual(Options.HOUR);
 });
 
 test('Get date parts', () => {
-    let result = hour.parts(timestamp);
+    const result = hour.parts(timestamp);
     expect(result).toEqual([1986, 5, 24, 12]);
 });

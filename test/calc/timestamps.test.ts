@@ -1,7 +1,7 @@
 import { add, difference, scale, subtract } from '../../src/lib/calc/timestamps';
 import { Units } from '../../src/lib/units';
 
-const Timespans = Units.Timespans;
+const Timespans = Units.Timespans.Options;
 
 /**
  * 1986-6-24 12:01:02.003 GMT

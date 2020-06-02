@@ -17,7 +17,7 @@ export function subtract (timestamp : number, amount : number, unit : string | T
 export function difference (left : number, right : number, unit ?: string | Timespan) : number {
     const timespan = Timespans.find(unit);
 
-    if (timespan === Timespans.MILLISECOND) {
+    if (timespan === Timespans.Options.MILLISECOND) {
         return Numbers.difference(left, right);
     }
 
