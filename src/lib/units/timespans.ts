@@ -18,7 +18,7 @@ const Options : TimespanOptions = {
     YEAR: new Year()
 };
 
-function find (timespan ?: string | Timespan) : Timespan {
+function find (timespan? : string | Timespan) : Timespan {
     if (!timespan) {
         return Options.MILLISECOND;
     }

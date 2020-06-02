@@ -65,7 +65,7 @@ describe('Find timespan', () => {
     });
 
     test('Non-existent values', () => {
-        expect(() => { find('non-existent value') }).toThrowError(PrimeError);
+        expect(() => find('non-existent value')).toThrowError(PrimeError);
     });
 
 });

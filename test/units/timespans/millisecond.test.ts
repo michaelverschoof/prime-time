@@ -14,5 +14,5 @@ test('Create', () => {
 
 test('Get date parts', () => {
     const result = millisecond.parts(timestamp);
-    expect(result).toEqual([1986, 5, 24, 12, 1, 2, 3]);
+    expect(result).toEqual([ 1986, 5, 24, 12, 1, 2, 3 ]);
 });

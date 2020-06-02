@@ -10,7 +10,7 @@ export default class Year implements Timespan {
 
     parts (timestamp : number) : number[] {
         const date = new Date(timestamp);
-        return [date.getUTCFullYear()];
+        return [ date.getUTCFullYear() ];
     }
 
 }

@@ -10,7 +10,13 @@ export default class Minute implements Timespan {
 
     parts (timestamp : number) : number[] {
         const date = new Date(timestamp);
-        return [date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes()];
+        return [
+            date.getUTCFullYear(),
+            date.getUTCMonth(),
+            date.getUTCDate(),
+            date.getUTCHours(),
+            date.getUTCMinutes()
+        ];
     }
 
 }

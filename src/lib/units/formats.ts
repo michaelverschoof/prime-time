@@ -7,7 +7,7 @@ import * as Millisecond from './formats/millisecond';
 import * as Month from './formats/month';
 import * as Second from './formats/second';
 import * as Year from './formats/year';
-import * as Timezone from './formats/timezone'
+import * as Timezone from './formats/timezone';
 
 const options : FormattingOptions = {
     ...Year.options,

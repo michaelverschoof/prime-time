@@ -14,5 +14,5 @@ test('Create', () => {
 
 test('Get date parts', () => {
     const result = year.parts(timestamp);
-    expect(result).toEqual([1986]);
+    expect(result).toEqual([ 1986 ]);
 });

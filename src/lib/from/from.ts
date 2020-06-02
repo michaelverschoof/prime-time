@@ -1,7 +1,7 @@
 import PrimeError from '../../error/prime-error';
 import { PrimeTime } from '../../prime-time';
 
-function anything (value ?: number | string | Date | PrimeTime) : PrimeTime {
+function anything (value? : number | string | Date | PrimeTime) : PrimeTime {
     if (!value) {
         return new PrimeTime(Date.now());
     }

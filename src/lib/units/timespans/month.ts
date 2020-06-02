@@ -10,7 +10,10 @@ export default class Month implements Timespan {
 
     parts (timestamp : number) : number[] {
         const date = new Date(timestamp);
-        return [date.getUTCFullYear(), date.getUTCMonth()];
+        return [
+            date.getUTCFullYear(),
+            date.getUTCMonth()
+        ];
     }
 
 }

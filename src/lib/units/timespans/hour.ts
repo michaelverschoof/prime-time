@@ -10,7 +10,12 @@ export default class Hour implements Timespan {
 
     parts (timestamp : number) : number[] {
         const date = new Date(timestamp);
-        return [date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours()];
+        return [
+            date.getUTCFullYear(),
+            date.getUTCMonth(),
+            date.getUTCDate(),
+            date.getUTCHours()
+        ];
     }
 
 }

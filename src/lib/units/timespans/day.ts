@@ -10,7 +10,11 @@ export default class Day implements Timespan {
 
     parts (timestamp : number) : number[] {
         const date = new Date(timestamp);
-        return [date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()];
+        return [
+            date.getUTCFullYear(),
+            date.getUTCMonth(),
+            date.getUTCDate()
+        ];
     }
 
 }

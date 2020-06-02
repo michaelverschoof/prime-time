@@ -6,7 +6,7 @@ import { Units } from './lib/units';
 
 const Timespans = Units.Timespans.Options;
 
-function primetime (from ?: number | string | Date | PrimeTime) : PrimeTime {
+function primetime (from? : number | string | Date | PrimeTime) : PrimeTime {
     return From.anything(from);
 }
 
@@ -39,7 +39,7 @@ class PrimeTime {
         return this.update(timestamp);
     }
 
-    clone (timespan ?: string | Timespan) : PrimeTime {
+    clone (timespan? : string | Timespan) : PrimeTime {
         const timestamp = timespan ? Calc.Timestamps.scale(this.timestamp, timespan) : this.timestamp;
         return From.timestamp(timestamp);
     }
@@ -51,37 +51,37 @@ class PrimeTime {
 
     /* Comparisons */
 
-    difference (to : PrimeTime, timespan ?: string | Timespan) : number {
-        return Calc.Timestamps.difference(this.timestamp, to.timestamp, timespan)
+    difference (to : PrimeTime, timespan? : string | Timespan) : number {
+        return Calc.Timestamps.difference(this.timestamp, to.timestamp, timespan);
     }
 
-    after (other : PrimeTime, timespan ?: string | Timespan, inclusivity ?: boolean) : boolean {
+    after (other : PrimeTime, timespan? : string | Timespan, inclusivity? : boolean) : boolean {
         return this.difference(other, timespan) <= (inclusivity ? 0 : -1);
     }
 
-    before (other : PrimeTime, timespan ?: string | Timespan, inclusivity ?: boolean) : boolean {
+    before (other : PrimeTime, timespan? : string | Timespan, inclusivity? : boolean) : boolean {
         return this.difference(other, timespan) >= (inclusivity ? 0 : 1);
     }
 
-    between (from : PrimeTime, to : PrimeTime, timespan ?: string | Timespan, inclusivity ?: boolean) : boolean {
+    between (from : PrimeTime, to : PrimeTime, timespan ? : string | Timespan, inclusivity ? : boolean) : boolean {
         return this.after(from, timespan, inclusivity) && this.before(to, timespan, inclusivity);
     }
 
-    equals (other : PrimeTime, timespan ?: string | Timespan) : boolean {
+    equals (other : PrimeTime, timespan? : string | Timespan) : boolean {
         return this.difference(other, timespan) === 0;
     }
 
     /* Formatting */
 
-    format (format ?: string, locale ?: string) {
+    format (format? : string, locale? : string) {
         return Format.format(this.timestamp, format, locale);
     }
 
-    localise (format ?: string, locale ?: string) {
+    localise (format? : string, locale? : string) {
         return Format.localise(this.timestamp, format, locale);
     }
 
-    customise (format : string, locale ?: string) {
+    customise (format : string, locale? : string) {
         return Format.customise(this.timestamp, format, locale);
     }
 

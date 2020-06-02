@@ -10,7 +10,7 @@ const Formatter = Intl.DateTimeFormat;
 const regex = /{.*?}/g;
 const whitespaces = /\s+/g;
 
-function format (timestamp : number, format ?: string, locale ?: string, timezone ?: string) : string {
+function format (timestamp : number, format? : string, locale? : string, timezone? : string) : string {
     if (format && regex.test(format)) {
         return customisedFormat(timestamp, format, locale, timezone);
     }
@@ -18,22 +18,22 @@ function format (timestamp : number, format ?: string, locale ?: string, timezon
     return localisedFormat(timestamp, format, locale, timezone);
 }
 
-function localisedFormat (timestamp : number, format ?: string, locale ?: string, timezone ?: string) : string {
+function localisedFormat (timestamp : number, format? : string, locale? : string, timezone? : string) : string {
     const locales = getLocales(locale);
     const options = getOptions(format?.split(','), timezone);
 
-    // TODO: Remove this once fractionalDigits is more widely used
+    // TODO: Remove this once fractionalDigits is introduced to Intl.DateTimeFormat.format()
     if (options.fractionalSecondDigits) {
         delete options.fractionalSecondDigits;
 
         if (!options.second) {
-            console.warn('Tried to add milliseconds to localised format without seconds present. This is currently not possible.')
+            console.warn('Tried to add milliseconds to localised format without seconds present. This is currently not possible.');
             return Formatter(locales, options).format(timestamp);
         }
 
         return Formatter(locales, options).formatToParts(timestamp).reduce(
             (formatted : string, item : DateTimeFormatPart) => (
-                formatted += (item.value + (item.type === 'second' ? '.' + getMilliseconds(timestamp) : ''))
+                formatted + (item.value + (item.type === 'second' ? '.' + getMilliseconds(timestamp) : ''))
             ), ''
         );
     }
@@ -41,7 +41,7 @@ function localisedFormat (timestamp : number, format ?: string, locale ?: string
     return Formatter(locales, options).format(timestamp);
 }
 
-function customisedFormat (timestamp : number, format : string, locale ?: string, timezone ?: string) : string {
+function customisedFormat (timestamp : number, format : string, locale? : string, timezone? : string) : string {
     const matches = format.match(regex)?.map(item => item.slice(1, -1));
     if (!matches) {
         throw new PrimeError('Format "' + format + '" could not be parsed');
@@ -65,7 +65,7 @@ function getFormattedValue (key : string, formatted : DateTimeFormatPart[]) : st
     return formatted.find(item => item.type.toLowerCase() === type.toLowerCase()).value;
 }
 
-function getOptions (formats ?: string[], timezone ?: string) : FormattingOption {
+function getOptions (formats? : string[], timezone? : string) : FormattingOption {
     const options = formats && formats.length > 0
         ? Formats.options(formats)
         : {};
@@ -74,7 +74,7 @@ function getOptions (formats ?: string[], timezone ?: string) : FormattingOption
     return options;
 }
 
-function getLocales (locale ?: string) : string[] {
+function getLocales (locale ? : string) : string[] {
     if (!locale || locale === 'local') {
         locale = navigator.language;
     }
@@ -96,6 +96,6 @@ function getMilliseconds (timestamp : number) : string {
 
 export const Format = {
     format,
-    localise : localisedFormat,
-    customise : customisedFormat
+    localise: localisedFormat,
+    customise: customisedFormat
 };

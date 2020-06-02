@@ -62,7 +62,7 @@ describe('Create', () => {
         });
 
         test('Providing invalid string', () => {
-            expect(() => { primetime('not-a-date') }).toThrowError(PrimeError);
+            expect(() => primetime('not-a-date')).toThrowError(PrimeError);
         });
 
     });

@@ -172,10 +172,10 @@ describe('Customise', () => {
     });
 
     test('Providing timestamp, format and timezone', () => {
-        let result = Format.customise(timestamp, FORMAT_CUSTOMISED_LONG, undefined,  NEW_YORK);
+        let result = Format.customise(timestamp, FORMAT_CUSTOMISED_LONG, undefined, NEW_YORK);
         expect(result).toBe(RESULT_CUSTOMISED_NEW_YORK);
 
-        result = Format.customise(timestamp, FORMAT_CUSTOMISED_SHORT, undefined,  NEW_YORK);
+        result = Format.customise(timestamp, FORMAT_CUSTOMISED_SHORT, undefined, NEW_YORK);
         expect(result).toBe(RESULT_CUSTOMISED_NEW_YORK);
 
         expect(() => Format.customise(timestamp, FORMAT_WRONG_LONG)).toThrowError(PrimeError);
