@@ -31,12 +31,9 @@ function find (timespan ?: string | Timespan) : Timespan {
         }
     }
 
-    // TODO: Create a base object for all timespans to check with instanceof?
-    if (typeof timespan === 'object' && 'milliseconds' in timespan) {
-        const found = Object.values(Options).find(item => item.milliseconds === timespan.milliseconds) || null;
-        if (found !== null) {
-            return found;
-        }
+    const found = Object.values(Options).find(item => item === timespan) || null;
+    if (found !== null) {
+        return found;
     }
 
     throw new PrimeError('The provided unit (' + timespan + ') is not allowed');
