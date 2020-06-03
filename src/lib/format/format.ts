@@ -1,10 +1,8 @@
 import PrimeError from '../../error/prime-error';
 import { FormattingOption } from '../types';
-import { Units } from '../units';
+import * as Formats from '../units/formats';
 import * as Millisecond from '../units/formats/millisecond';
 import DateTimeFormatPart = Intl.DateTimeFormatPart;
-
-const Formats = Units.Formats;
 
 const Formatter = Intl.DateTimeFormat;
 const regex = /{.*?}/g;
@@ -12,13 +10,13 @@ const whitespaces = /\s+/g;
 
 function format (timestamp : number, format? : string, locale? : string, timezone? : string) : string {
     if (format && regex.test(format)) {
-        return customisedFormat(timestamp, format, locale, timezone);
+        return customise(timestamp, format, locale, timezone);
     }
 
-    return localisedFormat(timestamp, format, locale, timezone);
+    return localise(timestamp, format, locale, timezone);
 }
 
-function localisedFormat (timestamp : number, format? : string, locale? : string, timezone? : string) : string {
+function localise (timestamp : number, format? : string, locale? : string, timezone? : string) : string {
     const locales = getLocales(locale);
     const options = getOptions(format?.split(','), timezone);
 
@@ -41,7 +39,7 @@ function localisedFormat (timestamp : number, format? : string, locale? : string
     return Formatter(locales, options).format(timestamp);
 }
 
-function customisedFormat (timestamp : number, format : string, locale? : string, timezone? : string) : string {
+function customise (timestamp : number, format : string, locale? : string, timezone? : string) : string {
     const matches = format.match(regex)?.map(item => item.slice(1, -1));
     if (!matches) {
         throw new PrimeError('Format "' + format + '" could not be parsed');
@@ -94,8 +92,8 @@ function getMilliseconds (timestamp : number) : string {
     return timestamp.toString().slice(-3);
 }
 
-export const Format = {
+export {
     format,
-    localise: localisedFormat,
-    customise: customisedFormat
+    localise,
+    customise
 };

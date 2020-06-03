@@ -1,4 +1,3 @@
-import { Options } from '../../../src/lib/units/timespans';
 import Day from '../../../src/lib/units/timespans/day';
 
 /**
@@ -6,11 +5,7 @@ import Day from '../../../src/lib/units/timespans/day';
  */
 const timestamp : number = 519998462003;
 
-const day = new Day();
-
-test('Create', () => {
-    expect(day).toEqual(Options.DAY);
-});
+const day = Day;
 
 test('Get date parts', () => {
     const result = day.parts(timestamp);

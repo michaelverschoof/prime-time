@@ -1,19 +1,17 @@
 import { Timespan } from '../../types';
 
-export default class Month implements Timespan {
+const Month : Timespan = {
 
-    readonly milliseconds : number = 2629746000;
-    readonly aliases : string[] = [
-        'months',
-        'month'
-    ];
+    milliseconds: 2629746000,
+    aliases: [ 'months', 'month' ],
 
-    parts (timestamp : number) : number[] {
+    parts (timestamp) {
         const date = new Date(timestamp);
         return [
             date.getUTCFullYear(),
             date.getUTCMonth()
         ];
     }
+};
 
-}
+export default Month;

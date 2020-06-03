@@ -1,4 +1,3 @@
-import { Options } from '../../../src/lib/units/timespans';
 import Minute from '../../../src/lib/units/timespans/minute';
 
 /**
@@ -6,11 +5,7 @@ import Minute from '../../../src/lib/units/timespans/minute';
  */
 const timestamp : number = 519998462003;
 
-const minute = new Minute();
-
-test('Create', () => {
-    expect(minute).toEqual(Options.MINUTE);
-});
+const minute = Minute;
 
 test('Get date parts', () => {
     const result = minute.parts(timestamp);

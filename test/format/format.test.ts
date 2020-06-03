@@ -1,5 +1,5 @@
 import PrimeError from '../../src/error/prime-error';
-import { Format } from '../../src/lib/format/format';
+import * as Format from '../../src/lib/format/format';
 
 /**
  * 1986-6-24 12:01:02.003 GMT

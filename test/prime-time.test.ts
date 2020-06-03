@@ -1,9 +1,6 @@
 import PrimeError from '../src/error/prime-error';
-import { Format } from '../src/lib/format/format';
-import { Units } from '../src/lib/units';
+import { Timespans } from '../src/lib/units';
 import { primetime, PrimeTime } from '../src/prime-time';
-
-const Timespans = Units.Timespans.Options;
 
 /**
  * 1986-6-24 12:01:02.003 GMT

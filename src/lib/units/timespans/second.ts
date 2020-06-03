@@ -1,22 +1,11 @@
 import { Timespan } from '../../types';
 
-export default class Second implements Timespan {
+const Second : Timespan = {
 
-    readonly milliseconds : number = 1000;
-    readonly aliases : string[] = [
-        'seconds',
-        'second'
-    ];
+    milliseconds: 1000,
+    aliases: [ 'seconds', 'second' ],
 
-    constructor () {
-        this.milliseconds = 1000;
-        this.aliases = [
-            'seconds',
-            'second'
-        ];
-    }
-
-    parts (timestamp : number) : number[] {
+    parts (timestamp) {
         const date = new Date(timestamp);
         return [
             date.getUTCFullYear(),
@@ -27,5 +16,6 @@ export default class Second implements Timespan {
             date.getUTCSeconds()
         ];
     }
+};
 
-}
+export default Second;

@@ -1,14 +1,11 @@
 import { Timespan } from '../../types';
 
-export default class Millisecond implements Timespan {
+const Millisecond : Timespan = {
 
-    readonly milliseconds : number = 1;
-    readonly aliases : string[] = [
-        'milliseconds',
-        'millisecond'
-    ];
+    milliseconds: 1,
+    aliases: [ 'milliseconds', 'millisecond' ],
 
-    parts (timestamp : number) : number[] {
+    parts (timestamp) {
         const date = new Date(timestamp);
         return [
             date.getUTCFullYear(),
@@ -20,5 +17,6 @@ export default class Millisecond implements Timespan {
             date.getUTCMilliseconds()
         ];
     }
+};
 
-}
+export default Millisecond;

@@ -1,4 +1,4 @@
-import { From } from '../../src/lib/from/from';
+import * as From from '../../src/lib/from/from';
 import { PrimeTime } from '../../src/prime-time';
 
 /**

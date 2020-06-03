@@ -1,4 +1,3 @@
-import { Options } from '../../../src/lib/units/timespans';
 import Second from '../../../src/lib/units/timespans/second';
 
 /**
@@ -6,11 +5,7 @@ import Second from '../../../src/lib/units/timespans/second';
  */
 const timestamp : number = 519998462003;
 
-const second = new Second();
-
-test('Create', () => {
-    expect(second).toEqual(Options.SECOND);
-});
+const second = Second;
 
 test('Get date parts', () => {
     const result = second.parts(timestamp);

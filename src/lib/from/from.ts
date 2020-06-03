@@ -1,5 +1,5 @@
 import PrimeError from '../../error/prime-error';
-import { PrimeTime } from '../../prime-time';
+import PrimeTime from '../prime-time';
 
 function anything (value? : number | string | Date | PrimeTime) : PrimeTime {
     if (!value) {
@@ -38,7 +38,7 @@ function string (date : string) : PrimeTime {
     return new PrimeTime(parsed);
 }
 
-export const From = {
+export {
     anything,
     date,
     string,

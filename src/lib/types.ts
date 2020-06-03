@@ -1,7 +1,3 @@
-export interface TimespanOptions {
-    [key : string] : Timespan
-}
-
 export interface Timespan {
     readonly milliseconds : number
     readonly aliases : string[]

@@ -1,7 +1,8 @@
 import * as Formats from './units/formats';
-import * as Timespans from './units/timespans';
+import { find, Timespans } from './units/timespans';
 
-export const Units = {
+export {
+    find,
     Formats,
     Timespans
 };

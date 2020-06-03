@@ -1,4 +1,3 @@
-import { Options } from '../../../src/lib/units/timespans';
 import Millisecond from '../../../src/lib/units/timespans/millisecond';
 
 /**
@@ -6,11 +5,7 @@ import Millisecond from '../../../src/lib/units/timespans/millisecond';
  */
 const timestamp : number = 519998462003;
 
-const millisecond = new Millisecond();
-
-test('Create', () => {
-    expect(millisecond).toEqual(Options.MILLISECOND);
-});
+const millisecond = Millisecond;
 
 test('Get date parts', () => {
     const result = millisecond.parts(timestamp);
