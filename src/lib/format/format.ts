@@ -82,7 +82,7 @@ function getLocales (locale ? : string) : string[] {
 
 // TODO: Remove this once fractionalDigits is more widely used
 function formatMilliseconds (timestamp : number, format : string) : string {
-    const regex = new RegExp('{(' + Object.keys(Millisecond.options).join('|') + ')}', 'g');
+    const regex = new RegExp('{(' + Object.keys(Millisecond.formats).join('|') + ')}', 'g');
     const milliseconds = getMilliseconds(timestamp);
 
     return format.replace(regex, milliseconds);

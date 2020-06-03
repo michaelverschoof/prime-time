@@ -1,12 +1,14 @@
-import { FormattingOption, FormattingValues, FormattingOptions } from '../../types';
+import { FormattingOption, FormattingValues, Formats } from '../../types';
 
 const long : FormattingOption = { timeZoneName: FormattingValues.TEXTUAL_LONG };
 const short : FormattingOption = { timeZoneName: FormattingValues.TEXTUAL_SHORT };
 
-export const options : FormattingOptions = {
+const formats : Formats = {
     'timezone': long,
     'timezone-long': long,
     'timezone-short': short,
     'TZ': short,
     'TZZ': long
 };
+
+export { formats };

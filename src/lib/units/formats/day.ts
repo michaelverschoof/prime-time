@@ -1,4 +1,4 @@
-import { FormattingOption, FormattingValues, FormattingOptions } from '../../types';
+import { FormattingOption, FormattingValues, Formats } from '../../types';
 
 const fixed : FormattingOption = { day: FormattingValues.NUMERIC_FIXED };
 const flexible : FormattingOption = { day: FormattingValues.NUMERIC_FLEXIBLE };
@@ -9,7 +9,7 @@ const short : FormattingOption = { weekday: FormattingValues.TEXTUAL_SHORT };
 const hour12 : FormattingOption = { hour12: true };
 const hour24 : FormattingOption = { hour12: false };
 
-export const options : FormattingOptions = {
+const formats : Formats = {
     'day': fixed,
     'day-long': fixed,
     'day-short': flexible,
@@ -26,3 +26,5 @@ export const options : FormattingOptions = {
     '12-hour': hour12,
     '24-hour': hour24
 };
+
+export { formats };

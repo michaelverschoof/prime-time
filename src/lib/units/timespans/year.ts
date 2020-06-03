@@ -1,9 +1,10 @@
-import { Timespan } from '../../types';
+import { Timespan, TimeUnit } from '../../types';
 
 const Year : Timespan = {
 
-    milliseconds: 31556952000,
+    name: TimeUnit.YEAR,
     aliases: [ 'years', 'year' ],
+    milliseconds: 31556952000,
 
     parts (timestamp) {
         const date = new Date(timestamp);

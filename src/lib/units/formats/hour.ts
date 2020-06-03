@@ -1,12 +1,14 @@
-import { FormattingOption, FormattingValues, FormattingOptions } from '../../types';
+import { FormattingOption, FormattingValues, Formats } from '../../types';
 
 const fixed : FormattingOption = { hour: FormattingValues.NUMERIC_FIXED };
 const flexible : FormattingOption = { hour: FormattingValues.NUMERIC_FLEXIBLE };
 
-export const options : FormattingOptions = {
+const formats : Formats = {
     'hour': fixed,
     'hour-long': fixed,
     'hour-short': flexible,
     'H': flexible,
     'HH': fixed
 };
+
+export { formats };

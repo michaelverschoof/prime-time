@@ -1,11 +1,12 @@
 export interface Timespan {
-    readonly milliseconds : number
+    readonly name : TimeUnit
     readonly aliases : string[]
+    readonly milliseconds : number
 
     parts (timestamp : number) : number[]
 }
 
-export interface FormattingOptions {
+export interface Formats {
     [key : string] : FormattingOption
 }
 
@@ -18,4 +19,14 @@ export enum FormattingValues {
     NUMERIC_FLEXIBLE = 'numeric',
     TEXTUAL_LONG = 'long',
     TEXTUAL_SHORT = 'short'
+}
+
+export enum TimeUnit {
+    MILLISECOND = 'millisecond',
+    SECOND = 'second',
+    MINUTE = 'minute',
+    HOUR = 'hour',
+    DAY = 'day',
+    MONTH = 'month',
+    YEAR = 'year'
 }

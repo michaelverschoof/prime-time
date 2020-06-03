@@ -1,11 +1,11 @@
-import { FormattingOption, FormattingValues, FormattingOptions } from '../../types';
+import { FormattingOption, FormattingValues, Formats } from '../../types';
 
 const fixed : FormattingOption = { month: FormattingValues.NUMERIC_FIXED };
 const flexible : FormattingOption = { month: FormattingValues.NUMERIC_FLEXIBLE };
 const long : FormattingOption = { month: FormattingValues.TEXTUAL_LONG };
 const short : FormattingOption = { month: FormattingValues.TEXTUAL_SHORT };
 
-export const options : FormattingOptions = {
+const formats : Formats = {
     'month': long,
     'month-long': long,
     'month-short': short,
@@ -18,3 +18,4 @@ export const options : FormattingOptions = {
     'MMMM': long
 };
 
+export { formats };

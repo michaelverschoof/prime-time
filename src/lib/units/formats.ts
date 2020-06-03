@@ -1,5 +1,5 @@
 import PrimeError from '../../error/prime-error';
-import { FormattingOption, FormattingOptions } from '../types';
+import { FormattingOption, Formats } from '../types';
 import * as Day from './formats/day';
 import * as Hour from './formats/hour';
 import * as Minute from './formats/minute';
@@ -9,15 +9,15 @@ import * as Second from './formats/second';
 import * as Year from './formats/year';
 import * as Timezone from './formats/timezone';
 
-const options : FormattingOptions = {
-    ...Year.options,
-    ...Month.options,
-    ...Day.options,
-    ...Hour.options,
-    ...Minute.options,
-    ...Second.options,
-    ...Millisecond.options,
-    ...Timezone.options
+const options : Formats = {
+    ...Year.formats,
+    ...Month.formats,
+    ...Day.formats,
+    ...Hour.formats,
+    ...Minute.formats,
+    ...Second.formats,
+    ...Millisecond.formats,
+    ...Timezone.formats
 };
 
 function findOption (key : string) : FormattingOption {
