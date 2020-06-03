@@ -1,7 +1,7 @@
-import { FormattingOption, FormattingValues, Formats } from '../../types';
+import { FormattingValues, Formats } from '../../types';
 
-const fixed : FormattingOption = { second: FormattingValues.NUMERIC_FIXED };
-const flexible : FormattingOption = { second: FormattingValues.NUMERIC_FLEXIBLE };
+const fixed = { second: FormattingValues.NUMERIC_FIXED };
+const flexible = { second: FormattingValues.NUMERIC_FLEXIBLE };
 
 const formats : Formats = {
     'second': fixed,

@@ -1,5 +1,6 @@
 import PrimeError from '../../error/prime-error';
-import { FormattingOption } from '../types';
+import { Options } from '../types';
+import {  } from '../types';
 import * as Formats from '../units/formats';
 import * as Millisecond from '../units/formats/millisecond';
 import DateTimeFormatPart = Intl.DateTimeFormatPart;
@@ -63,7 +64,7 @@ function getFormattedValue (key : string, formatted : DateTimeFormatPart[]) : st
     return formatted.find(item => item.type.toLowerCase() === type.toLowerCase()).value;
 }
 
-function getOptions (formats? : string[], timezone? : string) : FormattingOption {
+function getOptions (formats? : string[], timezone? : string) : Options {
     const options = formats && formats.length > 0
         ? Formats.options(formats)
         : {};

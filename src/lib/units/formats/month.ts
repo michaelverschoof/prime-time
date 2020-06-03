@@ -1,9 +1,9 @@
-import { FormattingOption, FormattingValues, Formats } from '../../types';
+import { FormattingValues, Formats } from '../../types';
 
-const fixed : FormattingOption = { month: FormattingValues.NUMERIC_FIXED };
-const flexible : FormattingOption = { month: FormattingValues.NUMERIC_FLEXIBLE };
-const long : FormattingOption = { month: FormattingValues.TEXTUAL_LONG };
-const short : FormattingOption = { month: FormattingValues.TEXTUAL_SHORT };
+const fixed = { month: FormattingValues.NUMERIC_FIXED };
+const flexible = { month: FormattingValues.NUMERIC_FLEXIBLE };
+const long = { month: FormattingValues.TEXTUAL_LONG };
+const short = { month: FormattingValues.TEXTUAL_SHORT };
 
 const formats : Formats = {
     'month': long,

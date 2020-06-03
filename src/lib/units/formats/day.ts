@@ -1,13 +1,13 @@
-import { FormattingOption, FormattingValues, Formats } from '../../types';
+import { FormattingValues, Formats } from '../../types';
 
-const fixed : FormattingOption = { day: FormattingValues.NUMERIC_FIXED };
-const flexible : FormattingOption = { day: FormattingValues.NUMERIC_FLEXIBLE };
+const fixed = { day: FormattingValues.NUMERIC_FIXED };
+const flexible = { day: FormattingValues.NUMERIC_FLEXIBLE };
 
-const long : FormattingOption = { weekday: FormattingValues.TEXTUAL_LONG };
-const short : FormattingOption = { weekday: FormattingValues.TEXTUAL_SHORT };
+const long = { weekday: FormattingValues.TEXTUAL_LONG };
+const short = { weekday: FormattingValues.TEXTUAL_SHORT };
 
-const hour12 : FormattingOption = { hour12: true };
-const hour24 : FormattingOption = { hour12: false };
+const hour12 = { hour12: true };
+const hour24 = { hour12: false };
 
 const formats : Formats = {
     'day': fixed,

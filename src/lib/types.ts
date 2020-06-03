@@ -7,10 +7,10 @@ export interface Timespan {
 }
 
 export interface Formats {
-    [key : string] : FormattingOption
+    [key : string] : Options
 }
 
-export interface FormattingOption {
+export interface Options {
     [key : string] : string | boolean | number
 }
 

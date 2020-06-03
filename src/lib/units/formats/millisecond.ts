@@ -1,6 +1,6 @@
-import { FormattingOption, Formats } from '../../types';
+import { Formats } from '../../types';
 
-const fixed : FormattingOption = { fractionalSecondDigits: 3 };
+const fixed = { fractionalSecondDigits: 3 };
 
 const formats : Formats = {
     'millisecond': fixed,
