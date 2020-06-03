@@ -1,6 +1,5 @@
 import PrimeError from '../../error/prime-error';
 import { Options } from '../types';
-import {  } from '../types';
 import * as Formats from '../units/formats';
 import * as Millisecond from '../units/formats/millisecond';
 import DateTimeFormatPart = Intl.DateTimeFormatPart;
