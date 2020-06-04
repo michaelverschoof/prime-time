@@ -2,8 +2,7 @@ import { Timespan, TimeUnit } from '../../types';
 
 const Hour : Timespan = {
 
-    name: TimeUnit.HOUR,
-    aliases: [ 'hours', 'hour' ],
+    aliases: [ TimeUnit.HOURS, TimeUnit.HOUR ],
     milliseconds: 3600000,
 
     parts (timestamp) {

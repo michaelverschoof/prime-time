@@ -1,6 +1,13 @@
 import PrimeError from '../src/error/prime-error';
-import { Timespans } from '../src/lib/units';
-import { primetime, PrimeTime } from '../src/prime-time';
+import PrimeTime from '../src/lib/prime-time';
+import Day from '../src/lib/units/timespans/day';
+import Hour from '../src/lib/units/timespans/hour';
+import Millisecond from '../src/lib/units/timespans/millisecond';
+import Minute from '../src/lib/units/timespans/minute';
+import Month from '../src/lib/units/timespans/month';
+import Second from '../src/lib/units/timespans/second';
+import Year from '../src/lib/units/timespans/year';
+import { primetime } from '../src/prime-time';
 
 /**
  * 1986-6-24 12:01:02.003 GMT
@@ -78,7 +85,7 @@ describe('Adding time', () => {
     });
 
     test('Milliseconds', () => {
-        let result = prime.add(5, Timespans.MILLISECOND).getTimestamp();
+        let result = prime.add(5, Millisecond).getTimestamp();
         expect(result).toEqual(timestamp + 5);
 
         result = prime.add(2, 'milliseconds').getTimestamp();
@@ -86,7 +93,7 @@ describe('Adding time', () => {
     });
 
     test('Days', () => {
-        let result = prime.add(5, Timespans.DAY).getTimestamp();
+        let result = prime.add(5, Day).getTimestamp();
         expect(result).toEqual(timestamp + 432000000);
 
         result = prime.add(2, 'days').getTimestamp();
@@ -107,7 +114,7 @@ describe('Subtracting time', () => {
     });
 
     test('Milliseconds', () => {
-        let result = prime.subtract(5, Timespans.MILLISECOND).getTimestamp();
+        let result = prime.subtract(5, Millisecond).getTimestamp();
         expect(result).toEqual(timestamp - 5);
 
         result = prime.subtract(2, 'milliseconds').getTimestamp();
@@ -115,7 +122,7 @@ describe('Subtracting time', () => {
     });
 
     test('Days', () => {
-        let result = prime.subtract(5, Timespans.DAY).getTimestamp();
+        let result = prime.subtract(5, Day).getTimestamp();
         expect(result).toEqual(timestamp - 432000000);
 
         result = prime.subtract(2, 'days').getTimestamp();
@@ -132,32 +139,32 @@ describe('Is after', () => {
     });
 
     test('Without equals', () => {
-        const compare = primetime(timestamp).add(2, Timespans.DAY);
+        const compare = primetime(timestamp).add(2, Day);
 
         let result = compare.after(prime);
         expect(result).toBe(true);
 
-        result = compare.after(prime, Timespans.MILLISECOND);
+        result = compare.after(prime, Millisecond);
         expect(result).toBe(true);
 
-        result = compare.after(prime, Timespans.DAY);
+        result = compare.after(prime, Day);
         expect(result).toBe(true);
 
-        result = compare.after(prime, Timespans.MONTH);
+        result = compare.after(prime, Month);
         expect(result).toBe(false);
     });
 
     test('With equals', () => {
         const compare = primetime(timestamp);
 
-        const result = compare.after(prime, Timespans.DAY, true);
+        const result = compare.after(prime, Day, true);
         expect(result).toBe(true);
     });
 
     test('Not after', () => {
-        const compare = primetime(timestamp).subtract(1, Timespans.DAY);
+        const compare = primetime(timestamp).subtract(1, Day);
 
-        const result = compare.after(prime, Timespans.DAY, true);
+        const result = compare.after(prime, Day, true);
         expect(result).toBe(false);
     });
 
@@ -171,32 +178,32 @@ describe('Is before', () => {
     });
 
     test('Without equals', () => {
-        const compare = primetime(timestamp).subtract(2, Timespans.DAY);
+        const compare = primetime(timestamp).subtract(2, Day);
 
         let result = compare.before(prime);
         expect(result).toBe(true);
 
-        result = compare.before(prime, Timespans.MILLISECOND);
+        result = compare.before(prime, Millisecond);
         expect(result).toBe(true);
 
-        result = compare.before(prime, Timespans.DAY);
+        result = compare.before(prime, Day);
         expect(result).toBe(true);
 
-        result = compare.before(prime, Timespans.MONTH);
+        result = compare.before(prime, Month);
         expect(result).toBe(false);
     });
 
     test('With equals', () => {
         const compare = primetime(timestamp);
 
-        const result = compare.before(prime, Timespans.DAY, true);
+        const result = compare.before(prime, Day, true);
         expect(result).toBe(true);
     });
 
     test('Not after', () => {
-        const compare = primetime(timestamp).add(1, Timespans.DAY);
+        const compare = primetime(timestamp).add(1, Day);
 
-        const result = compare.before(prime, Timespans.DAY, true);
+        const result = compare.before(prime, Day, true);
         expect(result).toBe(false);
     });
 
@@ -210,41 +217,41 @@ describe('Is between', () => {
     });
 
     test('Without equals', () => {
-        const from = primetime(timestamp).subtract(2, Timespans.DAY);
-        const to = primetime(timestamp).add(2, Timespans.DAY);
+        const from = primetime(timestamp).subtract(2, Day);
+        const to = primetime(timestamp).add(2, Day);
 
         let result = prime.between(from, to);
         expect(result).toBe(true);
 
-        result = prime.between(from, to, Timespans.MILLISECOND);
+        result = prime.between(from, to, Millisecond);
         expect(result).toBe(true);
 
-        result = prime.between(from, to, Timespans.DAY);
+        result = prime.between(from, to, Day);
         expect(result).toBe(true);
 
-        result = prime.between(from, to, Timespans.MONTH);
+        result = prime.between(from, to, Month);
         expect(result).toBe(false);
     });
 
     test('With equals', () => {
-        const from = primetime(timestamp).subtract(2, Timespans.DAY);
+        const from = primetime(timestamp).subtract(2, Day);
         const to = primetime(timestamp);
 
-        let result = prime.between(from, to, Timespans.MILLISECOND, true);
+        let result = prime.between(from, to, Millisecond, true);
         expect(result).toBe(true);
 
-        result = prime.between(from, to, Timespans.DAY, true);
+        result = prime.between(from, to, Day, true);
         expect(result).toBe(true);
     });
 
     test('Not between', () => {
-        const from = primetime(timestamp).add(1, Timespans.DAY);
-        const to = primetime(timestamp).add(2, Timespans.DAY);
+        const from = primetime(timestamp).add(1, Day);
+        const to = primetime(timestamp).add(2, Day);
 
         let result = prime.between(from, to);
         expect(result).toBe(false);
 
-        result = prime.between(from, to, Timespans.DAY, true);
+        result = prime.between(from, to, Day, true);
         expect(result).toBe(false);
     });
 
@@ -258,15 +265,15 @@ describe('Is equal', () => {
     });
 
     test('5 minute difference', () => {
-        const compare = primetime(timestamp).add(5, Timespans.MINUTE);
+        const compare = primetime(timestamp).add(5, Minute);
 
         let result = compare.equals(prime);
         expect(result).toBe(false);
 
-        result = compare.equals(prime, Timespans.MINUTE);
+        result = compare.equals(prime, Minute);
         expect(result).toBe(false);
 
-        result = compare.equals(prime, Timespans.DAY);
+        result = compare.equals(prime, Day);
         expect(result).toBe(true);
     });
 
@@ -280,32 +287,32 @@ describe('To timespan', () => {
     });
 
     test('Seconds', () => {
-        const result = prime.scale(Timespans.SECOND);
+        const result = prime.scale(Second);
         expect(result.getTimestamp()).toEqual(519998462000);
     });
 
     test('Minutes', () => {
-        const result = prime.scale(Timespans.MINUTE);
+        const result = prime.scale(Minute);
         expect(result.getTimestamp()).toEqual(519998460000);
     });
 
     test('Hours', () => {
-        const result = prime.scale(Timespans.HOUR);
+        const result = prime.scale(Hour);
         expect(result.getTimestamp()).toEqual(519998400000);
     });
 
     test('Days', () => {
-        const result = prime.scale(Timespans.DAY);
+        const result = prime.scale(Day);
         expect(result.getTimestamp()).toEqual(519955200000);
     });
 
     test('Months', () => {
-        const result = prime.scale(Timespans.MONTH);
+        const result = prime.scale(Month);
         expect(result.getTimestamp()).toEqual(517968000000);
     });
 
     test('Years', () => {
-        const result = prime.scale(Timespans.YEAR);
+        const result = prime.scale(Year);
         expect(result.getTimestamp()).toEqual(504921600000);
     });
 
@@ -324,37 +331,37 @@ describe('Clone', () => {
     });
 
     test('Milliseconds', () => {
-        const result = prime.clone(Timespans.MILLISECOND);
+        const result = prime.clone(Millisecond);
         expect(result).toEqual(prime);
     });
 
     test('Seconds', () => {
-        const result = prime.clone(Timespans.SECOND);
+        const result = prime.clone(Second);
         expect(result.getTimestamp()).toEqual(519998462000);
     });
 
     test('Minutes', () => {
-        const result = prime.clone(Timespans.MINUTE);
+        const result = prime.clone(Minute);
         expect(result.getTimestamp()).toEqual(519998460000);
     });
 
     test('Hours', () => {
-        const result = prime.clone(Timespans.HOUR);
+        const result = prime.clone(Hour);
         expect(result.getTimestamp()).toEqual(519998400000);
     });
 
     test('Days', () => {
-        const result = prime.clone(Timespans.DAY);
+        const result = prime.clone(Day);
         expect(result.getTimestamp()).toEqual(519955200000);
     });
 
     test('Months', () => {
-        const result = prime.clone(Timespans.MONTH);
+        const result = prime.clone(Month);
         expect(result.getTimestamp()).toEqual(517968000000);
     });
 
     test('Years', () => {
-        const result = prime.clone(Timespans.YEAR);
+        const result = prime.clone(Year);
         expect(result.getTimestamp()).toEqual(504921600000);
     });
 

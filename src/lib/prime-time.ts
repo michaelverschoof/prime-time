@@ -1,6 +1,6 @@
-import { Timestamps } from './calc';
+import * as Timestamps from './calc/timestamps';
 import * as Format from './format/format';
-import { timestamp as from } from './from/from';
+import * as From from './from/from';
 import { Timespan } from './types';
 
 export default class PrimeTime {
@@ -34,7 +34,7 @@ export default class PrimeTime {
 
     clone (timespan? : string | Timespan) : PrimeTime {
         const timestamp = timespan ? Timestamps.scale(this.timestamp, timespan) : this.timestamp;
-        return from(timestamp);
+        return From.timestamp(timestamp);
     }
 
     update (milliseconds : number) : PrimeTime {

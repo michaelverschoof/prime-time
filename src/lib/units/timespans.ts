@@ -24,8 +24,8 @@ function find (timespan? : string | Timespan) : Timespan {
     }
 
     if (typeof timespan === 'string') {
-        const alias = timespan.toLowerCase();
-        const found = Object.values(Timespans).find(item => item.aliases.includes(alias)) || null;
+        const search = timespan.toLowerCase();
+        const found = Object.values(Timespans).find(item => item.aliases.includes(search)) || null;
         if (found !== null) {
             return found;
         }
@@ -39,7 +39,4 @@ function find (timespan? : string | Timespan) : Timespan {
     throw new PrimeError('The provided unit (' + timespan + ') is not allowed');
 }
 
-export {
-    find,
-    Timespans
-};
+export { find };

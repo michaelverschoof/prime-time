@@ -1,71 +1,78 @@
 import PrimeError from '../../src/error/prime-error';
-import { find, Timespans } from '../../src/lib/units/timespans';
+import * as Timespans from '../../src/lib/units/timespans';
+import Day from '../../src/lib/units/timespans/day';
+import Hour from '../../src/lib/units/timespans/hour';
+import Millisecond from '../../src/lib/units/timespans/millisecond';
+import Minute from '../../src/lib/units/timespans/minute';
+import Month from '../../src/lib/units/timespans/month';
+import Second from '../../src/lib/units/timespans/second';
+import Year from '../../src/lib/units/timespans/year';
 
 describe('Find timespan', () => {
 
     test('Year', () => {
-        let result = find(Timespans.YEAR);
-        expect(result).toEqual(Timespans.YEAR);
+        let result = Timespans.find(Year);
+        expect(result).toEqual(Year);
 
-        result = find('year');
-        expect(result).toEqual(Timespans.YEAR);
+        result = Timespans.find('year');
+        expect(result).toEqual(Year);
     });
 
     test('Month', () => {
-        let result = find(Timespans.MONTH);
-        expect(result).toEqual(Timespans.MONTH);
+        let result = Timespans.find(Month);
+        expect(result).toEqual(Month);
 
-        result = find('month');
-        expect(result).toEqual(Timespans.MONTH);
+        result = Timespans.find('month');
+        expect(result).toEqual(Month);
     });
 
     test('Day', () => {
-        let result = find(Timespans.DAY);
-        expect(result).toEqual(Timespans.DAY);
+        let result = Timespans.find(Day);
+        expect(result).toEqual(Day);
 
-        result = find('day');
-        expect(result).toEqual(Timespans.DAY);
+        result = Timespans.find('day');
+        expect(result).toEqual(Day);
     });
 
     test('Hour', () => {
-        let result = find(Timespans.HOUR);
-        expect(result).toEqual(Timespans.HOUR);
+        let result = Timespans.find(Hour);
+        expect(result).toEqual(Hour);
 
-        result = find('hour');
-        expect(result).toEqual(Timespans.HOUR);
+        result = Timespans.find('hour');
+        expect(result).toEqual(Hour);
     });
 
     test('Minute', () => {
-        let result = find(Timespans.MINUTE);
-        expect(result).toEqual(Timespans.MINUTE);
+        let result = Timespans.find(Minute);
+        expect(result).toEqual(Minute);
 
-        result = find('minute');
-        expect(result).toEqual(Timespans.MINUTE);
+        result = Timespans.find('minute');
+        expect(result).toEqual(Minute);
     });
 
     test('Second', () => {
-        let result = find(Timespans.SECOND);
-        expect(result).toEqual(Timespans.SECOND);
+        let result = Timespans.find(Second);
+        expect(result).toEqual(Second);
 
-        result = find('second');
-        expect(result).toEqual(Timespans.SECOND);
+        result = Timespans.find('second');
+        expect(result).toEqual(Second);
     });
 
     test('Millisecond', () => {
-        let result = find(Timespans.MILLISECOND);
-        expect(result).toEqual(Timespans.MILLISECOND);
+        let result = Timespans.find(Millisecond);
+        expect(result).toEqual(Millisecond);
 
-        result = find('millisecond');
-        expect(result).toEqual(Timespans.MILLISECOND);
+        result = Timespans.find('millisecond');
+        expect(result).toEqual(Millisecond);
     });
 
     test('No value', () => {
-        const result = find();
-        expect(result).toEqual(Timespans.MILLISECOND);
+        const result = Timespans.find();
+        expect(result).toEqual(Millisecond);
     });
 
     test('Non-existent values', () => {
-        expect(() => find('non-existent value')).toThrowError(PrimeError);
+        expect(() => Timespans.find('non-existent value')).toThrowError(PrimeError);
     });
 
 });

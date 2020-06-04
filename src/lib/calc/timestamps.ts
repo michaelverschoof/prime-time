@@ -1,21 +1,21 @@
-import { Timespan } from '../types';
+import { Timespan, TimeUnit } from '../types';
+import * as Timespans from '../units/timespans';
 import * as Numbers from './numbers';
-import { find, Timespans } from '../units/timespans';
 
 function add (timestamp : number, amount : number, unit : string | Timespan) : number {
-    const addend = Numbers.multiply(amount, find(unit).milliseconds);
+    const addend = Numbers.multiply(amount, Timespans.find(unit).milliseconds);
     return Numbers.add(timestamp, addend);
 }
 
 function subtract (timestamp : number, amount : number, unit : string | Timespan) : number {
-    const subtrahend = Numbers.multiply(amount, find(unit).milliseconds);
+    const subtrahend = Numbers.multiply(amount, Timespans.find(unit).milliseconds);
     return Numbers.subtract(timestamp, subtrahend);
 }
 
 function difference (left : number, right : number, unit? : string | Timespan) : number {
-    const timespan = find(unit);
+    const timespan = Timespans.find(unit);
 
-    if (timespan === Timespans.MILLISECOND) {
+    if (timespan.aliases.includes(TimeUnit.MILLISECOND)) {
         return Numbers.difference(left, right);
     }
 
@@ -23,7 +23,7 @@ function difference (left : number, right : number, unit? : string | Timespan) :
 }
 
 function scale (timestamp : number, timespan : string | Timespan) : number {
-    const parts = find(timespan).parts(timestamp);
+    const parts = Timespans.find(timespan).parts(timestamp);
 
     // As ES6's Date.UTC() requires year and month, add it if it's not present
     if (parts.length === 1) {

@@ -2,8 +2,7 @@ import { Timespan, TimeUnit } from '../../types';
 
 const Month : Timespan = {
 
-    name: TimeUnit.MONTH,
-    aliases: [ 'months', 'month' ],
+    aliases: [ TimeUnit.MONTHS, TimeUnit.MONTH ],
     milliseconds: 2629746000,
 
     parts (timestamp) {

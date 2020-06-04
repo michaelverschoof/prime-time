@@ -1,5 +1,5 @@
 export interface Timespan {
-    readonly name : TimeUnit
+
     readonly aliases : string[]
     readonly milliseconds : number
 
@@ -22,11 +22,18 @@ export enum FormattingValues {
 }
 
 export enum TimeUnit {
+    MILLISECONDS = 'milliseconds',
     MILLISECOND = 'millisecond',
+    SECONDS = 'seconds',
     SECOND = 'second',
+    MINUTES = 'minutes',
     MINUTE = 'minute',
+    HOURS = 'hours',
     HOUR = 'hour',
+    DAYS = 'days',
     DAY = 'day',
+    MONTHS = 'months',
     MONTH = 'month',
+    YEARS = 'years',
     YEAR = 'year'
 }

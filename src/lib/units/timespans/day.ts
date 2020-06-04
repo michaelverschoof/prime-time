@@ -2,8 +2,7 @@ import { Timespan, TimeUnit } from '../../types';
 
 const Day : Timespan = {
 
-    name: TimeUnit.DAY,
-    aliases: [ 'days', 'day' ],
+    aliases: [ TimeUnit.DAYS, TimeUnit.DAY ],
     milliseconds: 86400000,
 
     parts (timestamp) {
