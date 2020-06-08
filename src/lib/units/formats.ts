@@ -1,5 +1,5 @@
 import PrimeError from '../../error/prime-error';
-import { Formats, Options } from '../types';
+import { Formats, FormattingOptions } from '../types';
 import * as Day from './formats/day';
 import * as Hour from './formats/hour';
 import * as Minute from './formats/minute';
@@ -20,7 +20,7 @@ const formats : Formats = {
     ...Timezone.formats
 };
 
-function findOption (key : string) : Options {
+function option (key : string) : FormattingOptions {
     const search = key.trim();
     if (search in formats) {
         return formats[search];
@@ -29,19 +29,19 @@ function findOption (key : string) : Options {
     throw new PrimeError('Format: "' + search + '" not found');
 }
 
-function findOptions (formats : string[]) : Options {
+function options (formats : string[]) : FormattingOptions {
     return formats.map(item => item.trim()).reduce(
-        (options : Options, item : string) => (
-            { ...options, ...findOption(item) }
+        (options : FormattingOptions, item : string) => (
+            { ...options, ...option(item) }
         ), {}
     );
 }
 
-function findType (key : string) : string {
-    return Object.keys(findOption(key))[0];
+function find (key : string) : string {
+    return Object.keys(option(key))[0];
 }
 
 export {
-    findOptions as options,
-    findType as type
+    options,
+    find
 };

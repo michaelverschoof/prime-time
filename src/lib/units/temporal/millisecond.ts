@@ -1,8 +1,8 @@
-import { Timespan, TimeUnit } from '../../types';
+import { Temporal, Timespan } from '../../types';
 
-const Millisecond : Timespan = {
+const Millisecond : Temporal = {
 
-    aliases: [ TimeUnit.MILLISECONDS, TimeUnit.MILLISECOND ],
+    aliases: [ Timespan.MILLISECONDS, Timespan.MILLISECOND ],
     milliseconds: 1,
 
     parts (timestamp) {

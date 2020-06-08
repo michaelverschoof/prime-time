@@ -1,27 +1,25 @@
-export interface Timespan {
-
+export interface Temporal {
     readonly aliases : string[]
     readonly milliseconds : number
-
     parts (timestamp : number) : number[]
 }
 
 export interface Formats {
-    [key : string] : Options
+    [key : string] : FormattingOptions
 }
 
-export interface Options {
+export interface FormattingOptions {
     [key : string] : string | boolean | number
 }
 
-export enum FormattingValues {
+export const enum FormattingValues {
     NUMERIC_FIXED = '2-digit',
     NUMERIC_FLEXIBLE = 'numeric',
     TEXTUAL_LONG = 'long',
     TEXTUAL_SHORT = 'short'
 }
 
-export enum TimeUnit {
+export enum Timespan {
     MILLISECONDS = 'milliseconds',
     MILLISECOND = 'millisecond',
     SECONDS = 'seconds',

@@ -1,11 +1,7 @@
 import PrimeError from '../../src/error/prime-error';
 import * as From from '../../src/lib/from/from';
 import PrimeTime from '../../src/lib/prime-time';
-
-/**
- * 1986-6-24 12:01:02.003 GMT
- */
-const timestamp : number = 519998462003;
+import { timestamp } from '../variables';
 
 const now = Date.now();
 
@@ -28,13 +24,13 @@ test('From PrimeTime', () => {
     expect(result).toEqual(prime);
 });
 
-test('From timestamp', () => {
-    const result = From.anything(prime.getTimestamp());
+test('From string', () => {
+    const result = From.anything('1986-6-24 12:01:02.003 GMT');
     expect(result).toEqual(prime);
 });
 
-test('From string', () => {
-    const result = From.anything('1986-6-24 12:01:02.003 GMT');
+test('From timestamp', () => {
+    const result = From.anything(prime.getTimestamp());
     expect(result).toEqual(prime);
 });
 

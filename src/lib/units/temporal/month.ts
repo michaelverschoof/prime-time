@@ -1,8 +1,8 @@
-import { Timespan, TimeUnit } from '../../types';
+import { Temporal, Timespan } from '../../types';
 
-const Month : Timespan = {
+const Month : Temporal = {
 
-    aliases: [ TimeUnit.MONTHS, TimeUnit.MONTH ],
+    aliases: [ Timespan.MONTHS, Timespan.MONTH ],
     milliseconds: 2629746000,
 
     parts (timestamp) {

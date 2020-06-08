@@ -1,18 +1,6 @@
 import PrimeError from '../../src/error/prime-error';
 import * as Format from '../../src/lib/format/format';
-
-/**
- * 1986-6-24 12:01:02.003 GMT
- */
-const timestamp : number = 519998462003;
-
-const US = 'en-us';
-const GB = 'en-gb';
-const NL = 'nl-nl';
-
-const NEW_YORK = 'America/New_York';
-const LONDON = 'Europe/London';
-const AMSTERDAM = 'Europe/Amsterdam';
+import { Locale, Location, timestamp } from '../variables';
 
 const FORMAT_LOCALISED_LONG = 'weekday, month-number-short, day, year, hour, minute, second, millisecond, timezone';
 const FORMAT_LOCALISED_SHORT = 'WDD, M, DD, YY, HH, mm, ss, ms, TZZ';
@@ -50,13 +38,13 @@ describe('Localise', () => {
     });
 
     test('Providing timestamp and locale', () => {
-        let result = Format.localise(timestamp, undefined, US);
+        let result = Format.localise(timestamp, undefined, Locale.US);
         expect(result).toBe(RESULT_SHORT_US);
 
-        result = Format.localise(timestamp, undefined, GB);
+        result = Format.localise(timestamp, undefined, Locale.GB);
         expect(result).toBe(RESULT_SHORT_GB);
 
-        result = Format.localise(timestamp, undefined, NL);
+        result = Format.localise(timestamp, undefined, Locale.NL);
         expect(result).toBe(RESULT_SHORT_NL);
 
         result = Format.localise(timestamp, undefined, 'non-existing-locale');
@@ -64,16 +52,16 @@ describe('Localise', () => {
     });
 
     test('Providing timestamp, locale and timezone', () => {
-        let result = Format.localise(timestamp, undefined, US, NEW_YORK);
+        let result = Format.localise(timestamp, undefined, Locale.US, Location.NEW_YORK);
         expect(result).toBe(RESULT_SHORT_US);
 
-        result = Format.localise(timestamp, undefined, GB, LONDON);
+        result = Format.localise(timestamp, undefined, Locale.GB, Location.LONDON);
         expect(result).toBe(RESULT_SHORT_GB);
 
-        result = Format.localise(timestamp, undefined, NL, AMSTERDAM);
+        result = Format.localise(timestamp, undefined, Locale.NL, Location.AMSTERDAM);
         expect(result).toBe(RESULT_SHORT_NL);
 
-        result = Format.localise(timestamp, undefined, 'non-existing-locale', NEW_YORK);
+        result = Format.localise(timestamp, undefined, 'non-existing-locale', Location.NEW_YORK);
         expect(result).toBe(RESULT_SHORT_US);
     });
 
@@ -89,73 +77,72 @@ describe('Localise', () => {
     });
 
     test('Providing timestamp, format and timezone', () => {
-        let result = Format.localise(timestamp, FORMAT_LOCALISED_LONG, undefined, NEW_YORK);
+        let result = Format.localise(timestamp, FORMAT_LOCALISED_LONG, undefined, Location.NEW_YORK);
         expect(result).toBe(RESULT_LOCALISED_NEW_YORK);
 
-        result = Format.localise(timestamp, FORMAT_LOCALISED_SHORT, undefined, NEW_YORK);
+        result = Format.localise(timestamp, FORMAT_LOCALISED_SHORT, undefined, Location.NEW_YORK);
         expect(result).toBe(RESULT_LOCALISED_NEW_YORK);
 
-        expect(() => Format.localise(timestamp, FORMAT_WRONG_LONG, undefined, NEW_YORK)).toThrowError(PrimeError);
-        expect(() => Format.localise(timestamp, FORMAT_WRONG_SHORT, undefined, NEW_YORK)).toThrowError(PrimeError);
+        expect(() => Format.localise(timestamp, FORMAT_WRONG_LONG, undefined, Location.NEW_YORK)).toThrowError(PrimeError);
+        expect(() => Format.localise(timestamp, FORMAT_WRONG_SHORT, undefined, Location.NEW_YORK)).toThrowError(PrimeError);
     });
 
     test('Providing timestamp, format and locale', () => {
-        let result = Format.localise(timestamp, FORMAT_LOCALISED_LONG, US);
+        let result = Format.localise(timestamp, FORMAT_LOCALISED_LONG, Locale.US);
         expect(result).toBe(RESULT_LOCALISED_US);
 
-        result = Format.localise(timestamp, FORMAT_LOCALISED_LONG.replace(', millisecond', ''), GB);
+        result = Format.localise(timestamp, FORMAT_LOCALISED_LONG.replace(', millisecond', ''), Locale.GB);
         expect(result).toBe(RESULT_LOCALISED_GB);
 
-        result = Format.localise(timestamp, FORMAT_LOCALISED_LONG, NL);
+        result = Format.localise(timestamp, FORMAT_LOCALISED_LONG, Locale.NL);
         expect(result).toBe(RESULT_LOCALISED_NL);
 
-        result = Format.localise(timestamp, FORMAT_LOCALISED_SHORT, US);
+        result = Format.localise(timestamp, FORMAT_LOCALISED_SHORT, Locale.US);
         expect(result).toBe(RESULT_LOCALISED_US);
 
-        result = Format.localise(timestamp, FORMAT_LOCALISED_SHORT.replace(', ms', ''), GB);
+        result = Format.localise(timestamp, FORMAT_LOCALISED_SHORT.replace(', ms', ''), Locale.GB);
         expect(result).toBe(RESULT_LOCALISED_GB);
 
-        result = Format.localise(timestamp, FORMAT_LOCALISED_SHORT, NL);
+        result = Format.localise(timestamp, FORMAT_LOCALISED_SHORT, Locale.NL);
         expect(result).toBe(RESULT_LOCALISED_NL);
 
-        result = Format.localise(timestamp, FORMAT_LOCALISED_LONG.replace(', second', ''), GB);
+        result = Format.localise(timestamp, FORMAT_LOCALISED_LONG.replace(', second', ''), Locale.GB);
         expect(result).toBe(RESULT_LOCALISED_GB.replace(':02', ''));
 
-        expect(() => Format.localise(timestamp, FORMAT_WRONG_LONG, US)).toThrowError(PrimeError);
-        expect(() => Format.localise(timestamp, FORMAT_WRONG_LONG, GB)).toThrowError(PrimeError);
-        expect(() => Format.localise(timestamp, FORMAT_WRONG_LONG, NL)).toThrowError(PrimeError);
-        expect(() => Format.localise(timestamp, FORMAT_WRONG_SHORT, US)).toThrowError(PrimeError);
-        expect(() => Format.localise(timestamp, FORMAT_WRONG_SHORT, GB)).toThrowError(PrimeError);
-        expect(() => Format.localise(timestamp, FORMAT_WRONG_SHORT, NL)).toThrowError(PrimeError);
+        expect(() => Format.localise(timestamp, FORMAT_WRONG_LONG, Locale.US)).toThrowError(PrimeError);
+        expect(() => Format.localise(timestamp, FORMAT_WRONG_LONG, Locale.GB)).toThrowError(PrimeError);
+        expect(() => Format.localise(timestamp, FORMAT_WRONG_LONG, Locale.NL)).toThrowError(PrimeError);
+        expect(() => Format.localise(timestamp, FORMAT_WRONG_SHORT, Locale.US)).toThrowError(PrimeError);
+        expect(() => Format.localise(timestamp, FORMAT_WRONG_SHORT, Locale.GB)).toThrowError(PrimeError);
+        expect(() => Format.localise(timestamp, FORMAT_WRONG_SHORT, Locale.NL)).toThrowError(PrimeError);
     });
 
     test('Providing timestamp, format, locale and timezone', () => {
-        let result = Format.localise(timestamp, FORMAT_LOCALISED_LONG, US, NEW_YORK);
+        let result = Format.localise(timestamp, FORMAT_LOCALISED_LONG, Locale.US, Location.NEW_YORK);
         expect(result).toBe(RESULT_LOCALISED_NEW_YORK);
 
-        result = Format.localise(timestamp, FORMAT_LOCALISED_LONG.replace(', millisecond', ''), GB, LONDON);
+        result = Format.localise(timestamp, FORMAT_LOCALISED_LONG.replace(', millisecond', ''), Locale.GB, Location.LONDON);
         expect(result).toBe(RESULT_LOCALISED_LONDON);
 
-        result = Format.localise(timestamp, FORMAT_LOCALISED_LONG, NL, AMSTERDAM);
+        result = Format.localise(timestamp, FORMAT_LOCALISED_LONG, Locale.NL, Location.AMSTERDAM);
         expect(result).toBe(RESULT_LOCALISED_AMSTERDAM);
 
-        result = Format.localise(timestamp, FORMAT_LOCALISED_SHORT, US, NEW_YORK);
+        result = Format.localise(timestamp, FORMAT_LOCALISED_SHORT, Locale.US, Location.NEW_YORK);
         expect(result).toBe(RESULT_LOCALISED_NEW_YORK);
 
-        result = Format.localise(timestamp, FORMAT_LOCALISED_SHORT.replace(', ms', ''), GB, LONDON);
+        result = Format.localise(timestamp, FORMAT_LOCALISED_SHORT.replace(', ms', ''), Locale.GB, Location.LONDON);
         expect(result).toBe(RESULT_LOCALISED_LONDON);
 
-        result = Format.localise(timestamp, FORMAT_LOCALISED_SHORT, NL, AMSTERDAM);
+        result = Format.localise(timestamp, FORMAT_LOCALISED_SHORT, Locale.NL, Location.AMSTERDAM);
         expect(result).toBe(RESULT_LOCALISED_AMSTERDAM);
 
-        expect(() => Format.localise(timestamp, FORMAT_WRONG_LONG, US, NEW_YORK)).toThrowError(PrimeError);
-        expect(() => Format.localise(timestamp, FORMAT_WRONG_LONG, GB, LONDON)).toThrowError(PrimeError);
-        expect(() => Format.localise(timestamp, FORMAT_WRONG_LONG, NL, AMSTERDAM)).toThrowError(PrimeError);
-        expect(() => Format.localise(timestamp, FORMAT_WRONG_SHORT, US, NEW_YORK)).toThrowError(PrimeError);
-        expect(() => Format.localise(timestamp, FORMAT_WRONG_SHORT, GB, LONDON)).toThrowError(PrimeError);
-        expect(() => Format.localise(timestamp, FORMAT_WRONG_SHORT, NL, AMSTERDAM)).toThrowError(PrimeError);
+        expect(() => Format.localise(timestamp, FORMAT_WRONG_LONG, Locale.US, Location.NEW_YORK)).toThrowError(PrimeError);
+        expect(() => Format.localise(timestamp, FORMAT_WRONG_LONG, Locale.GB, Location.LONDON)).toThrowError(PrimeError);
+        expect(() => Format.localise(timestamp, FORMAT_WRONG_LONG, Locale.NL, Location.AMSTERDAM)).toThrowError(PrimeError);
+        expect(() => Format.localise(timestamp, FORMAT_WRONG_SHORT, Locale.US, Location.NEW_YORK)).toThrowError(PrimeError);
+        expect(() => Format.localise(timestamp, FORMAT_WRONG_SHORT, Locale.GB, Location.LONDON)).toThrowError(PrimeError);
+        expect(() => Format.localise(timestamp, FORMAT_WRONG_SHORT, Locale.NL, Location.AMSTERDAM)).toThrowError(PrimeError);
     });
-
 });
 
 describe('Customise', () => {
@@ -172,10 +159,10 @@ describe('Customise', () => {
     });
 
     test('Providing timestamp, format and timezone', () => {
-        let result = Format.customise(timestamp, FORMAT_CUSTOMISED_LONG, undefined, NEW_YORK);
+        let result = Format.customise(timestamp, FORMAT_CUSTOMISED_LONG, undefined, Location.NEW_YORK);
         expect(result).toBe(RESULT_CUSTOMISED_NEW_YORK);
 
-        result = Format.customise(timestamp, FORMAT_CUSTOMISED_SHORT, undefined, NEW_YORK);
+        result = Format.customise(timestamp, FORMAT_CUSTOMISED_SHORT, undefined, Location.NEW_YORK);
         expect(result).toBe(RESULT_CUSTOMISED_NEW_YORK);
 
         expect(() => Format.customise(timestamp, FORMAT_WRONG_LONG)).toThrowError(PrimeError);
@@ -183,59 +170,58 @@ describe('Customise', () => {
     });
 
     test('Providing timestamp, format and locale', () => {
-        let result = Format.customise(timestamp, FORMAT_CUSTOMISED_LONG, US);
+        let result = Format.customise(timestamp, FORMAT_CUSTOMISED_LONG, Locale.US);
         expect(result).toBe(RESULT_CUSTOMISED_US);
 
-        result = Format.customise(timestamp, FORMAT_CUSTOMISED_LONG.replace('.{millisecond}', ''), GB);
+        result = Format.customise(timestamp, FORMAT_CUSTOMISED_LONG.replace('.{millisecond}', ''), Locale.GB);
         expect(result).toBe(RESULT_CUSTOMISED_GB);
 
-        result = Format.customise(timestamp, FORMAT_CUSTOMISED_LONG.replace('{AMPM}', ''), NL);
+        result = Format.customise(timestamp, FORMAT_CUSTOMISED_LONG.replace('{AMPM}', ''), Locale.NL);
         expect(result).toBe(RESULT_CUSTOMISED_NL);
 
-        result = Format.customise(timestamp, FORMAT_CUSTOMISED_SHORT, US);
+        result = Format.customise(timestamp, FORMAT_CUSTOMISED_SHORT, Locale.US);
         expect(result).toBe(RESULT_CUSTOMISED_US);
 
-        result = Format.customise(timestamp, FORMAT_CUSTOMISED_SHORT.replace('.{ms}', ''), GB);
+        result = Format.customise(timestamp, FORMAT_CUSTOMISED_SHORT.replace('.{ms}', ''), Locale.GB);
         expect(result).toBe(RESULT_CUSTOMISED_GB);
 
-        result = Format.customise(timestamp, FORMAT_CUSTOMISED_SHORT.replace('{AMPM}', ''), NL);
+        result = Format.customise(timestamp, FORMAT_CUSTOMISED_SHORT.replace('{AMPM}', ''), Locale.NL);
         expect(result).toBe(RESULT_CUSTOMISED_NL);
 
-        expect(() => Format.customise(timestamp, FORMAT_WRONG_LONG, US)).toThrowError(PrimeError);
-        expect(() => Format.customise(timestamp, FORMAT_WRONG_LONG, GB)).toThrowError(PrimeError);
-        expect(() => Format.customise(timestamp, FORMAT_WRONG_LONG, NL)).toThrowError(PrimeError);
-        expect(() => Format.customise(timestamp, FORMAT_WRONG_SHORT, US)).toThrowError(PrimeError);
-        expect(() => Format.customise(timestamp, FORMAT_WRONG_SHORT, GB)).toThrowError(PrimeError);
-        expect(() => Format.customise(timestamp, FORMAT_WRONG_SHORT, NL)).toThrowError(PrimeError);
+        expect(() => Format.customise(timestamp, FORMAT_WRONG_LONG, Locale.US)).toThrowError(PrimeError);
+        expect(() => Format.customise(timestamp, FORMAT_WRONG_LONG, Locale.GB)).toThrowError(PrimeError);
+        expect(() => Format.customise(timestamp, FORMAT_WRONG_LONG, Locale.NL)).toThrowError(PrimeError);
+        expect(() => Format.customise(timestamp, FORMAT_WRONG_SHORT, Locale.US)).toThrowError(PrimeError);
+        expect(() => Format.customise(timestamp, FORMAT_WRONG_SHORT, Locale.GB)).toThrowError(PrimeError);
+        expect(() => Format.customise(timestamp, FORMAT_WRONG_SHORT, Locale.NL)).toThrowError(PrimeError);
     });
 
     test('Providing timestamp, format, locale and timezone', () => {
-        let result = Format.customise(timestamp, FORMAT_CUSTOMISED_LONG, US, NEW_YORK);
+        let result = Format.customise(timestamp, FORMAT_CUSTOMISED_LONG, Locale.US, Location.NEW_YORK);
         expect(result).toBe(RESULT_CUSTOMISED_NEW_YORK);
 
-        result = Format.customise(timestamp, FORMAT_CUSTOMISED_LONG.replace('.{millisecond}', ''), GB, LONDON);
+        result = Format.customise(timestamp, FORMAT_CUSTOMISED_LONG.replace('.{millisecond}', ''), Locale.GB, Location.LONDON);
         expect(result).toBe(RESULT_CUSTOMISED_LONDON);
 
-        result = Format.customise(timestamp, FORMAT_CUSTOMISED_LONG.replace('{AMPM}', ''), NL, AMSTERDAM);
+        result = Format.customise(timestamp, FORMAT_CUSTOMISED_LONG.replace('{AMPM}', ''), Locale.NL, Location.AMSTERDAM);
         expect(result).toBe(RESULT_CUSTOMISED_AMSTERDAM);
 
-        result = Format.customise(timestamp, FORMAT_CUSTOMISED_SHORT, US, NEW_YORK);
+        result = Format.customise(timestamp, FORMAT_CUSTOMISED_SHORT, Locale.US, Location.NEW_YORK);
         expect(result).toBe(RESULT_CUSTOMISED_NEW_YORK);
 
-        result = Format.customise(timestamp, FORMAT_CUSTOMISED_SHORT.replace('.{ms}', ''), GB, LONDON);
+        result = Format.customise(timestamp, FORMAT_CUSTOMISED_SHORT.replace('.{ms}', ''), Locale.GB, Location.LONDON);
         expect(result).toBe(RESULT_CUSTOMISED_LONDON);
 
-        result = Format.customise(timestamp, FORMAT_CUSTOMISED_SHORT.replace('{AMPM}', ''), NL, AMSTERDAM);
+        result = Format.customise(timestamp, FORMAT_CUSTOMISED_SHORT.replace('{AMPM}', ''), Locale.NL, Location.AMSTERDAM);
         expect(result).toBe(RESULT_CUSTOMISED_AMSTERDAM);
 
-        expect(() => Format.customise(timestamp, FORMAT_WRONG_LONG, US, NEW_YORK)).toThrowError(PrimeError);
-        expect(() => Format.customise(timestamp, FORMAT_WRONG_LONG, GB, LONDON)).toThrowError(PrimeError);
-        expect(() => Format.customise(timestamp, FORMAT_WRONG_LONG, NL, AMSTERDAM)).toThrowError(PrimeError);
-        expect(() => Format.customise(timestamp, FORMAT_WRONG_SHORT, US, NEW_YORK)).toThrowError(PrimeError);
-        expect(() => Format.customise(timestamp, FORMAT_WRONG_SHORT, GB, LONDON)).toThrowError(PrimeError);
-        expect(() => Format.customise(timestamp, FORMAT_WRONG_SHORT, NL, AMSTERDAM)).toThrowError(PrimeError);
+        expect(() => Format.customise(timestamp, FORMAT_WRONG_LONG, Locale.US, Location.NEW_YORK)).toThrowError(PrimeError);
+        expect(() => Format.customise(timestamp, FORMAT_WRONG_LONG, Locale.GB, Location.LONDON)).toThrowError(PrimeError);
+        expect(() => Format.customise(timestamp, FORMAT_WRONG_LONG, Locale.NL, Location.AMSTERDAM)).toThrowError(PrimeError);
+        expect(() => Format.customise(timestamp, FORMAT_WRONG_SHORT, Locale.US, Location.NEW_YORK)).toThrowError(PrimeError);
+        expect(() => Format.customise(timestamp, FORMAT_WRONG_SHORT, Locale.GB, Location.LONDON)).toThrowError(PrimeError);
+        expect(() => Format.customise(timestamp, FORMAT_WRONG_SHORT, Locale.NL, Location.AMSTERDAM)).toThrowError(PrimeError);
     });
-
 });
 
 describe('Format', () => {
@@ -263,30 +249,30 @@ describe('Format', () => {
     });
 
     test('Providing timestamp, format and timezone', () => {
-        let result = Format.format(timestamp, FORMAT_LOCALISED_LONG, undefined, NEW_YORK);
+        let result = Format.format(timestamp, FORMAT_LOCALISED_LONG, undefined, Location.NEW_YORK);
         expect(result).toBe(RESULT_LOCALISED_NEW_YORK);
 
-        result = Format.format(timestamp, FORMAT_LOCALISED_SHORT, undefined, NEW_YORK);
+        result = Format.format(timestamp, FORMAT_LOCALISED_SHORT, undefined, Location.NEW_YORK);
         expect(result).toBe(RESULT_LOCALISED_NEW_YORK);
 
-        result = Format.format(timestamp, FORMAT_CUSTOMISED_LONG, undefined, NEW_YORK);
+        result = Format.format(timestamp, FORMAT_CUSTOMISED_LONG, undefined, Location.NEW_YORK);
         expect(result).toBe(RESULT_CUSTOMISED_NEW_YORK);
 
-        result = Format.format(timestamp, FORMAT_CUSTOMISED_SHORT, undefined, NEW_YORK);
+        result = Format.format(timestamp, FORMAT_CUSTOMISED_SHORT, undefined, Location.NEW_YORK);
         expect(result).toBe(RESULT_CUSTOMISED_NEW_YORK);
 
-        expect(() => Format.customise(timestamp, FORMAT_WRONG_LONG, undefined, NEW_YORK)).toThrowError(PrimeError);
-        expect(() => Format.customise(timestamp, FORMAT_WRONG_SHORT, undefined, NEW_YORK)).toThrowError(PrimeError);
+        expect(() => Format.customise(timestamp, FORMAT_WRONG_LONG, undefined, Location.NEW_YORK)).toThrowError(PrimeError);
+        expect(() => Format.customise(timestamp, FORMAT_WRONG_SHORT, undefined, Location.NEW_YORK)).toThrowError(PrimeError);
     });
 
     test('Providing timestamp and locale', () => {
-        let result = Format.format(timestamp, undefined, US);
+        let result = Format.format(timestamp, undefined, Locale.US);
         expect(result).toBe(RESULT_SHORT_US);
 
-        result = Format.format(timestamp, undefined, GB);
+        result = Format.format(timestamp, undefined, Locale.GB);
         expect(result).toBe(RESULT_SHORT_GB);
 
-        result = Format.format(timestamp, undefined, NL);
+        result = Format.format(timestamp, undefined, Locale.NL);
         expect(result).toBe(RESULT_SHORT_NL);
 
         result = Format.format(timestamp, undefined, 'wrong-locale');
@@ -294,106 +280,106 @@ describe('Format', () => {
     });
 
     test('Providing timestamp, locale and timezone', () => {
-        let result = Format.format(timestamp, undefined, US, NEW_YORK);
+        let result = Format.format(timestamp, undefined, Locale.US, Location.NEW_YORK);
         expect(result).toBe(RESULT_SHORT_US);
 
-        result = Format.format(timestamp, undefined, GB, LONDON);
+        result = Format.format(timestamp, undefined, Locale.GB, Location.LONDON);
         expect(result).toBe(RESULT_SHORT_GB);
 
-        result = Format.format(timestamp, undefined, NL, AMSTERDAM);
+        result = Format.format(timestamp, undefined, Locale.NL, Location.AMSTERDAM);
         expect(result).toBe(RESULT_SHORT_NL);
 
-        result = Format.format(timestamp, undefined, 'wrong-locale', NEW_YORK);
+        result = Format.format(timestamp, undefined, 'wrong-locale', Location.NEW_YORK);
         expect(result).toBe(RESULT_SHORT_US);
     });
 
     test('Providing timestamp, format and locale', () => {
-        let result = Format.format(timestamp, FORMAT_LOCALISED_LONG, US);
+        let result = Format.format(timestamp, FORMAT_LOCALISED_LONG, Locale.US);
         expect(result).toBe(RESULT_LOCALISED_US);
 
-        result = Format.format(timestamp, FORMAT_LOCALISED_LONG.replace(', millisecond', ''), GB);
+        result = Format.format(timestamp, FORMAT_LOCALISED_LONG.replace(', millisecond', ''), Locale.GB);
         expect(result).toBe(RESULT_LOCALISED_GB);
 
-        result = Format.format(timestamp, FORMAT_LOCALISED_LONG, NL);
+        result = Format.format(timestamp, FORMAT_LOCALISED_LONG, Locale.NL);
         expect(result).toBe(RESULT_LOCALISED_NL);
 
-        result = Format.format(timestamp, FORMAT_LOCALISED_SHORT, US);
+        result = Format.format(timestamp, FORMAT_LOCALISED_SHORT, Locale.US);
         expect(result).toBe(RESULT_LOCALISED_US);
 
-        result = Format.format(timestamp, FORMAT_LOCALISED_SHORT.replace(', ms', ''), GB);
+        result = Format.format(timestamp, FORMAT_LOCALISED_SHORT.replace(', ms', ''), Locale.GB);
         expect(result).toBe(RESULT_LOCALISED_GB);
 
-        result = Format.format(timestamp, FORMAT_LOCALISED_SHORT, NL);
+        result = Format.format(timestamp, FORMAT_LOCALISED_SHORT, Locale.NL);
         expect(result).toBe(RESULT_LOCALISED_NL);
 
-        result = Format.format(timestamp, FORMAT_CUSTOMISED_LONG, US);
+        result = Format.format(timestamp, FORMAT_CUSTOMISED_LONG, Locale.US);
         expect(result).toBe(RESULT_CUSTOMISED_US);
 
-        result = Format.format(timestamp, FORMAT_CUSTOMISED_LONG.replace('.{millisecond}', ''), GB);
+        result = Format.format(timestamp, FORMAT_CUSTOMISED_LONG.replace('.{millisecond}', ''), Locale.GB);
         expect(result).toBe(RESULT_CUSTOMISED_GB);
 
-        result = Format.format(timestamp, FORMAT_CUSTOMISED_LONG.replace('{AMPM}', ''), NL);
+        result = Format.format(timestamp, FORMAT_CUSTOMISED_LONG.replace('{AMPM}', ''), Locale.NL);
         expect(result).toBe(RESULT_CUSTOMISED_NL);
 
-        result = Format.format(timestamp, FORMAT_CUSTOMISED_SHORT, US);
+        result = Format.format(timestamp, FORMAT_CUSTOMISED_SHORT, Locale.US);
         expect(result).toBe(RESULT_CUSTOMISED_US);
 
-        result = Format.format(timestamp, FORMAT_CUSTOMISED_SHORT.replace('.{ms}', ''), GB);
+        result = Format.format(timestamp, FORMAT_CUSTOMISED_SHORT.replace('.{ms}', ''), Locale.GB);
         expect(result).toBe(RESULT_CUSTOMISED_GB);
 
-        result = Format.format(timestamp, FORMAT_CUSTOMISED_SHORT.replace('{AMPM}', ''), NL);
+        result = Format.format(timestamp, FORMAT_CUSTOMISED_SHORT.replace('{AMPM}', ''), Locale.NL);
         expect(result).toBe(RESULT_CUSTOMISED_NL);
 
-        expect(() => Format.format(timestamp, FORMAT_WRONG_LONG, US)).toThrowError(PrimeError);
-        expect(() => Format.format(timestamp, FORMAT_WRONG_LONG, GB)).toThrowError(PrimeError);
-        expect(() => Format.format(timestamp, FORMAT_WRONG_LONG, NL)).toThrowError(PrimeError);
-        expect(() => Format.format(timestamp, FORMAT_WRONG_SHORT, US)).toThrowError(PrimeError);
-        expect(() => Format.format(timestamp, FORMAT_WRONG_SHORT, GB)).toThrowError(PrimeError);
-        expect(() => Format.format(timestamp, FORMAT_WRONG_SHORT, NL)).toThrowError(PrimeError);
+        expect(() => Format.format(timestamp, FORMAT_WRONG_LONG, Locale.US)).toThrowError(PrimeError);
+        expect(() => Format.format(timestamp, FORMAT_WRONG_LONG, Locale.GB)).toThrowError(PrimeError);
+        expect(() => Format.format(timestamp, FORMAT_WRONG_LONG, Locale.NL)).toThrowError(PrimeError);
+        expect(() => Format.format(timestamp, FORMAT_WRONG_SHORT, Locale.US)).toThrowError(PrimeError);
+        expect(() => Format.format(timestamp, FORMAT_WRONG_SHORT, Locale.GB)).toThrowError(PrimeError);
+        expect(() => Format.format(timestamp, FORMAT_WRONG_SHORT, Locale.NL)).toThrowError(PrimeError);
     });
 
     test('Providing timestamp, format, locale and timezone', () => {
-        let result = Format.format(timestamp, FORMAT_LOCALISED_LONG, US, NEW_YORK);
+        let result = Format.format(timestamp, FORMAT_LOCALISED_LONG, Locale.US, Location.NEW_YORK);
         expect(result).toBe(RESULT_LOCALISED_NEW_YORK);
 
-        result = Format.format(timestamp, FORMAT_LOCALISED_LONG.replace(', millisecond', ''), GB, LONDON);
+        result = Format.format(timestamp, FORMAT_LOCALISED_LONG.replace(', millisecond', ''), Locale.GB, Location.LONDON);
         expect(result).toBe(RESULT_LOCALISED_LONDON);
 
-        result = Format.format(timestamp, FORMAT_LOCALISED_LONG.replace('{AMPM}', ''), NL, AMSTERDAM);
+        result = Format.format(timestamp, FORMAT_LOCALISED_LONG.replace('{AMPM}', ''), Locale.NL, Location.AMSTERDAM);
         expect(result).toBe(RESULT_LOCALISED_AMSTERDAM);
 
-        result = Format.format(timestamp, FORMAT_LOCALISED_SHORT, US, NEW_YORK);
+        result = Format.format(timestamp, FORMAT_LOCALISED_SHORT, Locale.US, Location.NEW_YORK);
         expect(result).toBe(RESULT_LOCALISED_NEW_YORK);
 
-        result = Format.format(timestamp, FORMAT_LOCALISED_SHORT.replace(', ms', ''), GB, LONDON);
+        result = Format.format(timestamp, FORMAT_LOCALISED_SHORT.replace(', ms', ''), Locale.GB, Location.LONDON);
         expect(result).toBe(RESULT_LOCALISED_LONDON);
 
-        result = Format.format(timestamp, FORMAT_LOCALISED_SHORT.replace('{AMPM}', ''), NL, AMSTERDAM);
+        result = Format.format(timestamp, FORMAT_LOCALISED_SHORT.replace('{AMPM}', ''), Locale.NL, Location.AMSTERDAM);
         expect(result).toBe(RESULT_LOCALISED_AMSTERDAM);
 
-        result = Format.format(timestamp, FORMAT_CUSTOMISED_LONG, US, NEW_YORK);
+        result = Format.format(timestamp, FORMAT_CUSTOMISED_LONG, Locale.US, Location.NEW_YORK);
         expect(result).toBe(RESULT_CUSTOMISED_NEW_YORK);
 
-        result = Format.format(timestamp, FORMAT_CUSTOMISED_LONG.replace('.{millisecond}', ''), GB, LONDON);
+        result = Format.format(timestamp, FORMAT_CUSTOMISED_LONG.replace('.{millisecond}', ''), Locale.GB, Location.LONDON);
         expect(result).toBe(RESULT_CUSTOMISED_LONDON);
 
-        result = Format.format(timestamp, FORMAT_CUSTOMISED_LONG.replace('{AMPM}', ''), NL, AMSTERDAM);
+        result = Format.format(timestamp, FORMAT_CUSTOMISED_LONG.replace('{AMPM}', ''), Locale.NL, Location.AMSTERDAM);
         expect(result).toBe(RESULT_CUSTOMISED_AMSTERDAM);
 
-        result = Format.format(timestamp, FORMAT_CUSTOMISED_SHORT, US, NEW_YORK);
+        result = Format.format(timestamp, FORMAT_CUSTOMISED_SHORT, Locale.US, Location.NEW_YORK);
         expect(result).toBe(RESULT_CUSTOMISED_NEW_YORK);
 
-        result = Format.format(timestamp, FORMAT_CUSTOMISED_SHORT.replace('.{ms}', ''), GB, LONDON);
+        result = Format.format(timestamp, FORMAT_CUSTOMISED_SHORT.replace('.{ms}', ''), Locale.GB, Location.LONDON);
         expect(result).toBe(RESULT_CUSTOMISED_LONDON);
 
-        result = Format.format(timestamp, FORMAT_CUSTOMISED_SHORT.replace('{AMPM}', ''), NL, AMSTERDAM);
+        result = Format.format(timestamp, FORMAT_CUSTOMISED_SHORT.replace('{AMPM}', ''), Locale.NL, Location.AMSTERDAM);
         expect(result).toBe(RESULT_CUSTOMISED_AMSTERDAM);
 
-        expect(() => Format.format(timestamp, FORMAT_WRONG_LONG, US, NEW_YORK)).toThrowError(PrimeError);
-        expect(() => Format.format(timestamp, FORMAT_WRONG_LONG, GB, LONDON)).toThrowError(PrimeError);
-        expect(() => Format.format(timestamp, FORMAT_WRONG_LONG, NL, AMSTERDAM)).toThrowError(PrimeError);
-        expect(() => Format.format(timestamp, FORMAT_WRONG_SHORT, US, NEW_YORK)).toThrowError(PrimeError);
-        expect(() => Format.format(timestamp, FORMAT_WRONG_SHORT, GB, LONDON)).toThrowError(PrimeError);
-        expect(() => Format.format(timestamp, FORMAT_WRONG_SHORT, NL, AMSTERDAM)).toThrowError(PrimeError);
+        expect(() => Format.format(timestamp, FORMAT_WRONG_LONG, Locale.US, Location.NEW_YORK)).toThrowError(PrimeError);
+        expect(() => Format.format(timestamp, FORMAT_WRONG_LONG, Locale.GB, Location.LONDON)).toThrowError(PrimeError);
+        expect(() => Format.format(timestamp, FORMAT_WRONG_LONG, Locale.NL, Location.AMSTERDAM)).toThrowError(PrimeError);
+        expect(() => Format.format(timestamp, FORMAT_WRONG_SHORT, Locale.US, Location.NEW_YORK)).toThrowError(PrimeError);
+        expect(() => Format.format(timestamp, FORMAT_WRONG_SHORT, Locale.GB, Location.LONDON)).toThrowError(PrimeError);
+        expect(() => Format.format(timestamp, FORMAT_WRONG_SHORT, Locale.NL, Location.AMSTERDAM)).toThrowError(PrimeError);
     });
 });

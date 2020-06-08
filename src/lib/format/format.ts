@@ -1,5 +1,5 @@
 import PrimeError from '../../error/prime-error';
-import { Options } from '../types';
+import { FormattingOptions } from '../types';
 import * as Formats from '../units/formats';
 import * as Millisecond from '../units/formats/millisecond';
 import DateTimeFormatPart = Intl.DateTimeFormatPart;
@@ -56,14 +56,14 @@ function customise (timestamp : number, format : string, locale? : string, timez
 }
 
 function getFormattedValue (key : string, formatted : DateTimeFormatPart[]) : string {
-    const optionType = Formats.type(key.slice(1, -1));
+    const optionType = Formats.find(key.slice(1, -1));
     const type = optionType === 'hour12' ? 'dayPeriod' : optionType;
 
     // @ts-ignore
     return formatted.find(item => item.type.toLowerCase() === type.toLowerCase()).value;
 }
 
-function getOptions (formats? : string[], timezone? : string) : Options {
+function getOptions (formats? : string[], timezone? : string) : FormattingOptions {
     const options = formats && formats.length > 0
         ? Formats.options(formats)
         : {};

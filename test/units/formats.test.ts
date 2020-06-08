@@ -1,23 +1,22 @@
 import PrimeError from '../../src/error/prime-error';
-import { options, type } from '../../src/lib/units/formats';
+import { options, find } from '../../src/lib/units/formats';
 
 describe('Timespan', () => {
 
     test('Year', () => {
-        let result = type('year');
+        let result = find('year');
         expect(result).toEqual('year');
 
-        result = type('year-long');
+        result = find('year-long');
         expect(result).toEqual('year');
 
-        result = type('year-short');
+        result = find('year-short');
         expect(result).toEqual('year');
     });
 
     test('Non-existent values', () => {
-        expect(() => type('non-existent value')).toThrowError(PrimeError);
+        expect(() => find('non-existent value')).toThrowError(PrimeError);
     });
-
 });
 
 describe('Options', () => {
@@ -31,5 +30,4 @@ describe('Options', () => {
         let result = options([ 'YY', 'MM', 'DD' ]);
         expect(result).toEqual({ year: 'numeric', month: '2-digit', day: '2-digit' });
     });
-
 });

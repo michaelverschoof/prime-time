@@ -21,7 +21,6 @@ describe('Additions', () => {
         const result = add(-5, 2);
         expect(result).toBe(-3);
     });
-
 });
 
 describe('Subtractions', () => {
@@ -45,7 +44,6 @@ describe('Subtractions', () => {
         const result = subtract(-5, 2);
         expect(result).toBe(-7);
     });
-
 });
 
 describe('Multiplications', () => {
@@ -69,7 +67,6 @@ describe('Multiplications', () => {
         const result = multiply(-5, 2);
         expect(result).toBe(-10);
     });
-
 });
 
 describe('Divisions', () => {
@@ -93,7 +90,6 @@ describe('Divisions', () => {
         const result = divide(-5, 2);
         expect(result).toBe(-2.5);
     });
-
 });
 
 describe('Differences', () => {
@@ -139,7 +135,6 @@ describe('Differences', () => {
             const result = difference(2, -5);
             expect(result).toBe(-7);
         });
-
     });
 
     describe('With divisor', () => {
@@ -183,7 +178,5 @@ describe('Differences', () => {
             const result = difference(2, -5, 5);
             expect(result).toBe(-1);
         });
-
     });
-
 });

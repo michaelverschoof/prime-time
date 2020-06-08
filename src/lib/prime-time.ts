@@ -33,7 +33,10 @@ export default class PrimeTime {
     }
 
     clone (timespan? : string | Timespan) : PrimeTime {
-        const timestamp = timespan ? Timestamps.scale(this.timestamp, timespan) : this.timestamp;
+        const timestamp = timespan
+            ? Timestamps.scale(this.timestamp, timespan)
+            : this.timestamp;
+
         return From.timestamp(timestamp);
     }
 
@@ -56,7 +59,7 @@ export default class PrimeTime {
         return this.difference(other, timespan) >= (inclusivity ? 0 : 1);
     }
 
-    between (from : PrimeTime, to : PrimeTime, timespan ? : string | Timespan, inclusivity ? : boolean) : boolean {
+    between (from : PrimeTime, to : PrimeTime, timespan? : string | Timespan, inclusivity? : boolean) : boolean {
         return this.after(from, timespan, inclusivity) && this.before(to, timespan, inclusivity);
     }
 
