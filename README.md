@@ -75,7 +75,7 @@ This song is one of my personal favorites and its name fits this project quite w
 
 [npm]: https://www.npmjs.com/package/prime-time
 [alan-parsons-project]: https://www.the-alan-parsons-project.com/
-[ammonia-avenue]: https://www.the-alan-parsons-project.com/
+[ammonia-avenue]: https://www.the-alan-parsons-project.com/ammonia-avenue
 [youtube-video]: https://www.youtube.com/watch?v=P6NNJq0FZN4
 
 [license-image]: http://img.shields.io/badge/license-MIT-blue.svg?style=flat

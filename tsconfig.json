@@ -1,24 +1,24 @@
 {
-  "compilerOptions": {
-    "strict": true,
-    "rootDir": "./",
-    "declaration": true,
-    "lib": [
-      "es2017",
-      "es7",
-      "dom"
+    "compilerOptions": {
+        "strict": true,
+        "rootDir": "./",
+        "declaration": true,
+        "lib": [
+            "es2017",
+            "es7",
+            "dom"
+        ],
+        "module": "commonjs",
+        "noImplicitAny": true,
+        "outDir": "./dist",
+        "target": "es6",
+        "removeComments": true
+    },
+    "include": [
+        "src",
+        "src/types.d.ts"
     ],
-    "module": "commonjs",
-    "noImplicitAny": true,
-    "outDir": "./dist",
-    "target": "es6",
-    "removeComments": true
-  },
-  "include": [
-    "src",
-    "src/types.d.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+    "exclude": [
+        "node_modules"
+    ]
 }
