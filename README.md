@@ -9,7 +9,7 @@ A lightweight JavaScript date library for parsing, manipulating and formatting d
 ## Installing
 The library is available as a [npm package][npm]. To install the package simply run:
 ```bash
-npm install prime-time --save
+npm install prime-time
 ```
 
 ## Calling the functionality
