@@ -1,6 +1,6 @@
 {
     "name": "prime-time",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Manipulate, display, format and parse dates.",
     "main": "dist/prime-time.js",
     "types": "dist/prime-time.d.ts",
