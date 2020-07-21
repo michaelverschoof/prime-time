@@ -5,7 +5,6 @@
         "declaration": true,
         "lib": [
             "es2017",
-            "es7",
             "dom"
         ],
         "module": "commonjs",
