@@ -18,7 +18,7 @@ const RESULT_LOCALISED_US = 'Tuesday, 6/24/1986, 12:01:02.003 PM Coordinated Uni
 const RESULT_LOCALISED_GB = 'Tuesday, 24/06/1986, 12:01:02 Coordinated Universal Time';
 const RESULT_LOCALISED_NL = 'dinsdag 24-6-1986 12:01:02.003 Gecoördineerde wereldtijd';
 
-const RESULT_LOCALISED_NEW_YORK = 'Tuesday, 6/24/1986, 8:01:02.003 AM Eastern Daylight Time';
+const RESULT_LOCALISED_NEW_YORK = 'Tuesday, 6/24/1986, 08:01:02.003 AM Eastern Daylight Time';
 const RESULT_LOCALISED_LONDON = 'Tuesday, 24/06/1986, 13:01:02 British Summer Time';
 const RESULT_LOCALISED_AMSTERDAM = 'dinsdag 24-6-1986 14:01:02.003 Midden-Europese zomertijd';
 
@@ -26,8 +26,8 @@ const RESULT_CUSTOMISED_US = 'Tuesday, June 24, 1986 @ 12:01:02.003 PM UTC';
 const RESULT_CUSTOMISED_GB = 'Tuesday, June 24, 1986 @ 12:01:02 pm UTC';
 const RESULT_CUSTOMISED_NL = 'dinsdag, juni 24, 1986 @ 12:01:02.003 UTC';
 
-const RESULT_CUSTOMISED_NEW_YORK = 'Tuesday, June 24, 1986 @ 8:01:02.003 AM EDT';
-const RESULT_CUSTOMISED_LONDON = 'Tuesday, June 24, 1986 @ 1:01:02 pm BST';
+const RESULT_CUSTOMISED_NEW_YORK = 'Tuesday, June 24, 1986 @ 08:01:02.003 AM EDT';
+const RESULT_CUSTOMISED_LONDON = 'Tuesday, June 24, 1986 @ 01:01:02 pm BST';
 const RESULT_CUSTOMISED_AMSTERDAM = 'dinsdag, juni 24, 1986 @ 14:01:02.003 CEST';
 
 describe('Localise', () => {
