@@ -69,16 +69,16 @@ export default class PrimeTime {
 
     /* Formatting */
 
-    format (format? : string, locale? : string) {
-        return Format.format(this.timestamp, format, locale);
+    format (format? : string, locale? : string, timezone? : string) {
+        return Format.format(this.timestamp, format, locale, timezone);
     }
 
-    localise (format? : string, locale? : string) {
-        return Format.localise(this.timestamp, format, locale);
+    localise (format? : string, locale? : string, timezone? : string) {
+        return Format.localise(this.timestamp, format, locale, timezone);
     }
 
-    customise (format : string, locale? : string) {
-        return Format.customise(this.timestamp, format, locale);
+    customise (format : string, locale? : string, timezone? : string) {
+        return Format.customise(this.timestamp, format, locale, timezone);
     }
 
     /* Getters */
