@@ -1,7 +1,7 @@
 {
     "name": "prime-time",
-    "version": "1.1.0",
-    "description": "Manipulate, display, format and parse dates.",
+    "version": "1.1.1",
+    "description": "Manipulate, compare, format and parse dates.",
     "keywords": [
         "prime-time",
         "primetime",
@@ -10,6 +10,7 @@
         "time",
         "format",
         "parse",
+        "compare",
         "calculate"
     ],
     "homepage": "https://github.com/michaelverschoof/prime-time#readme",

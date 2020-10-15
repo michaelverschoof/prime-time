@@ -1,5 +1,3 @@
-import PrimeTime from '../src/lib/prime-time';
-
 /**
  * 1986-6-24 12:01:02.003 GMT
  */
