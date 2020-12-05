@@ -458,3 +458,21 @@ describe('Customise', () => {
         expect(result).toBe('Tuesday, June 24, 1986 @ 12:01:02');
     });
 });
+
+describe('Format GMT/UTC', () => {
+    let prime : PrimeTime;
+
+    beforeAll(() => {
+        prime = new PrimeTime(timestamp);
+    });
+
+    test('GMT', () => {
+        const result = prime.gmt();
+        expect(result).toBe('Tue, 24 Jun 1986 12:01:02 GMT');
+    });
+
+    test('UTC', () => {
+        const result = prime.utc();
+        expect(result).toBe('Tue, 24 Jun 1986 12:01:02 GMT');
+    });
+});

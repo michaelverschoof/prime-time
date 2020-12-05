@@ -69,16 +69,24 @@ export default class PrimeTime {
 
     /* Formatting */
 
-    format (format? : string, locale? : string, timezone? : string) {
+    format (format? : string, locale? : string, timezone? : string) : string {
         return Format.format(this.timestamp, format, locale, timezone);
     }
 
-    localise (format? : string, locale? : string, timezone? : string) {
+    localise (format? : string, locale? : string, timezone? : string) : string {
         return Format.localise(this.timestamp, format, locale, timezone);
     }
 
-    customise (format : string, locale? : string, timezone? : string) {
+    customise (format : string, locale? : string, timezone? : string) : string {
         return Format.customise(this.timestamp, format, locale, timezone);
+    }
+
+    utc () {
+        return Format.formatGMT(this.timestamp);
+    }
+
+    gmt () {
+        return Format.formatGMT(this.timestamp);
     }
 
     /* Getters */

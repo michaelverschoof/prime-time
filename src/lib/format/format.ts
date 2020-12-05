@@ -16,6 +16,10 @@ function format (timestamp : number, format? : string, locale? : string, timezon
     return localise(timestamp, format, locale, timezone);
 }
 
+function formatGMT (timestamp : number) : string {
+    return customise(timestamp, '{WD}, {DD} {MMM} {YY} {HH}:{mm}:{ss} GMT', 'en-US', 'UTC');
+}
+
 function localise (timestamp : number, format? : string, locale? : string, timezone? : string) : string {
     const locales = getLocales(locale);
     const options = getOptions(format?.split(','), timezone);
@@ -94,6 +98,7 @@ function getMilliseconds (timestamp : number) : string {
 
 export {
     format,
+    formatGMT,
     localise,
     customise
 };
