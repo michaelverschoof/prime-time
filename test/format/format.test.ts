@@ -172,7 +172,7 @@ describe('Format', () => {
 describe('Format GMT', () => {
 
     test('GMT', () => {
-        const result = Format.formatGMT(timestamp);
+        const result = Format.gmt(timestamp);
         expect(result).toBe(RESULT_UTC);
     });
 });

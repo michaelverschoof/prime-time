@@ -6,13 +6,13 @@ import { Timespan } from './types';
 export default class PrimeTime {
 
     private timestamp : number;
+    private region : string;
     private offset : number;
-    private timezone : string;
 
     constructor (timestamp : number) {
         this.timestamp = timestamp;
+        this.region = '';
         this.offset = 0;
-        this.timezone = '';
     }
 
     /* Transformations */
@@ -81,12 +81,12 @@ export default class PrimeTime {
         return Format.customise(this.timestamp, format, locale, timezone);
     }
 
-    utc () {
-        return Format.formatGMT(this.timestamp);
+    utc () : string {
+        return Format.gmt(this.timestamp);
     }
 
-    gmt () {
-        return Format.formatGMT(this.timestamp);
+    gmt () : string {
+        return Format.gmt(this.timestamp);
     }
 
     /* Getters */
