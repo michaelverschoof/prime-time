@@ -38,4 +38,8 @@ function string (date : string) : PrimeTime {
     return new PrimeTime(parsed);
 }
 
-export { anything, timestamp };
+export {
+    anything,
+    string,
+    timestamp
+};

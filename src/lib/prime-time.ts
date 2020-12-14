@@ -1,4 +1,5 @@
 import * as Timestamps from './calc/timestamps';
+import * as Timezone from './units/timezone/timezone';
 import * as Format from './format/format';
 import * as From from './from/from';
 import { Timespan } from './types';
@@ -47,8 +48,12 @@ export default class PrimeTime {
 
     /* Comparisons */
 
+    // TODO tests with offset (opening hours)
     difference (to : PrimeTime, timespan? : string | Timespan) : number {
-        return Timestamps.difference(this.timestamp, to.timestamp, timespan);
+        const fromTimestamp = Timestamps.offset(this.timestamp, this.offset);
+        const toTimestamp = Timestamps.offset(to.timestamp, to.offset);
+
+        return Timestamps.difference(fromTimestamp, toTimestamp, timespan);
     }
 
     after (other : PrimeTime, timespan? : string | Timespan, inclusivity? : boolean) : boolean {
@@ -69,16 +74,26 @@ export default class PrimeTime {
 
     /* Formatting */
 
+
+    // TODO tests with offset (opening hours)
     format (format? : string, locale? : string, timezone? : string) : string {
-        return Format.format(this.timestamp, format, locale, timezone);
+        const timestamp = Timestamps.offset(this.timestamp, this.offset);
+
+        return Format.format(timestamp, format, locale, timezone);
     }
 
+    // TODO tests with offset (opening hours)
     localise (format? : string, locale? : string, timezone? : string) : string {
-        return Format.localise(this.timestamp, format, locale, timezone);
+        const timestamp = Timestamps.offset(this.timestamp, this.offset);
+
+        return Format.localise(timestamp, format, locale, timezone);
     }
 
+    // TODO tests with offset (opening hours)
     customise (format : string, locale? : string, timezone? : string) : string {
-        return Format.customise(this.timestamp, format, locale, timezone);
+        const timestamp = Timestamps.offset(this.timestamp, this.offset);
+
+        return Format.customise(timestamp, format, locale, timezone);
     }
 
     utc () : string {
@@ -87,6 +102,15 @@ export default class PrimeTime {
 
     gmt () : string {
         return Format.gmt(this.timestamp);
+    }
+
+    /* Timezones */
+
+    timezone (timezone : string) : void {
+        const zone = Timezone.get(this.timestamp, timezone);
+
+        this.region = zone.region;
+        this.offset = zone.offset;
     }
 
     /* Getters */

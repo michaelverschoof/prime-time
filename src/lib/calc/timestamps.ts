@@ -35,9 +35,18 @@ function scale (timestamp : number, unit : string | Timespan) : number {
     return Date.UTC(parts[0], parts[1], ...parts.splice(2));
 }
 
+function offset (timestamp : number, offset : number) : number {
+    if (offset === 0) {
+        return timestamp;
+    }
+
+    return add(timestamp, offset, Timespan.MINUTE);
+}
+
 export {
     add,
     subtract,
     difference,
+    offset,
     scale
 };

@@ -1,16 +1,26 @@
+/* Interfaces */
+
 export interface Temporal {
-    readonly aliases : string[]
-    readonly milliseconds : number
-    parts (timestamp : number) : number[]
+    readonly aliases : string[];
+    readonly milliseconds : number;
+
+    parts (timestamp : number) : number[];
 }
 
 export interface Formats {
-    [key : string] : FormattingOptions
+    [key : string] : FormattingOptions;
 }
 
 export interface FormattingOptions {
-    [key : string] : string | boolean | number
+    [key : string] : string | boolean | number;
 }
+
+export interface Timezone {
+    region : string;
+    offset : number;
+}
+
+/* Enums */
 
 export const enum FormattingValues {
     NUMERIC_FIXED = '2-digit',
