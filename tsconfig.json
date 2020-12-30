@@ -1,7 +1,6 @@
 {
     "compilerOptions": {
         "strict": true,
-        "rootDir": "./src",
         "declaration": true,
         "lib": [
             "es2017",
@@ -9,13 +8,13 @@
         ],
         "module": "commonjs",
         "noImplicitAny": true,
-        "outDir": "./dist",
+        "outDir": "dist/",
         "target": "es6",
         "removeComments": true,
         "sourceMap": false
     },
     "include": [
-        "src/*"
+        "src/"
     ],
     "exclude": [
         "node_modules"
