@@ -7,8 +7,7 @@ describe('Get offset', () => {
     test('With valid timezones', () => {
         let result = get(timestamp, Location.NEW_YORK);
         expect(result.region).toEqual(Location.NEW_YORK);
-        expect([ 300, 240 ]).toContainEqual(result.offset);
-        expect(result.offset).toEqual(240);
+        expect([ 240, 300 ]).toContainEqual(result.offset);
 
         result = get(timestamp, Location.LONDON);
         expect(result.region).toEqual(Location.LONDON);

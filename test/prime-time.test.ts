@@ -1,7 +1,7 @@
 import PrimeError from '../src/error/prime-error';
 import PrimeTime from '../src/lib/prime-time';
 import { primetime, Timespan } from '../src/prime-time';
-import { timestamp } from './variables';
+import { Location, timestamp } from './variables';
 
 describe('Create', () => {
     let date : Date;
@@ -474,5 +474,139 @@ describe('Format GMT/UTC', () => {
     test('UTC', () => {
         const result = prime.utc();
         expect(result).toBe('Tue, 24 Jun 1986 12:01:02 GMT');
+    });
+});
+
+describe('With timezones', () => {
+    let prime : PrimeTime;
+
+    beforeAll(() => {
+        prime = new PrimeTime(timestamp);
+    });
+
+    describe('From timezone', () => {
+
+        test('London', () => {
+            prime.timezone(Location.LONDON);
+
+            let result = prime.localise('DD, MM, YY, HH, mm, ss');
+            expect(result).toBe('06/24/1986, 11:01:02 AM');
+
+            result = prime.localise('DD, MM, YY, HH, mm, ss', 'nl-nl');
+            expect(result).toBe('24-06-1986 11:01:02');
+        });
+
+        test('Amsterdam', () => {
+            prime.timezone(Location.AMSTERDAM);
+
+            let result = prime.customise('{DD}-{MM}-{YY} {HH}:{mm}:{ss}');
+            expect(result).toBe('24-06-1986 10:01:02');
+
+            result = prime.customise('{DD}-{MM}-{YY} {HH}:{mm}:{ss}', 'nl-nl');
+            expect(result).toBe('24-06-1986 10:01:02');
+        });
+
+        test('New York', () => {
+            prime.timezone(Location.NEW_YORK);
+
+            let result = prime.format('DD, MM, YY, HH, mm, ss');
+            expect(result).toBe('06/24/1986, 04:01:02 PM');
+
+            result = prime.format('{DD}-{MM}-{YY} {HH}:{mm}:{ss}', 'nl-nl');
+            expect(result).toBe('24-06-1986 16:01:02');
+        });
+    });
+
+    describe('To timezone', () => {
+
+        test('New York to Amsterdam', () => {
+            prime.timezone(Location.NEW_YORK);
+
+            const result = prime.localise('DD, MM, YY, HH, mm, ss', 'nl-nl', Location.AMSTERDAM);
+            expect(result).toBe('24-06-1986 18:01:02');
+        });
+
+        test('New York to London', () => {
+            prime.timezone(Location.NEW_YORK);
+
+            const result = prime.localise('DD, MM, YY, HH, mm, ss', 'nl-nl', Location.LONDON);
+            expect(result).toBe('24-06-1986 17:01:02');
+        });
+
+        test('Amsterdam to New York', () => {
+            prime.timezone(Location.AMSTERDAM);
+
+            const result = prime.localise('DD, MM, YY, HH, mm, ss', 'nl-nl', Location.NEW_YORK);
+            expect(result).toBe('24-06-1986 06:01:02');
+        });
+
+        test('Amsterdam to London', () => {
+            prime.timezone(Location.AMSTERDAM);
+
+            const result = prime.localise('DD, MM, YY, HH, mm, ss', 'nl-nl', Location.LONDON);
+            expect(result).toBe('24-06-1986 11:01:02');
+        });
+
+        test('London to New York', () => {
+            prime.timezone(Location.LONDON);
+
+            const result = prime.localise('DD, MM, YY, HH, mm, ss', 'nl-nl', Location.NEW_YORK);
+            expect(result).toBe('24-06-1986 07:01:02');
+        });
+
+        test('London to Amsterdam', () => {
+            prime.timezone(Location.LONDON);
+
+            const result = prime.localise('DD, MM, YY, HH, mm, ss', 'nl-nl', Location.AMSTERDAM);
+            expect(result).toBe('24-06-1986 13:01:02');
+        });
+    });
+
+    describe('Compare', () => {
+
+        const Amsterdam = new PrimeTime(timestamp).timezone(Location.AMSTERDAM);
+        const London = new PrimeTime(timestamp).timezone(Location.LONDON);
+        const NewYork = new PrimeTime(timestamp).timezone(Location.NEW_YORK);
+
+        test('Is after', () => {
+            let result = London.after(Amsterdam);
+            expect(result).toBe(true);
+
+            result = London.after(NewYork);
+            expect(result).toBe(false);
+
+            result = Amsterdam.after(NewYork);
+            expect(result).toBe(false);
+        });
+
+        test('Is before', () => {
+            let result = Amsterdam.before(London);
+            expect(result).toBe(true);
+
+            result = NewYork.before(Amsterdam);
+            expect(result).toBe(false);
+
+            result = NewYork.before(London);
+            expect(result).toBe(false);
+        });
+
+        test('Is between', () => {
+            let result = London.between(Amsterdam, NewYork);
+            expect(result).toBe(true);
+
+            result = London.between(NewYork, Amsterdam);
+            expect(result).toBe(false);
+
+            result = NewYork.between(London, Amsterdam);
+            expect(result).toBe(false);
+        });
+
+        test('Is equal', () => {
+            let result = Amsterdam.equals(London);
+            expect(result).toBe(false);
+
+            result = Amsterdam.equals(prime.timezone(Location.AMSTERDAM));
+            expect(result).toBe(true);
+        });
     });
 });
