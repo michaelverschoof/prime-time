@@ -48,7 +48,6 @@ export default class PrimeTime {
 
     /* Comparisons */
 
-    // TODO tests with offset (opening hours)
     difference (to : PrimeTime, timespan? : string | Timespan) : number {
         const fromTimestamp = Timestamps.offset(this.timestamp, this.offset);
         const toTimestamp = Timestamps.offset(to.timestamp, to.offset);
@@ -92,12 +91,12 @@ export default class PrimeTime {
         return Format.customise(timestamp, format, locale, timezone);
     }
 
-    utc () : string {
+    gmt () : string {
         return Format.gmt(this.timestamp);
     }
 
-    gmt () : string {
-        return Format.gmt(this.timestamp);
+    utc () : string {
+        return this.gmt();
     }
 
     /* Timezones */

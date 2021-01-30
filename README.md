@@ -33,6 +33,7 @@ For example: `primetime(519998462003)` equals the date *1986-6-24 12:01:02.003 G
 | `primetime().format('{WDD}, {MMMM} {DD}, {YY} @ {HH}:{mm}:{ss} {TZ}', 'nl-nl')`                         | Format the date to the provided format and user's locale                         | `dinsdag, juni 24, 1986 @ 12:01:02 UTC`                      |
 
 ### Comparing dates
+If the date()
 
 | Code                                                                                          | Description                                                          | Returns |
 | --------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- | ------- |
@@ -64,6 +65,19 @@ These methods return the updated PrimeTime object, enabling method chaining.
 | `primetime().clone()`                | Creates a duplicate PrimeTime object                                      | `PrimeTime` |
 | `primetime().clone('day')`           | Creates a duplicate PrimeTime object with the year, month and day set     | `PrimeTime` |
 | `primetime().update(519998462003)`   | Sets a new timestamp for the object                                       | `PrimeTime` |
+
+### Changing time zones
+
+| Code                                                                                                                                | Description                                                                                                                     | Returns                                                      |
+| ----------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| `primetime().timezone('Europe/Amsterdam')`                                                                                          | Sets the object as if it is in that timezone                                                                                    | `PrimeTime`                                                  |
+| `primetime().timezone('Europe/Amsterdam').format('WDD, MMMM, DD, HH, mm, ss, TZZ')`                                                 | Format the date (in the chosen time zone) to the provided date parts and user's locale (en-US for example)                      | `Tuesday, 6/24/1986, 10:01:02 PM Coordinated Universal Time` |
+| `primetime().timezone('America/New_York').localise('DD, MM, YY, HH, mm, ss', 'nl-nl', 'Europe/Amsterdam')`                          | Format the date (in the chosen time zone) to the provided date parts and user's locale (en-US for example) in another time zone | `24-06-1986 18:01:02`                                        |
+| `primetime().timezone('Europe/London').after(primetime().timezone('Europe/Amsterdam'))`                                             | Check if the first date is after the second date, using their respective time zones                                             | `true`                                                       |
+| `primetime().timezone('Europe/London').before(primetime().timezone('Europe/Amsterdam'))`                                            | Check if the first date is before the second date, using their respective time zones                                            | `false`                                                      |
+| `primetime().timezone('Europe/London').between(primetime().timezone('Europe/Amsterdam'), primetime().timezone('America/New_York'))` | Check if the first date is between the other dates, using their respective time zones                                           | `true`                                                       |
+| `primetime().timezone('Europe/London').equal(primetime().timezone('Europe/Amsterdam'))`                                             | Check if the first date equals the second date, using their respective time zones                                               | `false`                                                      |
+
 
 ## Why Prime Time?
 Named after the [Alan Parsons Project][alan-parsons-project] song [Prime Time][youtube-video] from the album [Ammonia Avenue][ammonia-avenue]. 
