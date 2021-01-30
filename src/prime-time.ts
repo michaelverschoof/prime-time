@@ -6,4 +6,4 @@ function primetime (value? : number | string | Date | PrimeTime) : PrimeTime {
     return From.anything(value);
 }
 
-export { primetime, Timespan };
+export { primetime, PrimeTime, Timespan };
